@@ -1,6 +1,15 @@
 pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
+--[[
+player=0
+enemies=0's
+floor=100's
+walls=200's
+obstacles=300's
+hazards=400's
+items=500's
+]]
 --global directions
 north=0
 east=1
@@ -11,40 +20,21 @@ south=3
 pturn=true
 
 --table for player containing direction and sprite
+--"0" corresponds to player in gb matrix
 player={
-	direct = north,
-	sp=1
+	direct = north
 }
 
-function _init()
-	--sets up gameboard with nil values
-	gb={}
-	for i=1,16 do
-		gb[i]={}
-		for j=1,16 do
-			gb[i][j]=nil
-		end
-	end
-	--put player at position [2][2] in gb
-	gb[2][2]=player
-end
-
-function _update()
-	if pturn then
+function playermovement()
 		--move player
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
-				if gb[i][j]==player then
-
+				if gb[i][j]==0 then
 					if btn(0) then
-						if player.direct==west then
-							if i-1 == 1 then --stops movement
-								gb[i][j]=player
-							else
+						if player.direct==west and i-1!=1 then
 								--move player 1 space left
-								gb[i-1][j]=player
+								gb[i-1][j]=0
 								gb[i][j]=nil
-							end
 						else
 							--set direction to west
 							player.direct=west
@@ -53,15 +43,11 @@ function _update()
 					end
 
 					if btn(1) then
-						if player.direct==east then
-							if i+1 == 16 then --stops movement
-								gb[i][j]=player
-							else
+						if player.direct==east and i+1!=16 then 
 								--move player 1 space right
 								--is currently moving player to gb[15][j]
-								gb[i+1][j]=player
+							 gb[i+1][j]=0
 								gb[i][j]=nil
-							end
 						else
 							--set direction to east
 							player.direct=east
@@ -70,14 +56,11 @@ function _update()
 					end
 
 					if btn(2) then
-						if player.direct==north then
-							if j-1 == 1 then --stops movement
-								gb[i][j]=player
-							else
+						if player.direct==north and j-1 !=1 then
+						  --stops movement
 								--move player 1 up
-								gb[i][j-1]=player
+								gb[i][j-1]=0
 								gb[i][j]=nil
-							end
 						else
 							--set direction to north
 							player.direct=north
@@ -86,14 +69,10 @@ function _update()
 					end
 
 					if btn(3) then
-						if player.direct == south then
-							if j+1 == 17 then --stops movement
-								gb[i][j]=player
-						 else
+						if player.direct == south and j+1 != 16 then
 								--moves player 1 down
-								gb[i][j+1]=player
+								gb[i][j+1]=0
 								gb[i][j]=nil
-							end
 						else
 							--set direction to south
 							player.direct=south
@@ -105,8 +84,29 @@ function _update()
 				end
 			end
 		end
-	end
+end
 
+function _init()
+	--sets up gameboard with nil values
+	gb={}
+	for i=1,16 do
+		gb[i]={}
+		for j=1,16 do
+			gb[i][j]=nil
+			if j==1 or j==16 or i==1 or i== 16 then
+				gb[i][j]=210
+			end
+		end
+	end
+	--put player at position [8][15] in gb
+	gb[8][15]=0
+end
+
+function _update()
+	if pturn then
+		playermovement()
+	end
+	
 	--resets pturn
 	if btn(4) then
 		pturn=true
@@ -115,46 +115,44 @@ end
 
 function _draw()
 	cls()
-	rectfill(0,0,128,128,3)
-	rectfill(0,0,0,0,7)
-	--everything below this point is for debugging purposes
-	print(gb[2][2])
-	print(gb[2][3])
-	print(counter)
-	print(pturn)
-	print(player.direct)
-
+	rectfill(0,0,128,128,1)
+	print(pturn,10,10,7)
+	
 	for i=1,16 do
 		for j=1,16 do
-			if gb[i][j]==player then
+			if gb[i][j]==0 then
 				if player.direct==north then
-					spr(5,i*8,j*8-8,1,2)
+					spr(5,(i-1)*8,(j-1)*8-8,1,2)
 				end
 				if player.direct==south then
-					spr(6,i*8,j*8,1,2)
+					spr(6,(i-1)*8,(j-1)*8,1,2)
 				end		
 				if player.direct==east then
-				spr(1, i*8, j*8,2,2)
+				spr(1, (i-1)*8,(j-1)*8,2,2)
 				end
 				if player.direct==west then
-					spr(3,i*8-8,j*8,2,2)
+					spr(3,(i-1)*8-8,(j-1)*8,2,2)
 				end
-				print(i)
-				print(j)
+			--[[	print(i)
+				print(j)]]
+			end
+			if gb[i][j]==210 then --200=wall
+				spr(10, i*8-8, j*8-8)
 			end
 		end
 	end
-
+	spr(11,8*8-8,16*8-8) --draws a door, door is not in matrix yet
+	
 end
 __gfx__
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000044444000000000000000000004444400000000004444440000000000000000000000000000000000000000000000000000000000000000000000000
-00700700044444000000000000000000004444400006500004444440000000000000000000000000000000000000000000000000000000000000000000000000
-00077000044444666666660000555555554444400006500004444440000000000000000000000000000000000000000000000000000000000000000000000000
-00077000044444555555550000666666664444400006500004444440000000000000000000000000000000000000000000000000000000000000000000000000
-00700700044444000000000000000000004444400006500004444440000000000000000000000000000000000000000000000000000000000000000000000000
-00000000044444000000000000000000004444400006500000056000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000006500000056000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000066665666665666660044440000000000000000000000000000000000
+00000000044444000000000000000000004444400000000004444440000000000000000066665666555555550444444000000000000000000000000000000000
+00700700044444000000000000000000004444400006500004444440000000000000000055555555666666564444444400000000000000000000000000000000
+00077000044444666666660000555555554444400006500004444440000000000000000066566666555555554444444400000000000000000000000000000000
+0007700004444455555555000066666666444440000650000444444000000000000000006656666666566666444444a400000000000000000000000000000000
+00700700044444000000000000000000004444400006500004444440000000000000000055555555555555554444444400000000000000000000000000000000
+00000000044444000000000000000000004444400006500000056000000000000000000066665666666666564444444400000000000000000000000000000000
+00000000000000000000000000000000000000000006500000056000000000000000000066665666555555554444444400000000000000000000000000000000
 00000000000000000000000000000000000000000006500000056000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000006500000056000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000444444000056000000000000000000000000000000000000000000000000000000000000000000000000000
