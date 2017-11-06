@@ -1,285 +1,109 @@
 pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
---[[
-player=0
-enemies=0's
-floor=100's
-walls=200's
-obstacles=300's
-hazards=400's
-items=500's
-]]
 
---global directions
-north=0
-east=1
-west=2
-south=3
+--directions
+north = 0;
+east = 1;
+south = 2;
+west = 3;
 
+--entity codes
+--player entity code on matrix
+player = 0;
+-- if you mod by 100, then you can check with:
+enemy = 0;  --the 0-hundred series
+floor = 1; -- 100's
+wall = 2;
+obstacle = 3; --300's
+hazard = 4;
+item = 5; --500's
 
---temp variable used to simulate turn based movement
-pturn=true
+--enemy codes for %10
+lclown = 1;
+juggler = 2;
 
---table for player containing direction and sprite
---"0" corresponds to player in gb matrix
-player={
-	direct = north,
-	x = 8,
-	y = 15
-}
+--“ŽƒŽ: remove when done
+counter = 2;
 
---sprite rotation function
---written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
-function spra(angle,n,x,y,w,h,flip_x,flip_y)
- if w==nil or h==nil then
-  w,h=1,1
- else
-  w=w*8
-  h=h*8
- end
- local diag,w,h=flr(sqrt(w*w+h*h))/2,w/2,h/2
- flip_x,flip_y=flip_x and -1 or 1,flip_y and -1 or 1
- local cosa,sina,nx,ny=cos(angle),sin(angle),n%16*8,flr(n/16)*8
- for i=-diag,diag do
-  for j=-diag,diag do
-   local ox,oy=(cosa*i + sina*j),(cosa*j - sina*i)
-   if ox==mid(-w,ox,w) and oy==mid(-h,oy,h) then
-    local col=sget(ox+w+nx,oy+h+ny)
-    if col!=0 then
-     pset(x+flip_x*i+w,y+flip_y*j+h,col)
+--constructing the gameboard
+gb = {}     -- create the matrix
+for i=1,16 do
+  gb[i] = {}     -- create a new row
+  for j=1,16 do
+    if (i == 16 or j == 16 or i ==1 or j == 1) then
+     gb[i][j] = 200
+    else
+     gb[i][j] = 100
     end
-   end   
   end
- end
 end
 
-function playermovement()
-		--move player
-		for i=1,16 do --iterate through gb to find player
-			for j=1,16 do
-				if gb[i][j]==0 then
-					if temp==nil then
-					--upon entering a room, set temp to nil
-						temp=i+2
-					end
-				
-					--sword turning
-					if btn(5) and btn(0) then
-						player.direct+=.125
-						pturn=false
-						break
-					end
-					if btn(5) and btn(1) then
-						player.direct-=.125
-						pturn=false
-						break
-					end
-					
-					--cardinal player movement
-					if btn(0) then
-						if i-1!=1 then
-								--move player 1 space left
-								gb[i-1][j]=0
-								gb[i][j]=nil
-								temp-=1
-						end
-						pturn=false
+--put player in upper left
+gb[2][2] = 0
 
-				elseif btn(1) and temp<=16 then
-						if i+1<temp then
-								--move player 1 space right
-								--is currently moving player to gb[15][j]
-							 gb[i+1][j]=0		
-							 gb[i][j]=nil
-							 break						
-						end
-						temp+=1
-						pturn=false
-
-					elseif btn(2) then
-						if j-1 !=1 then
-						  --stops movement
-								--move player 1 up
-								gb[i][j-1]=0
-								gb[i][j]=nil
-						end
-						pturn=false
-
-					elseif btn(3) then
-						if j+1 != 16 then
-								--moves player 1 down
-								gb[i][j+1]=0
-								gb[i][j]=nil
-						end
-						pturn=false
-					end
-					--breaks loop if the player is found
-					break
-				end
-			end
-		end
-end
+--lesser clown and juggler
+gb[4][4] = 10*lclown
+gb[4][5] = 10*juggler + 3
 
 function _init()
-	--sets up gameboard with nil values
-	gb={}
-	floor = {}
-	for i=1,16 do
-		gb[i]={}
-		floor[i] = {}
-		for j=1,16 do
-			floor[i][j] = 100
-			gb[i][j]=nil
-			if j==1 or j==16 or i==1 or i== 16 then
-				gb[i][j]=210
-			end
-		end
-	end
-	--put player at position [8][15] in gb
-	gb[8][15]=0
-	
-	--put lesser clown at 8,8
-	gb[8][8] = 10 + north
-	
-	--put juggler at 10,7
-	gb[10][7] = 20+south
-end
+  cls()
 
-function ai(i, j)
-	entity = gb[i][j]
-	xoff = player.x - i
-	yoff = player.y - j
-	
-	if(entity == 0 or entity == nil) then
-		return
-	end
-			
-	--lesser clown
-	if(flr(entity/10) == 1) then
-		if(abs(xoff) > abs(yoff)) then
-			a = xoff/abs(xoff)
-			spot = gb[i+a][j]
-			if(spot == nil or spot == 0) then
-			 gb[i+a][j] = entity+100
-			 gb[i][j] = nil
-			end
-		else
-			b = yoff/abs(yoff)
-			spot = gb[i][j+b]
-			if(spot== nil or spot == 0) then
-			 gb[i][j+b] = entity+100
-			 gb[i][j] = nil
-			end
-		end
-	--juggler
-	elseif (flr(entity/10) ==2) then
-		gb[i][j] += 100
-	end
-	
-	wait(30)
-end
-
-function enemymovement()
-	
-	for j = 1,16 do
-		for i = 1, 16 do
-				if gb[i][j] != nil and gb[i][j] > 0 and gb[i][j] < 100 then
-					ai(i, j)
-				end
-		end
-	end
-	
-	for j = 1,16 do
-		for i = 1, 16 do
-				if gb[i][j] != nil and gb[i][j] > 99 and gb[i][j] < 200 then
-					gb[i][j] -= 100
-				end
-		end
-	end
-		
-	pturn = true;
-end
-
-function wait(i)
- for j = 1, i do
- 	flip()
- end
-	--temp variable. fixes east movement bug
-	temp=nil
+  print('initialising!')
+  wait(30)
+  print(gb)
+  
 end
 
 function _update()
-	if pturn then
-		playermovement()
+	counter -= 1;
+	if(counter < 0) then
+		stop()
+	end
+end
 
-	else
-		enemymovement()
-	end
-	
-	--resets pturn
-	if btn(4) then
-		pturn=true
-	end
+function wait(a)
+  for i = 1,a do
+    flip()
+  end
 end
 
 function _draw()
+	wait(30)
 	cls()
-	rectfill(0,0,128,128,1)
-	
-	for i=1,16 do
-		for j=1,16 do		
-			--floor first
-			floor_offset = 50;
-			fspr = floor[i][j] - 100 + floor_offset
-			spr(fspr, (i-1)*8, (j-1)*8)
-		
-			--player things
-			if gb[i][j]==0 then
-				spra(player.direct,1,i*8-8,j*8-13,1,2)
-			end
-			
-			--enemy things
-			if(not(gb[i][j] == nil) and gb[i][j] > 0 and gb[i][j] < 100) then
-				if gb[i][j]<20 then
-					spr(32,(i-1)*8,(j-1)*8)
-				elseif gb[i][j] < 30 then
-					spr(33,(i-1)*8,(j-1)*8)
-				end
-			end
-			
-			--wall things
-			if gb[i][j]==210 then --200=wall
-				spr(10, i*8-8, j*8-8)
-			end
-			
-				--[[error testing
-	  ent = gb[i][j]
-	  if ent != nil and ent != 0 and ent != 210 then
-	   print(ent,10,18,7)
-	   wait(30)
-	  end
-		]]
-		end
-	end
-	spr(11,8*8-8,16*8-8) --draws a door, door is not in matrix yet
-	
-	print(pturn,10,10,7)
+ 
+ for i = 1,16 do
+ str = "";
+ 	for j = 1,16 do
+ 		if gb[i][j] >= floor*100 then
+ 			temp = gb[i][j] .. " "
+ 			str = str .. temp
+ 		else
+ 			if gb[i][j]  == 0 then
+ 				str = str .. "000 "
+ 			else
+ 				str = str .. "0" .. gb[i][j] .. " "
+				end 	
+ 		end
+ 	end
+ print(str)
+ end
 	
 end
+
 __gfx__
-00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440000000000000000000000000000000000
-00000000000560000000000000000000000000000000000000000000000000000000000066665666555555550444444000000000000000000000000000000000
-00700700000560000000000000000000000000000000000000000000000000000000000055555555666666564444444400000000000000000000000000000000
-00077000000560000000000000000000000000000000000000000000000000000000000066566666555555554444444400000000000000000000000000000000
-0007700000056000000000000000000000000000000000000000000000000000000000006656666666566666444444a400000000000000000000000000000000
-00700700000560000000000000000000000000000000000000000000000000000000000055555555555555554444444400000000000000000000000000000000
-00000000000560000000000000000000000000000000000000000000000000000000000066665666666666564444444400000000000000000000000000000000
-00000000044444400000000000000000000000000000000000000000000000000000000066665666555555554444444400000000000000000000000000000000
-00000000044444400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000044444400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000044444400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000044444400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00700700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00077000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00700700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
