@@ -159,7 +159,7 @@ function _draw()
 	for i=1,16 do
 		for j=1,16 do
 			if gb[i][j]==0 then
-				spra(player.direct,1,i*8-8,j*8-12,1,2)
+				spra(player.direct,1,i*8-8,j*8-13,1,2)
 			end
 			if gb[i][j]==210 then --200=wall
 				spr(10, i*8-8, j*8-8)
