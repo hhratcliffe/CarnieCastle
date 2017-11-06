@@ -10,11 +10,16 @@ obstacles=300's
 hazards=400's
 items=500's
 ]]
---global directions
+--[[global directions
 north=0
+northe=.5
 east=1
-west=2
-south=3
+south=1.5
+south=2
+southw=2.5
+west=3
+northw=3.5]]
+
 
 --temp variable used to simulate turn based movement
 pturn=true
@@ -22,60 +27,91 @@ pturn=true
 --table for player containing direction and sprite
 --"0" corresponds to player in gb matrix
 player={
-	direct = north
+	direct = 0
 }
+
+--sprite rotation function
+--written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
+function spra(angle,n,x,y,w,h,flip_x,flip_y)
+ if w==nil or h==nil then
+  w,h=1,1
+ else
+  w=w*8
+  h=h*8
+ end
+ local diag,w,h=flr(sqrt(w*w+h*h))/2,w/2,h/2
+ flip_x,flip_y=flip_x and -1 or 1,flip_y and -1 or 1
+ local cosa,sina,nx,ny=cos(angle),sin(angle),n%16*8,flr(n/16)*8
+ for i=-diag,diag do
+  for j=-diag,diag do
+   local ox,oy=(cosa*i + sina*j),(cosa*j - sina*i)
+   if ox==mid(-w,ox,w) and oy==mid(-h,oy,h) then
+    local col=sget(ox+w+nx,oy+h+ny)
+    if col!=0 then
+     pset(x+flip_x*i+w,y+flip_y*j+h,col)
+    end
+   end   
+  end
+ end
+end
 
 function playermovement()
 		--move player
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
+					if temp==nil then
+					--upon entering a room, set temp to nil
+						temp=i+2
+					end
+				
+					--sword turning
+					if btn(5) and btn(0) then
+						player.direct+=.125
+						pturn=false
+						break
+					end
+					if btn(5) and btn(1) then
+						player.direct-=.125
+						pturn=false
+						break
+					end
+					
+					--cardinal player movement
 					if btn(0) then
-						if player.direct==west and i-1!=1 then
+						if i-1!=1 then
 								--move player 1 space left
 								gb[i-1][j]=0
 								gb[i][j]=nil
-						else
-							--set direction to west
-							player.direct=west
+								temp-=1
 						end
 						pturn=false
-					end
 
-					if btn(1) then
-						if player.direct==east and i+1!=16 then 
+				elseif btn(1) and temp<=16 then
+						if i+1<temp then
 								--move player 1 space right
 								--is currently moving player to gb[15][j]
-							 gb[i+1][j]=0
-								gb[i][j]=nil
-						else
-							--set direction to east
-							player.direct=east
+							 gb[i+1][j]=0		
+							 gb[i][j]=nil
+							 break						
 						end
+						temp+=1
 						pturn=false
-					end
 
-					if btn(2) then
-						if player.direct==north and j-1 !=1 then
+					elseif btn(2) then
+						if j-1 !=1 then
 						  --stops movement
 								--move player 1 up
 								gb[i][j-1]=0
 								gb[i][j]=nil
-						else
-							--set direction to north
-							player.direct=north
 						end
 						pturn=false
-					end
 
-					if btn(3) then
-						if player.direct == south and j+1 != 16 then
+					elseif btn(3) then
+						if j+1 != 16 then
 								--moves player 1 down
 								gb[i][j+1]=0
 								gb[i][j]=nil
-						else
-							--set direction to south
-							player.direct=south
 						end
 						pturn=false
 					end
@@ -100,6 +136,8 @@ function _init()
 	end
 	--put player at position [8][15] in gb
 	gb[8][15]=0
+	--temp variable. fixes east movement bug
+	temp=nil
 end
 
 function _update()
@@ -117,24 +155,11 @@ function _draw()
 	cls()
 	rectfill(0,0,128,128,1)
 	print(pturn,10,10,7)
-	
+
 	for i=1,16 do
 		for j=1,16 do
 			if gb[i][j]==0 then
-				if player.direct==north then
-					spr(5,(i-1)*8,(j-1)*8-8,1,2)
-				end
-				if player.direct==south then
-					spr(6,(i-1)*8,(j-1)*8,1,2)
-				end		
-				if player.direct==east then
-				spr(1, (i-1)*8,(j-1)*8,2,2)
-				end
-				if player.direct==west then
-					spr(3,(i-1)*8-8,(j-1)*8,2,2)
-				end
-			--[[	print(i)
-				print(j)]]
+				spra(player.direct,7,i*8-8,j*8-12,1,2)
 			end
 			if gb[i][j]==210 then --200=wall
 				spr(10, i*8-8, j*8-8)
@@ -142,7 +167,7 @@ function _draw()
 		end
 	end
 	spr(11,8*8-8,16*8-8) --draws a door, door is not in matrix yet
-	
+	--door needs to be put in the matrix
 end
 __gfx__
 00000000000000000000000000000000000000000000000000000000000000000000000066665666665666660044440000000000000000000000000000000000
