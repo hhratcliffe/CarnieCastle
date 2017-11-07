@@ -14,8 +14,9 @@ items=500's
 --global directions
 north=0
 east=1
-west=2
 south=3
+west=2
+
 
 
 --temp variable used to simulate turn based movement
@@ -29,6 +30,10 @@ player={
 	y = 15
 }
 
+sword = {
+	x = 8,
+	y = 14
+}
 --sprite rotation function
 --written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
 function spra(angle,n,x,y,w,h,flip_x,flip_y)
@@ -54,6 +59,7 @@ function spra(angle,n,x,y,w,h,flip_x,flip_y)
  end
 end
 
+sturn=1
 function playermovement()
 		--move player
 		for i=1,16 do --iterate through gb to find player
@@ -68,14 +74,18 @@ function playermovement()
 					if btn(5) and btn(0) then
 						player.direct+=.125
 						pturn=false
+						sturn=true
+						sworddirection()
 						break
 					end
 					if btn(5) and btn(1) then
 						player.direct-=.125
 						pturn=false
+						sturn=true
+						sworddirection()
 						break
-					end
-					
+					end 	
+								
 					--cardinal player movement
 					if btn(0) then
 						if i-1!=1 then
@@ -83,6 +93,7 @@ function playermovement()
 								gb[i-1][j]=0
 								gb[i][j]=nil
 								player.x-=1
+								sword.x-=1
 								temp-=1
 						end
 						pturn=false
@@ -94,6 +105,7 @@ function playermovement()
 							 gb[i+1][j]=0		
 							 gb[i][j]=nil
 							 player.x+=1
+							 sword.x+=1
 							 break						
 						end
 						temp+=1
@@ -106,6 +118,7 @@ function playermovement()
 								gb[i][j-1]=0
 								gb[i][j]=nil
 								player.y-=1
+								sword.y-=1
 						end
 						pturn=false
 
@@ -115,6 +128,7 @@ function playermovement()
 								gb[i][j+1]=0
 								gb[i][j]=nil
 								player.y+=1
+								sword.y+=1
 						end
 						pturn=false
 					end
@@ -124,6 +138,46 @@ function playermovement()
 			end
 		end
 end
+
+--need to optimize
+function sworddirection()
+	sd=player.direct*8
+	
+	if sd==1 or sd==-7 then
+		sword.x=player.x-1
+		sword.y=player.y-1
+	end
+	if sd==2 or sd==-6 then
+		sword.x=player.x-1
+		sword.y=player.y
+	end
+	if sd==3 or sd==-5 then
+		sword.x=player.x-1
+		sword.y=player.y+1
+	end
+	if sd==4 or sd==-4 then
+		sword.x=player.x
+		sword.y=player.y+1
+	end
+	if sd==5 or sd==-3 then
+		sword.x=player.x+1
+		sword.y=player.y+1
+	end
+	if sd==6 or sd==-2 then
+		sword.x=player.x+1
+		sword.y=player.y
+	end
+	if sd==7 or sd==-1 then
+		sword.x=player.x+1
+		sword.y=player.y-1
+	end
+	if sd==0 or player.direct>=1 or player.direct<=-1 then
+		player.direct = 0
+		sword.x=player.x
+		sword.y=player.y-1
+	end
+end
+
 
 function _init()
 	--sets up gameboard with nil values
@@ -268,7 +322,9 @@ function _draw()
 	spr(11,8*8-8,16*8-8) --draws a door, door is not in matrix yet
 	
 	print(pturn,10,10,7)
-	
+	print(sword.x, 20, 20)
+	print(sword.y, 20, 26)
+
 end
 __gfx__
 00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440000000000000000000000000000000000
