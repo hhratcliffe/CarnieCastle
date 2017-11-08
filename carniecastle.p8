@@ -250,6 +250,7 @@ function titleinit()
 end
 
 function gameinit()
+	mode=1
 	--sets up gameboard with nil values
 	gb={}
 	floor = {}
@@ -266,12 +267,12 @@ function gameinit()
 	end
 	--put player at position [8][3] in gb
 	gb[8][3]=0
-	
+
 	--put lesser clown at 4,2
 	gb[4][2] = 10 + north
 	--put lesser clown at 3,3
 	gb[3][3] = 10 + north
-	
+
 	--placing door
 	gb[10][3] = 201
 	--placing stairway
@@ -321,12 +322,12 @@ end
 function gamedraw()
 	cls()
 	--rectfill(0,0,128,128,1)
-  
+
 	for i=1,16 do
 		for j=1,16 do
 			--floor first
 			spr(floor[i][j], (i-1)*8, (j-1)*8)
-		
+
 			--player things
 			if gb[i][j]==0 then
 				spra(player.direct,1,i*8-8,j*8-13,1,2)
@@ -345,17 +346,17 @@ function gamedraw()
 			if gb[i][j]==210 then --200=wall
 				spr(10, i*8-8, j*8-8)
 			end
-			
+
 			--door things
 			if gb[i][j] == 201 then
 				spr(11, i*8-8, j*8-8)
 			end
-			
+
 			--stairway
 			if gb[i][j] == 202 then
 				spr(12, i*8-8, j*8-8)
 			end
-			
+
 				--[[error testing
 	  ent = gb[i][j]
 	  if ent != nil and ent != 0 and ent != 210 then
@@ -365,7 +366,7 @@ function gamedraw()
 		]]
 		end
 	end
-  
+
 	print(pturn,10,10,7)
 	print(sword.x, 20, 20)
 	print(sword.y, 20, 26)
