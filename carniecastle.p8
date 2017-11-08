@@ -85,7 +85,7 @@ function playermovement()
 
 					--cardinal player movement
 					if btn(0) then
-						if gb[i-1][j] !=210 or gb[i-1][j]!=201 then --201 = blocks movement into doors. temporary
+						if gb[i-1][j] !=210 and gb[i-1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space left
 							if gb[i-1][j]==10 or gb[i-1][j]==202 then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
@@ -685,3 +685,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
