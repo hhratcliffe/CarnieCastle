@@ -359,6 +359,7 @@ function gamedraw()
 			if gb[i][j]==0 then
 				pdrawx=i
 				pdrawy=j
+				spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
 			end
 
 			--enemy things
@@ -395,7 +396,6 @@ function gamedraw()
 		end
 	end
 	
-	spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
 	print(pturn,10,10,7)
 end
 __gfx__
