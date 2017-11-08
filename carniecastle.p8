@@ -111,7 +111,6 @@ function playermovement()
 							 sword.x+=1
 							 break
 							end
-
 						end
 						temp+=1
 						pturn=false
@@ -144,6 +143,7 @@ function playermovement()
 						end
 						pturn=false
 					end
+					sworddirection()
 					--breaks loop if the player is found
 					break
 				end
@@ -289,6 +289,7 @@ function gameinit()
 	end
 	--put player at position [8][3] in gb
 	gb[8][3]=0
+	player.direct=.25
 	--put lesser clown at 4,2
 	gb[4][2] = 10 + north
 	--put lesser clown at 3,3
@@ -314,10 +315,12 @@ function titleupdate()
 end
 
 function gameupdate()
+	
 	if pturn then
 		playermovement()
 	else
 		enemymovement()
+		wait(3)
 	end
 
 	--resets pturn
