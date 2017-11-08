@@ -27,7 +27,7 @@ pturn=true
 player={
 	direct = north,
 	x = 8,
-	y = 15
+	y = 3
 }
 
 sword = {
@@ -59,7 +59,6 @@ function spra(angle,n,x,y,w,h,flip_x,flip_y)
  end
 end
 
-sturn=1
 function playermovement()
 		--move player
 		for i=1,16 do --iterate through gb to find player
@@ -74,61 +73,74 @@ function playermovement()
 					if btn(5) and btn(0) then
 						player.direct+=.125
 						pturn=false
-						sturn=true
 						sworddirection()
 						break
 					end
 					if btn(5) and btn(1) then
 						player.direct-=.125
 						pturn=false
-						sturn=true
 						sworddirection()
 						break
 					end
 
 					--cardinal player movement
 					if btn(0) then
-						if i-1!=1 then
+						if gb[i-1][j] !=210 or gb[i-1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space left
+							if gb[i-1][j]==10 or gb[i-1][j]==202 then  --update to a range when more enemies are introduced
+									gb[i][j]=nil
+							else
 								gb[i-1][j]=0
 								gb[i][j]=nil
 								player.x-=1
 								sword.x-=1
 								temp-=1
+							end
 						end
 						pturn=false
 
 				elseif btn(1) and temp<=16 then
-						if i+1<temp then
+						if i+1<temp and gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space right
-								--is currently moving player to gb[15][j]
+							if gb[i+1][j]==10  or gb[i+1][j]==202 then --update to a range when more enemies are introduced
+									gb[i][j]=nil
+							else
 							 gb[i+1][j]=0
 							 gb[i][j]=nil
 							 player.x+=1
 							 sword.x+=1
 							 break
+							end
+
 						end
 						temp+=1
 						pturn=false
 
 					elseif btn(2) then
-						if j-1 !=1 then
-						  --stops movement
+						if gb[i][j-1] !=210 then
 								--move player 1 up
+							if gb[i][j-1]==10 or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
+									gb[i][j]=nil
+							else
 								gb[i][j-1]=0
 								gb[i][j]=nil
 								player.y-=1
 								sword.y-=1
+							end
 						end
 						pturn=false
 
 					elseif btn(3) then
-						if j+1 != 16 then
+						if gb[i][j+1] != 210 then
 								--moves player 1 down
+							if gb[i][j+1]==10 or gb[i][j+1]==202 then --update to a range when more enemies are introduced
+									gb[i][j]=nil
+							else
 								gb[i][j+1]=0
 								gb[i][j]=nil
 								player.y+=1
 								sword.y+=1
+							end
 						end
 						pturn=false
 					end
@@ -193,15 +205,25 @@ function ai(i, j)
 			a = xoff/abs(xoff)
 			spot = gb[i+a][j]
 			if(spot == nil or spot == 0) then
-			 gb[i+a][j] = entity+100
-			 gb[i][j] = nil
+				if (i+a)==sword.x and j==sword.y then
+					gb[i][j]=nil
+					gb[i+a][j]=nil
+				else
+			 		gb[i+a][j] = entity+100
+			 		gb[i][j] = nil
+				end
 			end
 		else
 			b = yoff/abs(yoff)
 			spot = gb[i][j+b]
 			if(spot== nil or spot == 0) then
-			 gb[i][j+b] = entity+100
-			 gb[i][j] = nil
+				if i==sword.x and (j+b)==sword.y then
+					gb[i][j]=nil
+					gb[i][j+b]=nil
+				else
+			 		gb[i][j+b] = entity+100
+			 		gb[i][j] = nil
+				end
 			end
 		end
 	--juggler
@@ -267,12 +289,10 @@ function gameinit()
 	end
 	--put player at position [8][3] in gb
 	gb[8][3]=0
-
 	--put lesser clown at 4,2
 	gb[4][2] = 10 + north
 	--put lesser clown at 3,3
 	gb[3][3] = 10 + north
-
 	--placing door
 	gb[10][3] = 201
 	--placing stairway
@@ -368,8 +388,6 @@ function gamedraw()
 	end
 
 	print(pturn,10,10,7)
-	print(sword.x, 20, 20)
-	print(sword.y, 20, 26)
 end
 __gfx__
 00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440060000000000000000000000000000000
