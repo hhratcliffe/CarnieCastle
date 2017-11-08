@@ -206,6 +206,8 @@ function ai(i, j)
 				if (i+a)==sword.x and j==sword.y then
 					gb[i][j]=nil
 					gb[i+a][j]=nil
+				elseif i==sword.x and j==sword.y then
+					gb[i][j]=nil
 				else
 			 		gb[i+a][j] = entity+100
 			 		gb[i][j] = nil
@@ -218,6 +220,8 @@ function ai(i, j)
 				if i==sword.x and (j+b)==sword.y then
 					gb[i][j]=nil
 					gb[i][j+b]=nil
+				elseif i==sword.x and j==sword.y then
+					gb[i][j]=nil
 				else
 			 		gb[i][j+b] = entity+100
 			 		gb[i][j] = nil
