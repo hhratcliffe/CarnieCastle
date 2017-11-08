@@ -233,7 +233,7 @@ function ai(i, j)
 		gb[i][j] += 100
 	end
 
-	wait(30)
+	wait(15)
 end
 
 function enemymovement()
@@ -357,7 +357,8 @@ function gamedraw()
 
 			--player things
 			if gb[i][j]==0 then
-				spra(player.direct,1,i*8-8,j*8-13,1,2)
+				pdrawx=i
+				pdrawy=j
 			end
 
 			--enemy things
@@ -393,7 +394,8 @@ function gamedraw()
 		]]
 		end
 	end
-
+	
+	spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
 	print(pturn,10,10,7)
 end
 __gfx__
