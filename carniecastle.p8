@@ -337,13 +337,22 @@ function _draw()
 	if mode==0 then
 		titledraw()
 	else
+		pal()
 		gamedraw()
 	end
 end
 
 function titledraw()
 	cls()
+	pal()
+	if x==nil or x+1==16 then
+		x=7
+	end
 	sspr(0,34,32,32,0,0,128,128)
+	pal(x,x+1)
+	print("press z to start",32,80,x)
+	x+=1
+	wait(3)
 end
 
 function gamedraw()
@@ -359,7 +368,6 @@ function gamedraw()
 			if gb[i][j]==0 then
 				pdrawx=i
 				pdrawy=j
-				spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
 			end
 
 			--enemy things
@@ -396,6 +404,9 @@ function gamedraw()
 		end
 	end
 	
+	spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
+	pdrawx=-1
+	pdrawy=-1
 	print(pturn,10,10,7)
 end
 __gfx__
