@@ -22,7 +22,7 @@ west=2
 --temp variable used to simulate turn based movement
 pturn=true
 
-truefloor={
+trueFloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -41,9 +41,10 @@ truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025"
 }
 --rooms
---generic room
+
+--Generic Room
 --[[
-{--roomx
+{--RoomX
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -62,9 +63,10 @@ truefloor={
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 }
 ]]
-gameboard={
-	{--floor1
-		{--room1
+
+gameBoard={
+	{--Floor1
+		{--Room1
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
 			"712,nil,nil,010,nil,nil,nil,nil,000,210,210,210,210,210,210,210",
@@ -82,7 +84,8 @@ gameboard={
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
-		{--room2
+
+		{--Room2
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
@@ -175,8 +178,8 @@ function playermovement()
 							if gb[i-1][j]!=nil and (gb[i-1][j]>=10 and gb[i-1][j]<=90) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i-1][j]!=nil and gb[i-1][j] > 700 and gb[i-1][j] < 800 then
-							 music(36, 100, 1)
-								gb=convertstringstoarray(gameboard[flr((gb[i-1][j]-700)/10)][gb[i-1][j]%10])
+							  music(36, 100, 1)
+								gb=convertStringsToArray(gameBoard[flr((gb[i-1][j]-700)/10)][gb[i-1][j]%10])
 								player.x=15
 								gb[player.x][player.y]=0
 							else
@@ -195,7 +198,7 @@ function playermovement()
 							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) or gb[i+1][j]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i+1][j]!=nil and gb[i+1][j] > 700 and gb[i+1][j] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
+								gb=convertStringsToArray(gameBoard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
 								player.x=2
 								gb[player.x][player.y]=0
 							else
@@ -215,7 +218,7 @@ function playermovement()
 							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
+								gb=convertStringsToArray(gameBoard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
 								player.y=15
 								gb[player.x][player.y]=0
 							else
@@ -233,7 +236,7 @@ function playermovement()
 							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) or gb[i][j+1]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j+1]!=nil and gb[i][j+1] > 700 and gb[i][j+1] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
+								gb=convertStringsToArray(gameBoard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
 								player.y=2
 								gb[player.x][player.y]=0
 							else
@@ -563,7 +566,7 @@ function wait(i)
 	temp=nil
 end
 
-function convertstringstoarray(room)
+function convertStringsToArray(room)
 	board={}
 	i=1
 	for x in all(room) do
@@ -610,8 +613,8 @@ function gameinit()
 	mode=1
 	music(32, 200, 2)
 	--sets up gameboard
-	gb=convertstringstoarray(gameboard[1][1])
-	floor = convertstringstoarray(truefloor)
+	gb=convertStringsToArray(gameBoard[1][1])
+	floor = convertStringsToArray(trueFloor)
 	player.x=9
 	player.y=3
 	player.direct=.25
@@ -1052,4 +1055,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
