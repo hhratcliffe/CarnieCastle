@@ -9,6 +9,8 @@ walls=200's
 obstacles=300's
 hazards=400's
 items=500's
+doors=600's
+stairs=700's
 ]]
 
 --global directions
@@ -43,7 +45,7 @@ trueFloor={
 --rooms
 --Generic Room
 --[[
-{
+{--RoomX
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -66,9 +68,8 @@ gameBoard={
 	{--Floor1
 		{--Room1
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
-			"202,nil,nil,010,nil,nil,nil,nil,000,201,210,210,210,210,210,210",
+			"712,nil,nil,010,nil,nil,nil,nil,000,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -76,6 +77,25 @@ gameBoard={
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+		},
+		{--Room2
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -153,8 +173,12 @@ function playermovement()
 					if btn(0) then
 						if gb[i-1][j] !=210 and gb[i-1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space left
-							if gb[i-1][j]!=nil and (gb[i-1][j]>=10 and gb[i-1][j]<=90) or gb[i-1][j]==202 then  --update to a range when more enemies are introduced
+							if gb[i-1][j]!=nil and (gb[i-1][j]>=10 and gb[i-1][j]<=90) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
+							elseif gb[i-1][j]!=nil and gb[i-1][j] > 700 and gb[i-1][j] < 800 then
+								gb=convertStringsToArray(gameBoard[flr((gb[i-1][j]-700)/10)][gb[i-1][j]%10])
+								player.x=15
+								gb[player.x][player.y]=0
 							else
 								gb[i-1][j]=0
 								gb[i][j]=nil
@@ -170,6 +194,10 @@ function playermovement()
 								--move player 1 space right
 							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) or gb[i+1][j]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
+							elseif gb[i+1][j]!=nil and gb[i+1][j] > 700 and gb[i+1][j] < 800 then
+								gb=convertStringsToArray(gameBoard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
+								player.x=2
+								gb[player.x][player.y]=0
 							else
 							 gb[i+1][j]=0
 							 gb[i][j]=nil
@@ -186,6 +214,10 @@ function playermovement()
 								--move player 1 up
 							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
+							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
+								gb=convertStringsToArray(gameBoard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
+								player.y=15
+								gb[player.x][player.y]=0
 							else
 								gb[i][j-1]=0
 								gb[i][j]=nil
@@ -200,6 +232,10 @@ function playermovement()
 								--moves player 1 down
 							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) or gb[i][j+1]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
+							elseif gb[i][j+1]!=nil and gb[i][j+1] > 700 and gb[i][j+1] < 800 then
+								gb=convertStringsToArray(gameBoard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
+								player.y=2
+								gb[player.x][player.y]=0
 							else
 								gb[i][j+1]=0
 								gb[i][j]=nil
@@ -263,17 +299,17 @@ function animation(a, delay, i, j, direction)
 	--delay is how many frames to wait for each frame
 	--i, j are the x,y coordinates where the animation starts
 	--direction is...the direction.
-	
+
 	--checking animation length
 	if(#a != 8) then
 		return
 	end
-	
+
 	--order of drawing:
 	--floor
 	--entities
 	--sword
-	
+
 	for q = 1,#a do
 		--floor
 			spr(floor[i][j], i*8, j*8)
@@ -282,7 +318,7 @@ function animation(a, delay, i, j, direction)
 			spr(floor[i][j], i*8, j*8-8)
 			--entities
 			spr()
-			
+
 			--animation
 			spr(a[q], i*8, j*8-q)
 		elseif direction == east then
@@ -290,7 +326,7 @@ function animation(a, delay, i, j, direction)
 			spr(floor[i][j], i*8+8, j*8)
 			--entities
 			spr()
-			
+
 			--animation
 			spr(a[q], i*8+q, j*8)
 		elseif direction == south then
@@ -298,7 +334,7 @@ function animation(a, delay, i, j, direction)
 			spr(floor[i][j], i*8, j*8+8)
 			--entities
 			spr()
-			
+
 			--animation
 			spr(a[q], i*8, j*8+q)
 		elseif direction == west then
@@ -306,16 +342,16 @@ function animation(a, delay, i, j, direction)
 			spr(floor[i][j], i*8-8, j*8)
 			--entities
 			spr()
-			
+
 			--animation
 			spr(a[q], i*8-q, j*8)
 		else
 			print("problem!!!!")
 		end
 		--redraw sword/player
-		spra(player.direct,1,player.x*8-8,player.y*8-13,1,2)	
+		spra(player.direct,1,player.x*8-8,player.y*8-13,1,2)
 		wait(delay)
-	end		
+	end
 end
 
 function wait(z)
@@ -361,11 +397,11 @@ function ai(i, j)
 			 		gb[i+a][j] = entity+100
 			 		gb[i][j] = nil
 				end
-				
+
 				--animation
 				if a < 0 then
 					direction = west
-				else 
+				else
 					direction = east
 				end
 				animation(lclownwalk,10,i-1,j-1,direction)
@@ -381,11 +417,11 @@ function ai(i, j)
 			 		gb[i][j+b] = entity+100
 			 		gb[i][j] = nil
 				end
-				
+
 				--animation
 				if b < 0 then
 					direction = north
-				else 
+				else
 					direction = south
 				end
 				animation(lclownwalk,10,i-1,j-1,direction)
@@ -476,6 +512,8 @@ function gameinit()
 	--sets up gameboard
 	gb=convertStringsToArray(gameBoard[1][1])
 	floor = convertStringsToArray(trueFloor)
+	player.x=9
+	player.y=3
 	player.direct=.25
 end
 
@@ -556,7 +594,7 @@ function gamedraw()
 			end
 
 			--door things
-			if gb[i][j] == 201 then
+			if gb[i][j]!=nil and gb[i][j] > 700 and gb[i][j] < 800 then
 				spr(11, i*8-8, j*8-8)
 			end
 
