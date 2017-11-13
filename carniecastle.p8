@@ -91,7 +91,7 @@ function playermovement()
 					if btn(0) then
 						if gb[i-1][j] !=210 and gb[i-1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space left
-							if gb[i-1][j]==10 or gb[i-1][j]==202 then  --update to a range when more enemies are introduced
+							if gb[i-1][j]!=nil and (gb[i-1][j]>=10 and gb[i-1][j]<=90) or gb[i-1][j]==202 then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							else
 								gb[i-1][j]=0
@@ -106,7 +106,7 @@ function playermovement()
 				elseif btn(1) and temp<=16 then
 						if i+1<temp and gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space right
-							if gb[i+1][j]==10  or gb[i+1][j]==202 then --update to a range when more enemies are introduced
+							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) or gb[i+1][j]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							else
 							 gb[i+1][j]=0
@@ -122,7 +122,7 @@ function playermovement()
 					elseif btn(2) then
 						if gb[i][j-1] !=210 then
 								--move player 1 up
-							if gb[i][j-1]==10 or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
+							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							else
 								gb[i][j-1]=0
@@ -136,7 +136,7 @@ function playermovement()
 					elseif btn(3) then
 						if gb[i][j+1] != 210 then
 								--moves player 1 down
-							if gb[i][j+1]==10 or gb[i][j+1]==202 then --update to a range when more enemies are introduced
+							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) or gb[i][j+1]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							else
 								gb[i][j+1]=0
@@ -193,6 +193,7 @@ function sworddirection()
 		sword.y=player.y-1
 	end
 end
+
 
 function animation(a, delay, i, j, direction)
 
@@ -260,6 +261,21 @@ function wait(z)
 		flip()
 	end
 end
+
+--checks if the player is in the current gameboard (gb). if player is absent, then they are dead
+function checkdeath(gb)
+	for i=1,16 do
+		for j=1,16 do
+			if gb[i][j]==0 then
+				dead=false
+				return
+			end
+		end
+	end
+	dead=true
+end
+
+
 function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
@@ -404,17 +420,11 @@ function titleupdate()
 end
 
 function gameupdate()
-	
+	checkdeath(gb) 
 	if pturn then
 		playermovement()
 	else
 		enemymovement()
-		wait(3)
-	end
-
-	--resets pturn
-	if btn(4) then
-		pturn=true
 	end
 end
 
@@ -422,18 +432,28 @@ function _draw()
 	if mode==0 then
 		titledraw()
 	else
+		pal() --resets color palette for gameplay
 		gamedraw()
 	end
 end
 
 function titledraw()
 	cls()
+	pal() --resets color palette
 	sspr(0,34,32,32,0,0,128,128)
+	--cycles colors 7-16
+	if x==nil or x+1==16 then
+		x=7
+	end
+	pal(x,x+1)
+	print("press z to start",32,80,x)
+	x+=1
+	wait(3) --slows down rotation of colors
 end
 
 function gamedraw()
 	cls()
-	--rectfill(0,0,128,128,1)
+	if not dead then
 
 	for i=1,16 do
 		for j=1,16 do
@@ -443,6 +463,8 @@ function gamedraw()
 			--player things
 			if gb[i][j]==0 then
 				spra(player.direct,1,i*8-8,j*8-13,1,2)
+				pdrawx=i
+				pdrawy=j
 			end
 
 			--enemy things
@@ -478,8 +500,17 @@ function gamedraw()
 		]]
 		end
 	end
-
+	--fixes a bug where the sword would not draw
+	spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
+	pdrawx=-1
+	pdrawy=-1
 	print(pturn,10,10,7)
+	else
+		--prints this to screen if player is dead
+		cls()
+		print("dead",56,56)
+		print("the carnies got you",26,64)
+	end
 end
 __gfx__
 00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440060000000000000000000000000000000
