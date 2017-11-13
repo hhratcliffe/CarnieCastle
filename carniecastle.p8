@@ -99,6 +99,7 @@ sword = {
 
 --animation
 lclownwalk = {33, 32, 34, 32, 33, 32, 34, 32}
+jugglerwalk = {49, 50, 51, 52, 53, 54, 55, 48}
 
 --sprite rotation function
 --written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
@@ -276,39 +277,39 @@ function animation(a, delay, i, j, direction)
 	
 	for q = 1,#a do
 		--floor
-			spr(floor[i][j], i*8, j*8)
+			spr(floor[i][j], i*8-8, j*8-8)
 		if direction == north then
+			--floor
+			spr(floor[i][j], i*8-8, j*8-16)
+			--entities
+			spr()
+			
+			--animation
+			spr(a[q], i*8-8, j*8-q-8)
+		elseif direction == east then
 			--floor
 			spr(floor[i][j], i*8, j*8-8)
 			--entities
 			spr()
 			
 			--animation
-			spr(a[q], i*8, j*8-q)
-		elseif direction == east then
-			--floor
-			spr(floor[i][j], i*8+8, j*8)
-			--entities
-			spr()
-			
-			--animation
-			spr(a[q], i*8+q, j*8)
+			spr(a[q], i*8+q-8, j*8-8)
 		elseif direction == south then
-			--floor
-			spr(floor[i][j], i*8, j*8+8)
-			--entities
-			spr()
-			
-			--animation
-			spr(a[q], i*8, j*8+q)
-		elseif direction == west then
 			--floor
 			spr(floor[i][j], i*8-8, j*8)
 			--entities
 			spr()
 			
 			--animation
-			spr(a[q], i*8-q, j*8)
+			spr(a[q], i*8-8, j*8+q-8)
+		elseif direction == west then
+			--floor
+			spr(floor[i][j], i*8-16, j*8-8)
+			--entities
+			spr()
+			
+			--animation
+			spr(a[q], i*8-q-8, j*8-8)
 		else
 			print("problem!!!!")
 		end
@@ -368,7 +369,7 @@ function ai(i, j)
 				else 
 					direction = east
 				end
-				animation(lclownwalk,10,i-1,j-1,direction)
+				animation(lclownwalk,3,i,j,direction)
 			end
 		else
 			b = yoff/abs(yoff)
@@ -388,15 +389,114 @@ function ai(i, j)
 				else 
 					direction = south
 				end
-				animation(lclownwalk,10,i-1,j-1,direction)
+				animation(lclownwalk,3,i,j,direction)
 			end
 		end
+		
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		gb[i][j] += 100
+		direction = entity%10	
+		
+		--juggler north
+		if direction == north then
+			if(xoff==0 and yoff < 0) then
+				if los(i, j, direction) then
+					gb[player.x][player.y] = nil
+				end
+			else
+				c = xoff/abs(xoff)
+				spot = gb[i+c][j]
+				if(spot == o or spot == nil) then
+					gb[i][j] = nil
+					gb[i+c][j] = entity+100
+					
+					if c<0 then
+						newdir = west
+					else
+						newdir = east
+					end
+					
+					animation(jugglerwalk, 3, i, j, newdir)
+				end				
+			end
+		
+		--juggler south	
+		elseif direction == south then
+			if(xoff==0 and yoff > 0) then
+				if los(i, j, direction) then
+					gb[player.x][player.y] = nil
+				end
+			else
+				c = xoff/abs(xoff)
+				spot = gb[i+c][j]
+				if(spot == o or spot == nil) then
+					gb[i][j] = nil
+					gb[i+c][j] = entity+100
+					
+					if c<0 then
+						newdir = west
+					else
+						newdir = east
+					end
+					
+					animation(jugglerwalk, 3, i, j, newdir)
+				end
+			end
+			
+		--juggler east	
+		elseif direction == east then
+			if(xoff>0 and yoff == 0) then
+				if los(i, j, direction) then
+					gb[player.x][player.y] = nil
+				end	
+			else
+				c = yoff/abs(yoff)
+				spot = gb[i][j+c]
+				if(spot == o or spot == nil) then
+					gb[i][j] = nil
+					gb[i][j+c] = entity+100
+					
+					if c<0 then
+						newdir = north
+					else
+						newdir = south
+					end
+					
+					animation(jugglerwalk, 3, i, j, newdir)
+				end
+			end
+			
+		--juggler west
+		elseif direction == west then
+			if(xoff<0 and yoff == 0) then
+				if los(i, j, direction) then
+					gb[player.x][player.y] = nil
+				end
+			else
+				c = yoff/abs(yoff)
+				spot = gb[i][j+c]
+				if(spot == o or spot == nil) then
+					gb[i][j] = nil
+					gb[i][j+c] = entity+100
+					
+					if c<0 then
+						newdir = north
+					else
+						newdir = south
+					end
+					
+					animation(jugglerwalk, 3, i, j, newdir)
+				end
+			end
+		end
+		--don't forget to add 100
+		
+	else
+		z = 1/0
 	end
 
-	wait(30)
+	wait(10)
 end
 
 function enemymovement()
@@ -546,7 +646,8 @@ function gamedraw()
 				if gb[i][j]<20 then
 					spr(32,(i-1)*8,(j-1)*8)
 				elseif gb[i][j] < 30 then
-					spr(33,(i-1)*8,(j-1)*8)
+					spr(60+gb[i][j]%10, i*8-8, j*8-8)
+					spr(48,(i-1)*8,(j-1)*8)
 				end
 			end
 
@@ -586,6 +687,37 @@ function gamedraw()
 		print("the carnies got you",26,64)
 	end
 end
+
+function los(i, j, direction)
+	
+	if(direction == north) then
+		a = 0
+		b = -1
+	elseif direction == south then
+		a = 0
+		b = 1
+	elseif direction == east then
+		a = 1
+		b = 0
+	elseif direction == west then
+		a = -1
+		b = 0
+	end
+	
+		k = 0 
+		while(i+a*k<16 and i+a*k>1 and j+b*k <16 and j+b*k >1) do
+			k += 1
+			ent = gb[i+a*k][j+b*k]
+			
+			if ent == 0 then
+				return true
+			elseif ent != nil then
+				return false
+			end 
+		end 
+	
+	return false
+end
 __gfx__
 00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440060000000000000000000000000000000
 00000000000560000000000000000000000000000000000000000000000000000000000066665666555555550444444056000000000000000000000000000000
@@ -611,14 +743,14 @@ __gfx__
 00011000000110000001100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00800800008008000080080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00800800008000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00c00000000000000000000000c0000000c000c00c000c00000000000c0000000000000000000000000000000000000000700700000007000070000000000000
+000ee0000c0ee0c0000ee0c0000ee000000ee000000ee000000ee0c0000ee0000000000000000000000000000000000007000070000000700700000000000000
+000770c0000770000007700000077000000770000007700000077000000770000000000000000000000000000000000070000007000000077000000000000000
+c0888800008888000088880cc088880cc08888000088880cc088880cc088880c0000000000000000000000000000000000000000000000000000000000000000
+0808808008088c8008c8808008088080080880800808808008088080080880800000000000000000000000000000000000000000000000000000000000000000
+00011000000110000001100000011000000110000001100000011000000110000000000000000000000000000000000000000000000000077000000070000007
+00800800008008000080080000800800008008000080080000800800008008000000000000000000000000000000000000000000000000700700000007000070
+00800800008000000080080000000800008008000080000000800800000008000000000000000000000000000000000000000000000007000070000000700700
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 07777077770777707000707777707777000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
