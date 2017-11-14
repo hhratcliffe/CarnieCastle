@@ -22,7 +22,7 @@ west=2
 --temp variable used to simulate turn based movement
 pturn=true
 
-trueFloor={
+truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -42,9 +42,9 @@ trueFloor={
 }
 --rooms
 
---Generic Room
+--generic room
 --[[
-{--RoomX
+{--roomx
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -64,9 +64,9 @@ trueFloor={
 }
 ]]
 
-gameBoard={
-	{--Floor1
-		{--Room1
+gameboard={
+	{--floor1
+		{--room1
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
 			"712,nil,nil,010,nil,nil,nil,nil,000,210,210,210,210,210,210,210",
@@ -85,7 +85,7 @@ gameBoard={
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
 
-		{--Room2
+		{--room2
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
@@ -179,7 +179,7 @@ function playermovement()
 									gb[i][j]=nil
 							elseif gb[i-1][j]!=nil and gb[i-1][j] > 700 and gb[i-1][j] < 800 then
 							  music(36, 100, 1)
-								gb=convertStringsToArray(gameBoard[flr((gb[i-1][j]-700)/10)][gb[i-1][j]%10])
+								gb=convertstringstoarray(gameboard[flr((gb[i-1][j]-700)/10)][gb[i-1][j]%10])
 								player.x=15
 								gb[player.x][player.y]=0
 							else
@@ -198,7 +198,7 @@ function playermovement()
 							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) or gb[i+1][j]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i+1][j]!=nil and gb[i+1][j] > 700 and gb[i+1][j] < 800 then
-								gb=convertStringsToArray(gameBoard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
+								gb=convertstringstoarray(gameboard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
 								player.x=2
 								gb[player.x][player.y]=0
 							else
@@ -218,7 +218,7 @@ function playermovement()
 							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
-								gb=convertStringsToArray(gameBoard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
+								gb=convertstringstoarray(gameboard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
 								player.y=15
 								gb[player.x][player.y]=0
 							else
@@ -236,7 +236,7 @@ function playermovement()
 							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) or gb[i][j+1]==202 then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j+1]!=nil and gb[i][j+1] > 700 and gb[i][j+1] < 800 then
-								gb=convertStringsToArray(gameBoard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
+								gb=convertstringstoarray(gameboard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
 								player.y=2
 								gb[player.x][player.y]=0
 							else
@@ -566,7 +566,7 @@ function wait(i)
 	temp=nil
 end
 
-function convertStringsToArray(room)
+function convertstringstoarray(room)
 	board={}
 	i=1
 	for x in all(room) do
@@ -613,8 +613,8 @@ function gameinit()
 	mode=1
 	music(32, 200, 2)
 	--sets up gameboard
-	gb=convertStringsToArray(gameBoard[1][1])
-	floor = convertStringsToArray(trueFloor)
+	gb=convertstringstoarray(gameboard[1][1])
+	floor = convertstringstoarray(truefloor)
 	player.x=9
 	player.y=3
 	player.direct=.25
@@ -724,6 +724,7 @@ function gamedraw()
 	else
 		--prints this to screen if player is dead
 		cls()
+		poke(0x5f40,15)
 		print("dead",56,56)
 		print("the carnies got you",26,64)
 	end
@@ -965,8 +966,8 @@ __sfx__
 011200000c740107000074500745007000c7400c7050a7400a7400a745097400974507740077450070012740127401274513740137451074010745007001b7141d7111b711187121d705000001b7000003000040
 011200001a5561854616536115261a5161851616516115161a5161851616516115161a5161851616516115061c5561a54618536135261c5161a51618516135161c5161a51618516135161c5161a5161851613506
 0114001a110533f5201b625110533f5253f5251105311023110131b6553f5251b6653f525110531b6253f525110533f5253f525110531c625110531c6553f5251c6653f525000030000300003000030000300003
-014100002173221722217222172520732207222072220722207222072220722207251e7241e7221e7221e7221e7221e7221e7221e7251d7241d7221d7221d7221c7221c7321c7221c7251a7241f7212372123722
-014100001e0221e0101e0101e0101d0201d0101d0101d0101c0201c0101c0101c0101b0241b0101c0101b0101a0141a0101a0101a0101901419010190101901019010190101901019010170141a0111f0211f022
+014100002173221722217222172520732207222072220722207222072220722207251e7241e7221e7221e7221e7221e7221e7221e7251d7241d7221d7221d7221c7321c7221c7221c7251a7241f7212372123722
+014100001e0221e0101e0101e0101d0201d0101d0101d0101c0201c0101c0101c0101b0241b0101c0101b0101a0141a0101a0101a0101901419010190101901019012190101901019010170141a0111f0211f022
 0114001a0617506135001050615506135001050010506155061350010000100061250614506175061350010506155061350010500105061550613500100001000612506145001000010000100001000010000100
 01140012110433f5203f5251b6553f52511023110433f5203f5251b6553f52511023110333f5201b6553f525110233f525110433f5203f5251b6553f52511023110033f505110033f5003f5051b6053f50511003
 014100201231212312123151230511312113121131511305093140931209312093120e3110e3120e3120e3150b3140b3120b3120b3120d3140d3120d3120d3130131201312013120131507314073120731207315
@@ -1055,3 +1056,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
