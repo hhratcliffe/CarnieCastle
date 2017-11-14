@@ -69,7 +69,7 @@ gameBoard={
 		{--Room1
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
-			"712,nil,nil,010,nil,nil,nil,nil,000,210,210,210,210,210,210,210",
+			"712,nil,nil,010,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -192,10 +192,10 @@ function playermovement()
 						end
 						pturn=false
 
-				elseif btn(1) and temp<=16 then
-						if i+1<temp and gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
+				elseif btn(1) then
+						if gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space right
-							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) or gb[i+1][j]==202 then --update to a range when more enemies are introduced
+							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i+1][j]!=nil and gb[i+1][j] > 700 and gb[i+1][j] < 800 then
 								gb=convertStringsToArray(gameBoard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
@@ -215,7 +215,7 @@ function playermovement()
 					elseif btn(2) then
 						if gb[i][j-1] !=210 then
 								--move player 1 up
-							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) or gb[i][j-1]==202 then  --update to a range when more enemies are introduced
+							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
 								gb=convertStringsToArray(gameBoard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
@@ -233,7 +233,7 @@ function playermovement()
 					elseif btn(3) then
 						if gb[i][j+1] != 210 then
 								--moves player 1 down
-							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) or gb[i][j+1]==202 then --update to a range when more enemies are introduced
+							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j+1]!=nil and gb[i][j+1] > 700 and gb[i][j+1] < 800 then
 								gb=convertStringsToArray(gameBoard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
@@ -430,12 +430,12 @@ function ai(i, j)
 				animation(lclownwalk,3,i,j,direction)
 			end
 		end
-		
+
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		gb[i][j] += 100
-		direction = entity%10	
-		
+		direction = entity%10
+
 		--juggler north
 		if direction == north then
 			if(xoff==0 and yoff < 0) then
@@ -448,18 +448,18 @@ function ai(i, j)
 				if(spot == o or spot == nil) then
 					gb[i][j] = nil
 					gb[i+c][j] = entity+100
-					
+
 					if c<0 then
 						newdir = west
 					else
 						newdir = east
 					end
-					
+
 					animation(jugglerwalk, 3, i, j, newdir)
-				end				
+				end
 			end
-		
-		--juggler south	
+
+		--juggler south
 		elseif direction == south then
 			if(xoff==0 and yoff > 0) then
 				if los(i, j, direction) then
@@ -471,40 +471,40 @@ function ai(i, j)
 				if(spot == o or spot == nil) then
 					gb[i][j] = nil
 					gb[i+c][j] = entity+100
-					
+
 					if c<0 then
 						newdir = west
 					else
 						newdir = east
 					end
-					
+
 					animation(jugglerwalk, 3, i, j, newdir)
 				end
 			end
-			
-		--juggler east	
+
+		--juggler east
 		elseif direction == east then
 			if(xoff>0 and yoff == 0) then
 				if los(i, j, direction) then
 					gb[player.x][player.y] = nil
-				end	
+				end
 			else
 				c = yoff/abs(yoff)
 				spot = gb[i][j+c]
 				if(spot == o or spot == nil) then
 					gb[i][j] = nil
 					gb[i][j+c] = entity+100
-					
+
 					if c<0 then
 						newdir = north
 					else
 						newdir = south
 					end
-					
+
 					animation(jugglerwalk, 3, i, j, newdir)
 				end
 			end
-			
+
 		--juggler west
 		elseif direction == west then
 			if(xoff<0 and yoff == 0) then
@@ -517,19 +517,19 @@ function ai(i, j)
 				if(spot == o or spot == nil) then
 					gb[i][j] = nil
 					gb[i][j+c] = entity+100
-					
+
 					if c<0 then
 						newdir = north
 					else
 						newdir = south
 					end
-					
+
 					animation(jugglerwalk, 3, i, j, newdir)
 				end
 			end
 		end
 		--don't forget to add 100
-		
+
 	else
 		z = 1/0
 	end
@@ -617,6 +617,7 @@ function gameinit()
 	floor = convertStringsToArray(trueFloor)
 	player.x=9
 	player.y=3
+	gb[player.x][player.y]=0
 	player.direct=.25
 end
 
@@ -720,7 +721,7 @@ function gamedraw()
 	spra(player.direct,1,pdrawx*8-8,pdrawy*8-13,1,2)
 	pdrawx=-1
 	pdrawy=-1
-	print(pturn,10,10,7)
+	--print(gb[player.x+1][player.y],10,10,7)
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -730,7 +731,7 @@ function gamedraw()
 end
 
 function los(i, j, direction)
-	
+
 	if(direction == north) then
 		a = 0
 		b = -1
@@ -744,19 +745,19 @@ function los(i, j, direction)
 		a = -1
 		b = 0
 	end
-	
-		k = 0 
+
+		k = 0
 		while(i+a*k<16 and i+a*k>1 and j+b*k <16 and j+b*k >1) do
 			k += 1
 			ent = gb[i+a*k][j+b*k]
-			
+
 			if ent == 0 then
 				return true
 			elseif ent != nil then
 				return false
-			end 
-		end 
-	
+			end
+		end
+
 	return false
 end
 __gfx__
