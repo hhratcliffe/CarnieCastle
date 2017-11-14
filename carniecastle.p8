@@ -19,7 +19,7 @@ east=1
 south=3
 west=2
 
---temp variable used to simulate turn based movement
+--variable used to simulate turn based movement
 pturn=true
 
 truefloor={
@@ -105,6 +105,21 @@ gameboard={
 		}
 	}
 }
+
+--dialogue
+dialoguetf=true --boolean variable for dialogue
+dialogue={
+	--27 characters currently fit on one line.
+	t_dialogue={ --tutorial level dialogue
+		"press ‹ to move west\nand ‘ to move east. ",
+		"press ” to move north\nand ƒ to move south",
+		"hold x and press ‹/‘ to \nturn. ‘ turns clockwise,\n‹ turns counterclockwise.",
+		"touching enemies with your\nsword will kill them.",
+		"plan your movements, and\nyou shall succeed.\ngood luck!"
+	}
+	--put other dialogue options in this table
+}
+
 --table for player containing direction and sprite
 --"0" corresponds to player in gb matrix
 player={
@@ -148,13 +163,15 @@ function spra(angle,n,x,y,w,h,flip_x,flip_y)
 end
 
 function playermovement()
+	--fixes east movement bug
+	rightfix=nil
 		--move player
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-					if temp==nil then
+					if rightfix==nil then
 					--upon entering a room, set temp to nil
-						temp=i+2
+						rightfix=i+2
 					end
 
 					--sword turning
@@ -187,13 +204,13 @@ function playermovement()
 								gb[i][j]=nil
 								player.x-=1
 								sword.x-=1
-								temp-=1
+								rightfix-=1
 							end
 						end
 						pturn=false
 
 				elseif btn(1) then
-						if gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
+						if i+1<rightfix and gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space right
 							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
@@ -209,7 +226,7 @@ function playermovement()
 							 break
 							end
 						end
-						temp+=1
+						rightfix+=1
 						pturn=false
 
 					elseif btn(2) then
@@ -381,8 +398,12 @@ function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
-
+	
 	if(entity == 0 or entity == nil) then
+		return
+	elseif i==sword.x and j==sword.y then
+		gb[i][j]=nil
+		wait(3)
 		return
 	end
 
@@ -533,8 +554,7 @@ function ai(i, j)
 	else
 		z = 1/0
 	end
-
-	wait(10)
+	wait(7)
 end
 
 function enemymovement()
@@ -554,7 +574,7 @@ function enemymovement()
 				end
 		end
 	end
-
+	
 	pturn = true;
 end
 
@@ -562,8 +582,6 @@ function wait(i)
  for j = 1, i do
  	flip()
  end
-	--temp variable. fixes east movement bug
-	temp=nil
 end
 
 function convertstringstoarray(room)
@@ -598,6 +616,31 @@ function transpose(inputarray)
 		end
 	end
 	return outputarray
+end
+
+function load_dialogue(t,dn)
+	--t is dialogue table
+	--dn: specific dialogue message number
+	dialoguetf=true
+	if dn!=nil then
+		d_num=dn
+	end
+	if d_num==nil then
+		d_num=1
+	end
+	if t[d_num]==nil then
+		dialoguetf=false
+		return
+	end
+	--draws dialogue box and dialogue statement
+	rectfill(8,100,120,122,0)
+	rect(8,100,120,122,7)
+	print(t[d_num],10,102,7)
+	--print("x->",108,117,7 )
+	
+	if btnp(5) then
+		d_num+=1
+	end
 end
 
 function _init()
@@ -636,11 +679,14 @@ function titleupdate()
 end
 
 function gameupdate()
-	checkdeath(gb)
-	if pturn then
-		playermovement()
-	else
-		enemymovement()
+	if not dialoguetf then
+		checkdeath(gb)
+		if pturn then
+			playermovement()
+		elseif not dead then
+			enemymovement()
+			wait(3)
+		end
 	end
 end
 
@@ -648,8 +694,7 @@ function _draw()
 	if mode==0 then
 		titledraw()
 	else
-		pal() --resets color palette for gameplay
-		gamedraw()
+			gamedraw()
 	end
 end
 
@@ -669,6 +714,7 @@ end
 
 function gamedraw()
 	cls()
+	pal() --resets color palette for gameplay
 	if not dead then
 
 	for i=1,16 do
@@ -722,6 +768,12 @@ function gamedraw()
 	pdrawx=-1
 	pdrawy=-1
 	--print(gb[player.x+1][player.y],10,10,7)
+	
+	if dialoguetf then --tutorial dialogue
+	--load with tutorial level
+		load_dialogue(dialogue.t_dialogue)
+	end
+	
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -1057,3 +1109,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
