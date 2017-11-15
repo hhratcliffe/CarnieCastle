@@ -22,6 +22,9 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
+--used to skip enemy animations
+skipanim=false
+
 truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -89,13 +92,13 @@ gameboard={
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -320,6 +323,12 @@ function animation(a, delay, i, j, direction)
 	--i, j are the x,y coordinates where the animation starts
 	--direction is...the direction.
 
+	--if skipping animations
+	if skipanim then
+		--print('––––––')
+		return --then skip
+	end
+
 	--checking animation length
 	if(#a != 8) then
 		return
@@ -329,8 +338,17 @@ function animation(a, delay, i, j, direction)
 	--floor
 	--entities
 	--sword
-
-	for q = 1,#a do
+	
+	q = 0
+	while q < #a do
+		q += 1
+		--checking for skip button
+		if btn(4) then
+			print('btn 4')
+			skipanim = true
+			q = #a
+		end
+		
 		--floor
 			spr(floor[i][j], i*8-8, j*8-8)
 		if direction == north then
@@ -393,11 +411,62 @@ function checkdeath(gb)
 	dead=true
 end
 
+--returns whether it moves or not
+function lclownhorizontal(xoff, yoff, i, j)
+ a = xoff/abs(xoff)
+	spot = gb[i+a][j]
+	if(spot == nil or spot == 0) then
+		--mechanics of movement
+		if (i+a)==sword.x and j==sword.y then
+			gb[i][j]=nil
+			gb[i+a][j]=nil
+		else
+			gb[i+a][j] = entity+100
+			gb[i][j] = nil
+	 end
+
+		--animation
+		if a < 0 then
+			direction = west
+		else
+			direction = east
+		end
+		animation(lclownwalk,standarddelay,i,j,direction)
+		return true
+	end
+	return false
+end
+
+--returns whether it moves or not
+function lclownvertical(xoff, yoff, i, j)
+ b = yoff/abs(yoff)
+ spot = gb[i][j+b]
+ if(spot== nil or spot == 0) then
+ 	if i==sword.x and (j+b)==sword.y then
+	 	gb[i][j]=nil
+	 	gb[i][j+b]=nil
+	 else
+	 	gb[i][j+b] = entity+100
+	 	gb[i][j] = nil
+ 	end
+
+ 	--animation
+ 	if b < 0 then
+ 		direction = north
+ 	else
+ 		direction = south
+ 	end
+ 	animation(lclownwalk,standarddelay,i,j,direction)
+ 	return true
+ end
+ return false
+end
 
 function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
+	standarddelay = 2
 	
 	if(entity == 0 or entity == nil) then
 		return
@@ -406,52 +475,21 @@ function ai(i, j)
 		wait(3)
 		return
 	end
-
+	
 	--lesser clown
 	if(flr(entity/10) == 1) then
-		if(abs(xoff) > abs(yoff)) then
-			a = xoff/abs(xoff)
-			spot = gb[i+a][j]
-			if(spot == nil or spot == 0) then
-				--mechanics of movement
-				if (i+a)==sword.x and j==sword.y then
-					gb[i][j]=nil
-					gb[i+a][j]=nil
-				else
-			 		gb[i+a][j] = entity+100
-			 		gb[i][j] = nil
-				end
-
-				--animation
-				if a < 0 then
-					direction = west
-				else
-					direction = east
-				end
-				animation(lclownwalk,3,i,j,direction)
+		
+		if (abs(yoff) >= abs(xoff)) then
+			if not(lclownvertical(xoff, yoff, i, j)) and xoff != 0 then
+				lclownhorizontal(xoff, yoff, i, j)
 			end
 		else
-			b = yoff/abs(yoff)
-			spot = gb[i][j+b]
-			if(spot== nil or spot == 0) then
-				if i==sword.x and (j+b)==sword.y then
-					gb[i][j]=nil
-					gb[i][j+b]=nil
-				else
-			 		gb[i][j+b] = entity+100
-			 		gb[i][j] = nil
-				end
-
-				--animation
-				if b < 0 then
-					direction = north
-				else
-					direction = south
-				end
-				animation(lclownwalk,3,i,j,direction)
+			if not(lclownhorizontal(xoff, yoff, i, j)) and yoff != 0 then
+				lclownvertical(xoff, yoff, i, j)
 			end
 		end
-
+		
+		
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		gb[i][j] += 100
@@ -476,7 +514,7 @@ function ai(i, j)
 						newdir = east
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir)
+					animation(jugglerwalk, standarddelay, i, j, newdir)
 				end
 			end
 
@@ -499,7 +537,7 @@ function ai(i, j)
 						newdir = east
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir)
+					animation(jugglerwalk, standarddelay, i, j, newdir)
 				end
 			end
 
@@ -554,11 +592,13 @@ function ai(i, j)
 	else
 		z = 1/0
 	end
-	wait(7)
+	--wait(7)
 end
 
 function enemymovement()
 
+	skipanim = false
+	
 	for j = 1,16 do
 		for i = 1, 16 do
 				if gb[i][j] != nil and gb[i][j] > 0 and gb[i][j] < 100 then
@@ -665,6 +705,7 @@ function gameinit()
 end
 
 function _update()
+	
 	if mode==0 then
 		titleupdate()
 	else
