@@ -67,9 +67,9 @@ truefloor={
 gameboard={
 	{--floor1
 		{--room1
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,210,210,210,210,210,210,210,712,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
-			"712,nil,nil,010,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+			"712,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -88,7 +88,7 @@ gameboard={
 		{--room2
 			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
+			"711,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -97,15 +97,44 @@ gameboard={
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210"
 		}
 	}
 }
 
+flags={
+	{--floor1
+		{--room1
+			completed=1,
+			dialogue=1,
+			item=0,
+			tutorial=1
+		},
+
+		{--room2
+			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"711,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+			"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210"
+		}
+	}
+}
 --dialogue
 dialoguetf=true --boolean variable for dialogue
 dialogue={
@@ -235,7 +264,7 @@ function playermovement()
 							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
+								gb=convertstringstoarray(gameboard[flr((gb[i][j-1]-700)/10)][gb[i][j-1]%10])
 								player.y=15
 								gb[player.x][player.y]=0
 							else
@@ -271,6 +300,12 @@ function playermovement()
 				end
 			end
 		end
+end
+
+function screenTransition(prevFloor,prevRoom,nextFloor,nextRoom)
+	gb=convertstringstoarray(gameboard[nextFloor][nextRoom])
+	currentFloor=nextFloor
+	currentRoom=nextRoom
 end
 
 --need to optimize
@@ -398,7 +433,7 @@ function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
-	
+
 	if(entity == 0 or entity == nil) then
 		return
 	elseif i==sword.x and j==sword.y then
@@ -574,7 +609,7 @@ function enemymovement()
 				end
 		end
 	end
-	
+
 	pturn = true;
 end
 
@@ -637,7 +672,7 @@ function load_dialogue(t,dn)
 	rect(8,100,120,122,7)
 	print(t[d_num],10,102,7)
 	--print("x->",108,117,7 )
-	
+
 	if btnp(5) then
 		d_num+=1
 	end
@@ -768,12 +803,12 @@ function gamedraw()
 	pdrawx=-1
 	pdrawy=-1
 	--print(gb[player.x+1][player.y],10,10,7)
-	
+
 	if dialoguetf then --tutorial dialogue
 	--load with tutorial level
 		load_dialogue(dialogue.t_dialogue)
 	end
-	
+
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -1109,4 +1144,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
