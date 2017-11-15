@@ -210,7 +210,11 @@ function playermovement()
 						pturn=false
 
 				elseif btn(1) then
+<<<<<<< HEAD
 						if i+1<rightfix and gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
+=======
+						if gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
+>>>>>>> b1913736bdcfa77303697a289524494c55465a17
 								--move player 1 space right
 							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
@@ -768,12 +772,15 @@ function gamedraw()
 	pdrawx=-1
 	pdrawy=-1
 	--print(gb[player.x+1][player.y],10,10,7)
+<<<<<<< HEAD
 	
 	if dialoguetf then --tutorial dialogue
 	--load with tutorial level
 		load_dialogue(dialogue.t_dialogue)
 	end
 	
+=======
+>>>>>>> b1913736bdcfa77303697a289524494c55465a17
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -1109,4 +1116,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
