@@ -70,39 +70,40 @@ truefloor={
 gameboard={
 	{--floor1
 		{--room1
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
-			"712,nil,nil,010,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,210,nil,nil,nil,210",
-			"210,210,nil,nil,210,210,210,210,210,210,210,210,nil,nil,210,210",
-			"210,210,715,210,210,210,210,210,210,210,210,210,210,715,210,210"
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"712,nil,nil,010,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,210,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,210,nil,nil,210,210",
+		"210,210,715,210,210,210,210,210,210,210,210,210,210,715,210,210"
 		},
 		{--room2
-			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,711",
-			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-			"713,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,711",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
+		"713,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
 		},
  	{--room3
  	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -381,7 +382,7 @@ function animation(a, delay, i, j, direction)
 
 	--if skipping animations
 	if skipanim then
-		--print('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
+		--print('������')
 		return --then skip
 	end
 
