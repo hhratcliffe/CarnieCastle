@@ -295,7 +295,7 @@ function playermovement()
 							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i1][j-1]-700)/10)][gb[i][j-1]%10])
+								gb=convertstringstoarray(gameboard[flr((gb[i][j-1]-700)/10)][gb[i][j-1]%10])
 								player.y=15
 								gb[player.x][player.y]=0
 							else
