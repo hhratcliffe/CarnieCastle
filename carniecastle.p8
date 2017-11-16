@@ -88,24 +88,6 @@ gameboard={
 			"210,210,715,210,210,210,210,210,210,210,210,210,210,715,210,210"
 		},
 		{--room2
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,711",
-			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-			"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-		}
-=======
 			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,711",
 			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
@@ -117,8 +99,8 @@ gameboard={
 			"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 			"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
 		},
@@ -175,7 +157,7 @@ gameboard={
  	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
  	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
  	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-  },
+  }
 	}
 }
 
@@ -184,10 +166,10 @@ dialoguetf=true --boolean variable for dialogue
 dialogue={
 	--27 characters currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
-		"press � to move west\nand � to move east. ",
-		"press � to move north\nand � to move south",
-		"hold x and press �/� to \nturn.",
-		"x+� turns you clockwise,\nand x+� turns you\ncounterclockwise.",
+		"press  to move west\nand  to move east. ",
+		"press  to move north\nand  to move south",
+		"hold x and press / to \nturn.",
+		"x+ turns you clockwise,\nand x+ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -399,7 +381,7 @@ function animation(a, delay, i, j, direction)
 
 	--if skipping animations
 	if skipanim then
-		--print('������')
+		--print('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½')
 		return --then skip
 	end
 
