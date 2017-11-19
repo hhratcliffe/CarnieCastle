@@ -22,8 +22,13 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
+
+currentFloor=1
+currentRoom=1
+
 --used to skip enemy animations
 skipanim=false
+
 
 truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -162,6 +167,25 @@ gameboard={
 	}
 }
 
+flags={
+	{--floor1
+		{--room1
+			completed=1,
+			dialogue=1,
+			item=0,
+			tutorial=1,
+			enemies=2
+		},
+
+		{--room2
+			completed=1,
+			dialogue=1,
+			item=0,
+			tutorial=1,
+			enemies=14
+		}
+	}
+}
 --dialogue
 dialoguetf=true --boolean variable for dialogue
 dialogue={
@@ -255,10 +279,12 @@ function playermovement()
 							if gb[i-1][j]!=nil and (gb[i-1][j]>=10 and gb[i-1][j]<=90) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i-1][j]!=nil and gb[i-1][j] > 700 and gb[i-1][j] < 800 then
-							  music(36, 100, 1)
-								gb=convertstringstoarray(gameboard[flr((gb[i-1][j]-700)/10)][gb[i-1][j]%10])
-								player.x=15
-								gb[player.x][player.y]=0
+								if not checkForEnemies() then
+							  	music(36, 100, 1)
+									screentransition(currentFloor,currentRoom,flr((gb[i-1][j]-700)/10),gb[i-1][j]%10)
+									player.x=15
+									gb[player.x][player.y]=0
+								end
 							else
 								gb[i-1][j]=0
 								gb[i][j]=nil
@@ -275,9 +301,11 @@ function playermovement()
 							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i+1][j]!=nil and gb[i+1][j] > 700 and gb[i+1][j] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i+1][j]-700)/10)][gb[i+1][j]%10])
-								player.x=2
-								gb[player.x][player.y]=0
+								if not checkForEnemies() then
+									screentransition(currentFloor,currentRoom,flr((gb[i+1][j]-700)/10),gb[i+1][j]%10)
+									player.x=2
+									gb[player.x][player.y]=0
+								end
 							else
 							 gb[i+1][j]=0
 							 gb[i][j]=nil
@@ -295,9 +323,11 @@ function playermovement()
 							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) then  --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i][j-1]-700)/10)][gb[i][j-1]%10])
-								player.y=15
-								gb[player.x][player.y]=0
+								if not checkForEnemies() then
+									screentransition(currentFloor,currentRoom,flr((gb[i][j-1]-700)/10),gb[i][j-1]%10)
+									player.y=15
+									gb[player.x][player.y]=0
+								end
 							else
 								gb[i][j-1]=0
 								gb[i][j]=nil
@@ -313,9 +343,11 @@ function playermovement()
 							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
 							elseif gb[i][j+1]!=nil and gb[i][j+1] > 700 and gb[i][j+1] < 800 then
-								gb=convertstringstoarray(gameboard[flr((gb[i][j+1]-700)/10)][gb[i][j+1]%10])
-								player.y=2
-								gb[player.x][player.y]=0
+								if not checkForEnemies() then
+									screentransition(currentFloor,currentRoom,flr((gb[i][j+1]-700)/10),gb[i][j+1]%10)
+									player.y=2
+									gb[player.x][player.y]=0
+								end
 							else
 								gb[i][j+1]=0
 								gb[i][j]=nil
@@ -333,6 +365,31 @@ function playermovement()
 		end
 end
 
+function screenTransition(prevFloor,prevRoom,nextFloor,nextRoom)
+	currentFloor=nextFloor
+	currentRoom=nextRoom
+	--remove player from map
+	gb[player.x][player.y]=nil
+
+	--store the room state for future use
+	previousRooms[prevFloor][prevRoom]=gb
+	if(previousRooms[currentFloor][currentRoom]==nil) do
+		gb=convertstringstoarray(gameboard[currentFloor][currentRoom])
+	else
+		gb=previousRooms[currentFloor][currentRoom]
+	end
+end
+
+function checkForEnemies()
+	for i=1,#gb do
+		for j=1,#gb[i] do
+			if gb[i][j]!=nil and gb[i][j]>=10 and gb[i][j]<100 then
+				return true
+			end
+		end
+	end
+	return false
+end
 --need to optimize
 function sworddirection()
 	sd=player.direct*8
@@ -523,6 +580,7 @@ function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
+  
 	standarddelay = 2
 	
 	if(entity == 0 or entity == nil) then
@@ -671,7 +729,7 @@ function enemymovement()
 				end
 		end
 	end
-	
+
 	pturn = true;
 end
 
@@ -735,7 +793,6 @@ function update_dialogue()
 		dialoguetf=false
 		return
 	end
-	
 	if btnp(5) then
 		d_num+=1
 	end
@@ -762,12 +819,20 @@ function gameinit()
 	mode=1
 	music(32, 200, 2)
 	--sets up gameboard
-	gb=convertstringstoarray(gameboard[1][1])
+	gb=convertstringstoarray(gameboard[currentFloor][currentRoom])
 	floor = convertstringstoarray(truefloor)
 	player.x=9
 	player.y=3
 	gb[player.x][player.y]=0
 	player.direct=.25
+	--set up array of previous rooms
+	previousRooms={}
+	for i=1,#gameboard do
+		previousRooms[i]={}
+		for j=1,#gameboard[i] do
+			previousRooms[i][j]=nil
+		end
+	end
 	--load with tutorial level
 	load_dialogue(dialogue.t_dialogue)
 end
@@ -920,7 +985,7 @@ function gamedraw()
 	if dialoguetf then 
 		draw_dialogue()
 	end
-	
+
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -1255,4 +1320,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
