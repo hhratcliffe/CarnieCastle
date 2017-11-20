@@ -114,8 +114,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -195,8 +195,8 @@ dialogue={
 		"welcome to carne castle!",
 		"press to move west\nand to move east. ",
 		"press to move north\nand to move south",
-		"hold x and press/� to \nturn.",
-		"x+� turns you clockwise,\nand x+�turns you\ncounterclockwise.",
+		"hold x and press/� to \nturn.",
+		"x+� turns you clockwise,\nand x+�turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -1503,4 +1503,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
