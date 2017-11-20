@@ -35,6 +35,9 @@ pturn=true
 
 currentfloor=1
 currentroom=1
+initialx=9
+initialy=3
+initialdirection=0.25
 
 --used to skip enemy animations
 skipanim=false
@@ -104,15 +107,15 @@ gameboard={
 		},
 		{--room2
 		"210,210,210,210,210,210,210,210,821,210,210,210,210,210,210,210",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,711",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-		"713,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,711",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"713,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -122,19 +125,19 @@ gameboard={
 		},
 	 	{--room3
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,210,210,010,210,210,nil,nil,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,nil,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,nil,nil,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,712",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,nil,021,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 	  },
@@ -158,18 +161,18 @@ gameboard={
 	  },
 	  {--room5
 	 	"210,210,711,210,210,210,210,210,210,210,210,210,210,711,210,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"714,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"714,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,022,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
@@ -180,10 +183,24 @@ gameboard={
 flags={
 	{--floor1
 		{--room1
-			key=1
+			key=1,
+			tutorial=1
 		},
 		{--room2
-			key=0
+			key=0,
+			tutorial=1
+		},
+		{--room3
+			key=0,
+			tutorial=0
+		},
+		{--room4
+			key=0,
+			tutorial=1
+		},
+		{--room5
+			key=0,
+			tutorial=0
 		}
 	}
 }
@@ -379,6 +396,15 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 	else
 		gb=previousrooms[currentfloor][currentroom]
 	end
+
+	--music transitions
+	if flags[prevfloor][prevroom].tutorial==1 then
+		flags[prevfloor][prevroom].tutorial=0
+		if flags[currentfloor][currentroom].tutorial!=1 then
+			music(36, 100, 1)
+		end
+	elseif flags[currentfloor][currentroom].tutorial==1 then
+		music(32, 200, 2)
 	
 	--dialogue trigger to introduce lesser clowns
 	if currentroom==2 and checkforenemies() then
@@ -947,10 +973,10 @@ function gameinit()
 	--sets up gameboard
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
 	floor = convertstringstoarray(truefloor)
-	player.x=9
-	player.y=3
+	player.x=initialx
+	player.y=initialy
 	gb[player.x][player.y]=0
-	player.direct=.25
+	player.direct=initialdirection
 	--set up array of previous rooms
 	previousrooms={}
 	for i=1,#gameboard do
