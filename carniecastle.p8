@@ -31,8 +31,8 @@ afterenemywallcount = 0
 pturn=true
 
 
-currentFloor=1
-currentRoom=1
+currentfloor=1
+currentroom=1
 
 --used to skip enemy animations
 skipanim=false
@@ -83,7 +83,7 @@ truefloor={
 gameboard={
 	{--floor1
 		{--room1
-		"210,222,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"712,nil,nil,010,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -93,7 +93,7 @@ gameboard={
 		"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,501,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,210,nil,nil,nil,210",
@@ -101,7 +101,7 @@ gameboard={
 		"210,210,715,210,210,210,210,210,210,210,210,210,210,715,210,210"
 		},
 		{--room2
-		"210,210,210,210,210,210,210,210,821,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,711",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -112,8 +112,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -126,8 +126,8 @@ gameboard={
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
+ 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -155,7 +155,7 @@ gameboard={
  	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
   },
   {--room5
- 	"210,210,711,210,210,210,210,210,210,210,210,711,210,210,210,210",
+ 	"210,210,711,210,210,210,210,210,210,210,210,210,210,711,210,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -198,10 +198,10 @@ dialoguetf=true --boolean variable for dialogue
 dialogue={
 	--27 characters currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
-		"press  to move west\nand  to move east. ",
-		"press  to move north\nand  to move south",
-		"hold x and press / to \nturn.",
-		"x+ turns you clockwise,\nand x+ turns you\ncounterclockwise.",
+		"press to move west\nand to move east. ",
+		"press to move north\nand to move south",
+		"hold x and press /� to \nturn.",
+		"x+� turns you clockwise,\nand x+� turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -275,57 +275,57 @@ function playermovement()
 
 					--cardinal player movement
 					if (btnp(0) or btnp(1) or btnp(2) or btnp(3)) then
-						if btnp(0) then --Left
-							xMove=-1
-							yMove=0
-						elseif btnp(1) then --Right
-							xMove=1
-							yMove=0
-						elseif btnp(2) then --Up
-							xMove=0
-							yMove=-1
-						elseif btnp(3) then --Down
-							xMove=0
-							yMove=1
+						if btnp(0) then --left
+							xmove=-1
+							ymove=0
+						elseif btnp(1) then --right
+							xmove=1
+							ymove=0
+						elseif btnp(2) then --up
+							xmove=0
+							ymove=-1
+						elseif btnp(3) then --down
+							xmove=0
+							ymove=1
 						end
-						if gb[i+xMove][j+yMove]!=210 and gb[i+xMove][j+yMove]!=201 then --201 = blocks movement into doors. temporary
+						if gb[i+xmove][j+ymove]!=210 and gb[i+xmove][j+ymove]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space
-							if gb[i+xMove][j+yMove]!=nil and (gb[i+xMove][j+yMove]>=10 and gb[i+xMove][j+yMove]<100) then --update to a range when more enemies are introduced
+							if gb[i+xmove][j+ymove]!=nil and (gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
-							elseif gb[i+xMove][j+yMove]!=nil and gb[i+xMove][j+yMove] > 700 and gb[i+xMove][j+yMove] < 800 then --Door interaction
-								if not checkForEnemies() then
-									screentransition(currentFloor,currentRoom,flr((gb[i+xMove][j+yMove]-700)/10),gb[i+xMove][j+yMove]%10)
-									if xMove==-1 then
+							elseif gb[i+xmove][j+ymove]!=nil and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
+								if not checkforenemies() then
+									screentransition(currentfloor,currentroom,flr((gb[i+xmove][j+ymove]-700)/10),gb[i+xmove][j+ymove]%10)
+									if xmove==-1 then
 										player.x=15
 										gb[player.x][player.y]=0
-									elseif xMove==1 then
+									elseif xmove==1 then
 										player.x=2
 										gb[player.x][player.y]=0
-									elseif yMove==-1 then
+									elseif ymove==-1 then
 										player.y=15
 										gb[player.x][player.y]=0
-									elseif yMove==1 then
+									elseif ymove==1 then
 										player.y=2
 										gb[player.x][player.y]=0
 									end
 								end
-							elseif gb[i+xMove][j+yMove]!=nil and gb[i+xMove][j+yMove] > 800 and gb[i+xMove][j+yMove] < 900 then --Door interaction
-								if allKeysCollected() then
+							elseif gb[i+xmove][j+ymove]!=nil and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
+								if allkeyscollected() then
 									gb[player.x][player.y]=nil
 								end
 							else
-								if gb[i+xMove][j+yMove]==501 then --Picking up keys
-									flags[currentFloor][currentRoom].key-=1
+								if gb[i+xmove][j+ymove]==501 then --picking up keys
+									flags[currentfloor][currentroom].key-=1
 								end
-							 	gb[i+xMove][j+yMove]=0
+							 	gb[i+xmove][j+ymove]=0
 								gb[i][j]=nil
-								player.x+=xMove
-								player.y+=yMove
-								sword.x+=xMove
-								sword.y+=yMove
+								player.x+=xmove
+								player.y+=ymove
+								sword.x+=xmove
+								sword.y+=ymove
 							end
 						end
-						--if(xMove==1) then
+						--if(xmove==1) then
 							--rightfix+=1
 						--end
 						pturn=false
@@ -339,22 +339,22 @@ function playermovement()
 		end
 end
 
-function screenTransition(prevFloor,prevRoom,nextFloor,nextRoom)
-	currentFloor=nextFloor
-	currentRoom=nextRoom
+function screentransition(prevfloor,prevroom,nextfloor,nextroom)
+	currentfloor=nextfloor
+	currentroom=nextroom
 	--remove player from map
 	gb[player.x][player.y]=nil
 
 	--store the room state for future use
-	previousRooms[prevFloor][prevRoom]=gb
-	if(previousRooms[currentFloor][currentRoom]==nil) do
-		gb=convertstringstoarray(gameboard[currentFloor][currentRoom])
+	previousrooms[prevfloor][prevroom]=gb
+	if(previousrooms[currentfloor][currentroom]==nil) do
+		gb=convertstringstoarray(gameboard[currentfloor][currentroom])
 	else
-		gb=previousRooms[currentFloor][currentRoom]
+		gb=previousrooms[currentfloor][currentroom]
 	end
 end
 
-function checkForEnemies()
+function checkforenemies()
 	for i=1,#gb do
 		for j=1,#gb[i] do
 			if gb[i][j]!=nil and gb[i][j]>=10 and gb[i][j]<100 then
@@ -365,9 +365,9 @@ function checkForEnemies()
 	return false
 end
 
-function allKeysCollected()
-	for i=1,#flags[currentFloor] do
-		if flags[currentFloor][i].key>0 then
+function allkeyscollected()
+	for i=1,#flags[currentfloor] do
+		if flags[currentfloor][i].key>0 then
 			return false
 		end
 	end
@@ -409,6 +409,18 @@ function sworddirection()
 		player.direct = 0
 		sword.x=player.x
 		sword.y=player.y-1
+	end
+	
+	--checks if enemy is on the sword after the sword has moved
+	for i=1,16 do
+		for j=1,16 do
+			if gb[i][j]!=nil and (gb[i][j]>=10 and gb[i][j]<100) then
+				if i==sword.x and j==sword.y then
+					gb[i][j]=nil
+				return
+				end
+			end
+		end
 	end
 end
 
@@ -650,10 +662,6 @@ function ai(i, j)
 	
 	if(entity == 0 or entity == nil or entity > 200) then
 		return
-	elseif i==sword.x and j==sword.y then
-		gb[i][j]=nil
-		wait(3)
-		return
 	end
 
 	--lesser clown
@@ -844,6 +852,7 @@ end
 function load_dialogue(t,dn)
 	--t is dialogue table ex. dialogue.lvl1dialogue
 	--dn: specific dialogue message number
+	--dn is optional, the whole table will be displayed if omitted
 	dtable=t
 	dialoguetf=true
 	if dn!=nil then
@@ -856,11 +865,11 @@ end
 
 --updates the dialogue shown
 function update_dialogue()
-	if dtable[d_num+1]==nil and btnp(5)  then
+	if dtable[d_num+1]==nil and btnp(4)  then
 		dialoguetf=false
 		return
 	end
-	if btnp(5) then
+	if btnp(4) then
 		d_num+=1
 	end
 end
@@ -870,7 +879,7 @@ function draw_dialogue()
 	rectfill(8,100,120,122,0)
 	rect(8,100,120,122,7)
 	print(dtable[d_num],10,102,7)
-	print("x->",108,116,7 )
+	print("z->",108,116,7 )
 end
 
 function _init()
@@ -886,18 +895,18 @@ function gameinit()
 	mode=1
 	music(32, 200, 2)
 	--sets up gameboard
-	gb=convertstringstoarray(gameboard[currentFloor][currentRoom])
+	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
 	floor = convertstringstoarray(truefloor)
 	player.x=9
 	player.y=3
 	gb[player.x][player.y]=0
 	player.direct=.25
 	--set up array of previous rooms
-	previousRooms={}
+	previousrooms={}
 	for i=1,#gameboard do
-		previousRooms[i]={}
+		previousrooms[i]={}
 		for j=1,#gameboard[i] do
-			previousRooms[i][j]=nil
+			previousrooms[i][j]=nil
 		end
 	end
 	--load with tutorial level
@@ -906,7 +915,7 @@ end
 
 function _update()
 
-	if mode==0 then
+	if mode<1 then
 		titleupdate()
 	else
 		gameupdate()
@@ -914,7 +923,10 @@ function _update()
 end
 
 function titleupdate()
-	if btn(4,0) then
+	if btnp(4) then
+		mode+=.5
+	end
+	if mode==1 then
 		gameinit()
 	end
 end
@@ -961,6 +973,8 @@ end
 function _draw()
 	if mode==0 then
 		titledraw()
+	elseif mode==.5 then
+		lorescreen()
 	else
 			gamedraw()
 	end
@@ -994,7 +1008,7 @@ function titledraw()
 	x+=.33
 end
 
---creates ballons on title screen
+--creates balloons on title screen
 balloons={}
 function generateballoons()
 	rand=flr(rnd(120))
@@ -1016,6 +1030,16 @@ function generateballoons()
 	end
 end
 
+--black screen with lore descending? or ascending?
+--make skipable: done
+--mode=.5 is lorescreen
+function lorescreen()
+	cls()
+	lore="many years ago, you narrowly\nescaped your families castle\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carne minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnes from your home."
+	print(lore,10,10,7)
+	print("press z to continue",50,120,7)
+end
+
 function gamedraw()
 	cls()
 	pal() --resets color palette for gameplay
@@ -1029,10 +1053,7 @@ function gamedraw()
 				--player things
 				if gb[i][j]==0 then
 					spra(player.direct,1,i*8-8,j*8-12,1,2)
-					pdrawx=i
-					pdrawy=j
 				
-	
 				--enemy things
 				elseif(not(gb[i][j] == nil) and gb[i][j] > 0 and gb[i][j] < 100) then
 					if gb[i][j]<20 then
@@ -1057,9 +1078,9 @@ function gamedraw()
 				elseif gb[i][j] == 202 then
 					spr(12, i*8-8, j*8-8)
           
-          elseif gb[i][j]!=nil and gb[i][j] > 800 and gb[i][j] < 900 then
+    elseif gb[i][j]!=nil and gb[i][j] > 800 and gb[i][j] < 900 then
 				spr(27, i*8-8, j*8-8)
-			end
+			
 
 			if gb[i][j] == 501 then
 				spr(27, i*8-8, j*8-8)
@@ -1071,10 +1092,8 @@ function gamedraw()
 				end
 			end
 		end
-	--fixes a bug where the sword would not draw
-	spra(player.direct,1,pdrawx*8-8,pdrawy*8-12,1,2)
-	pdrawx=-1
-	pdrawy=-1
+		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+
 	--print(gb[player.x+1][player.y],10,10,7)
 
 	--draws any dialogue to screen
@@ -1425,3 +1444,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
