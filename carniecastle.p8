@@ -35,9 +35,11 @@ pturn=true
 
 
 currentfloor=1
-currentroom=3
-initialx=15
-initialy=8
+
+currentroom=1
+initialx=9
+initialy=3
+
 initialdirection=0.25
 
 --used to skip enemy animations
@@ -213,8 +215,8 @@ dialogue={
 		"welcome to carne castle!",
 		"press to move west\nand to move east. ",
 		"press to move north\nand to move south",
-		"hold x and press/� to \nturn.",
-		"x+� turns you clockwise,\nand x+�turns you\ncounterclockwise.",
+		"hold x and press/��to \nturn.",
+		"x+� turns you clockwise,\nand x+��turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -407,8 +409,8 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 		end
 	elseif flags[currentfloor][currentroom].tutorial==1 then
 		music(32, 200, 2)
-   end
-	
+
+	end
 	--dialogue trigger to introduce lesser clowns
 	if currentroom==2 and checkforenemies() then
 		load_dialogue(dialogue.enemies,1,2)
@@ -1182,7 +1184,6 @@ function titledraw()
 	rectfill(42,110,82,150,3)
 	circfill(82,130,20,3)
 	circfill(82,136,24,3)
-
 	--draws castle and title text
  sspr(40,32,64,64,40,54,128,128)
 	sspr(0,34,32,38,0,0,128,128)
@@ -1244,6 +1245,12 @@ function gamedraw()
 		print("thanks for playing!",25,40,7)
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
+		print("press z to return to title screen",20,120,7)
+		
+		if btnp(4) then
+			win=false
+			titleinit()
+		end
 	else
 	
 	if not dead then
@@ -1297,7 +1304,8 @@ function gamedraw()
 	if dialoguetf then
 		draw_dialogue()
 	end
-
+	print(peek(0x5f40),0,0,7)
+	
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -1351,7 +1359,9 @@ function los(i, j, direction)
 		end
 
 	return false
+
 end
+
 __gfx__
 00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440060000000000000000000000000000000
 00000000000560000000000000000000000000000000000000000000000000000000000066665666555555550444444056000000000000000000000000000000
