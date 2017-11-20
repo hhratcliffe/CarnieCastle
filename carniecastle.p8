@@ -19,6 +19,14 @@ east=1
 south=3
 west=2
 
+--debugging things
+playerenemycount = 0
+enemyenemycount = 0
+afterenemyenemycount = 0
+playerwallcount = 0
+enemywallcount = 0
+afterenemywallcount = 0
+
 --variable used to simulate turn based movement
 pturn=true
 
@@ -70,7 +78,7 @@ truefloor={
 gameboard={
 	{--floor1
 		{--room1
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,222,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,010,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"712,nil,nil,010,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -373,7 +381,7 @@ function sworddirection()
 end
 
 
-function animation(a, delay, i, j, direction)
+function animation(a, delay, i, j, direction, enemydeath)
 
 	--a is a list of frames for animations
 	--delay is how many frames to wait for each frame
@@ -447,6 +455,39 @@ function animation(a, delay, i, j, direction)
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 		wait(delay)
 	end
+		
+	if enemydeath then	
+		if direction == north then
+			--floor
+			spr(floor[i][j], i*8-8, j*8-16)
+			--entities
+			spr()
+
+		elseif direction == east then
+			--floor
+			spr(floor[i][j], i*8, j*8-8)
+			--entities
+			spr()
+
+		elseif direction == south then
+			--floor
+			spr(floor[i][j], i*8-8, j*8)
+			--entities
+			spr()
+
+		elseif direction == west then
+			--floor
+			spr(floor[i][j], i*8-16, j*8-8)
+			--entities
+			spr()
+		
+		else
+			print("problem!!!!")
+		end
+		--redraw sword/player
+		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+	end
+	
 end
 
 function wait(z)
@@ -470,25 +511,50 @@ end
 
 --returns whether it moves or not
 function lclownhorizontal(xoff, yoff, i, j)
+ 
+ enemydeath = false
  a = xoff/abs(xoff)
 	spot = gb[i+a][j]
 	if(spot == nil or spot == 0) then
 		--mechanics of movement
 		if (i+a)==sword.x and j==sword.y then
+			enemydeath = true
+			print("walking to my death")
 			gb[i][j]=nil
-			gb[i+a][j]=nil
+			--gb[i+a][j]=nil should be unnecessary
 		else
+		
+			ec1,wc1 = enemycount()
+
+			if(target == nil) then
+				print("taret is nil")
+			else
+				print("target = "..gb[i+a][j])
+			end
 			gb[i+a][j] = entity+100
 			gb[i][j] = nil
+	 	
+	 	ec2,wc2 = enemycount()
+	 	
+			if ec1!=ec2 then
+				print("a="..a)
+				print("i="..i)
+				print("j="..j)
+				wait(120)
+			end
+		
+			--print("clown ("..i..","..j..") to ("..i+a..","..j..")")
 	 end
 
 		--animation
-		if a < 0 then
+		if a == -1 then
 			direction = west
-		else
+		elseif a == 1 then
 			direction = east
+		else
+			print("problem: a="..a)
 		end
-		animation(lclownwalk,standarddelay,i,j,direction)
+		animation(lclownwalk,standarddelay,i,j,direction, enemydeath)
 		return true
 	end
 	return false
@@ -496,24 +562,48 @@ end
 
 --returns whether it moves or not
 function lclownvertical(xoff, yoff, i, j)
+
+ enemydeath = false
  b = yoff/abs(yoff)
  spot = gb[i][j+b]
  if(spot== nil or spot == 0) then
  	if i==sword.x and (j+b)==sword.y then
+	 	enemydeath = true
+	 	print("walking to my death")
 	 	gb[i][j]=nil
-	 	gb[i][j+b]=nil
+	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
-	 	gb[i][j+b] = entity+100
-	 	gb[i][j] = nil
+
+			ec1,wc1 = enemycount()
+
+			if(target == nil) then
+				print("taret is nil")
+			else
+				print("target = "..gb[i][j+b])
+			end
+			gb[i][j+b] = entity+100
+			gb[i][j] = nil
+	 	
+	 	ec2,wc2 = enemycount()
+	 	
+			if ec1!=ec2 then
+				print("a="..a)
+				print("i="..i)
+				print("j="..j)
+				wait(120)
+			end	 	
+	 	--print("clown ("..i..","..j..") to ("..i..","..j+b..")")
  	end
 
  	--animation
- 	if b < 0 then
+ 	if b == -1 then
  		direction = north
- 	else
+  elseif b == 1 then
  		direction = south
+ 	else
+ 		print("problem: b="..b)
  	end
- 	animation(lclownwalk,standarddelay,i,j,direction)
+ 	animation(lclownwalk,standarddelay,i,j,direction, enemydeath)
  	return true
  end
  return false
@@ -523,9 +613,9 @@ function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
-	standarddelay = 2
+	standarddelay = 1
 	
-	if(entity == 0 or entity == nil) then
+	if(entity == 0 or entity == nil or entity > 200) then
 		return
 	elseif i==sword.x and j==sword.y then
 		gb[i][j]=nil
@@ -545,8 +635,8 @@ function ai(i, j)
 				lclownvertical(xoff, yoff, i, j)
 			end
 		end
-		
-		
+	
+	--[[	
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		gb[i][j] += 100
@@ -648,6 +738,7 @@ function ai(i, j)
 
 	else
 		z = 1/0
+	]]
 	end
 	--wait(7)
 end
@@ -663,7 +754,7 @@ function enemymovement()
 				end
 		end
 	end
-
+	
 	for j = 1,16 do
 		for i = 1, 16 do
 				if gb[i][j] != nil and gb[i][j] > 99 and gb[i][j] < 200 then
@@ -672,7 +763,8 @@ function enemymovement()
 		end
 	end
 	
-	pturn = true;
+	pturn = true
+	
 end
 
 function wait(i)
@@ -788,17 +880,42 @@ function titleupdate()
 end
 
 function gameupdate()
+	
 	if dialoguetf then
 		update_dialogue()
 	else
 		checkdeath(gb)
 		if pturn then
+			if(lastchecked != "playermovement") then
+				playerenemycount, playerwallcount = enemycount()
+				lastchecked = "playermovement"
+			end	
 			playermovement()
 		elseif not dead then
+			if(lastchecked != "enemymovement") then
+				lastchecked = "enemymovement"
+				enemyenemycount, enemywallcount = enemycount()
+			end
 			enemymovement()
+			afterenemyenemycount, afterenemywallcount = enemycount()
 			wait(3)
 		end
 	end
+end
+
+function enemycount()
+	count = 0
+	wallcount = 0
+	for i = 1,16 do
+		for j = 1,16 do
+			if gb[i][j] != nil and gb[i][j] > 0 and gb[i][j] < 200 then
+				count += 1			
+			elseif gb[i][j] == 210 then
+				wallcount += 1
+			end
+		end
+	end
+	return count, wallcount
 end
 
 function _draw()
@@ -864,62 +981,58 @@ function gamedraw()
 	pal() --resets color palette for gameplay
 	if not dead then
 
-	for i=1,16 do
-		for j=1,16 do
-			--floor first
-			spr(floor[i][j], (i-1)*8, (j-1)*8)
-
-			--player things
-			if gb[i][j]==0 then
-				spra(player.direct,1,i*8-8,j*8-12,1,2)
-				pdrawx=i
-				pdrawy=j
-			end
-
-			--enemy things
-			if(not(gb[i][j] == nil) and gb[i][j] > 0 and gb[i][j] < 100) then
-				if gb[i][j]<20 then
-					spr(32,(i-1)*8,(j-1)*8)
-				elseif gb[i][j] < 30 then
-					spr(60+gb[i][j]%10, i*8-8, j*8-8)
-					spr(48,(i-1)*8,(j-1)*8)
+		for i=1,16 do
+			for j=1,16 do
+				--floor first
+				spr(floor[i][j], (i-1)*8, (j-1)*8)
+	
+				--player things
+				if gb[i][j]==0 then
+					spra(player.direct,1,i*8-8,j*8-12,1,2)
+					pdrawx=i
+					pdrawy=j
+				
+	
+				--enemy things
+				elseif(not(gb[i][j] == nil) and gb[i][j] > 0 and gb[i][j] < 100) then
+					if gb[i][j]<20 then
+						spr(32,(i-1)*8,(j-1)*8)
+					elseif gb[i][j] < 30 then
+						spr(60+gb[i][j]%10, i*8-8, j*8-8)
+						spr(48,(i-1)*8,(j-1)*8)
+					end
+				
+	
+				--wall things
+				elseif gb[i][j]==210 then --200=wall
+					spr(10, i*8-8, j*8-8)
+				
+	
+				--door things
+				elseif gb[i][j]!=nil and gb[i][j] > 700 and gb[i][j] < 800 then
+					spr(11, i*8-8, j*8-8)
+			
+	
+				--stairway
+				elseif gb[i][j] == 202 then
+					spr(12, i*8-8, j*8-8)
+				
+	
+				elseif gb[i][j] != nil then
+					spr(0, i*8-8, j*8-8)
 				end
 			end
-
-			--wall things
-			if gb[i][j]==210 then --200=wall
-				spr(10, i*8-8, j*8-8)
-			end
-
-			--door things
-			if gb[i][j]!=nil and gb[i][j] > 700 and gb[i][j] < 800 then
-				spr(11, i*8-8, j*8-8)
-			end
-
-			--stairway
-			if gb[i][j] == 202 then
-				spr(12, i*8-8, j*8-8)
-			end
-
-				--[[error testing
-	  ent = gb[i][j]
-	  if ent != nil and ent != 0 and ent != 210 then
-	   print(ent,10,18,7)
-	   wait(30)
-	  end
-		]]
 		end
-	end
-	--fixes a bug where the sword would not draw
-	spra(player.direct,1,pdrawx*8-8,pdrawy*8-12,1,2)
-	pdrawx=-1
-	pdrawy=-1
-	--print(gb[player.x+1][player.y],10,10,7)
-	
-	--draws any dialogue to screen
-	if dialoguetf then 
-		draw_dialogue()
-	end
+		--fixes a bug where the sword would not draw
+		spra(player.direct,1,pdrawx*8-8,pdrawy*8-12,1,2)
+		pdrawx=-1
+		pdrawy=-1
+		--print(gb[player.x+1][player.y],10,10,7)
+		
+		--draws any dialogue to screen
+		if dialoguetf then 
+			draw_dialogue()
+		end
 	
 	else
 		--prints this to screen if player is dead
@@ -927,6 +1040,15 @@ function gamedraw()
 		poke(0x5f40,15)
 		print("the carnies got you",26,64,7)
 	end
+
+--[[
+print("enemies before enemymovement: " .. enemyenemycount)
+print("walls before enemymovement: " .. enemywallcount)
+print("enemies after enemymovement: " .. afterenemyenemycount)
+print("walls after enemymovement: " .. afterenemywallcount)
+print("enemies before playermovement: " .. playerenemycount)
+print("walls before playermovement: " .. playerwallcount)
+]]
 end
 
 function los(i, j, direction)
