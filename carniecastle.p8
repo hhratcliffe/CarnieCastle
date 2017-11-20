@@ -35,9 +35,9 @@ pturn=true
 
 
 currentfloor=1
-currentroom=1
-initialx=9
-initialy=3
+currentroom=3
+initialx=15
+initialy=8
 initialdirection=0.25
 
 --used to skip enemy animations
@@ -552,7 +552,7 @@ function jugglershoot(i, j, direction)
 	spr(jugglerprojectile, x-3, y-3)
 	
 	--cover your tracks
-	if (x+1)%8==0 or (y+1)%8==0 then
+	if (x)%8==0 or (y-b)%8==0 then
 		--floor
 		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
 		--entity
@@ -563,6 +563,9 @@ function jugglershoot(i, j, direction)
 		elseif entity == 210 then
 			spr(entity-200,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8) 
 		end		
+		--player
+		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+	
 	end
 	
 	wait(delay)
