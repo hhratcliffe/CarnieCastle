@@ -120,8 +120,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -215,8 +215,8 @@ dialogue={
 		"welcome to carne castle!",
 		"pressÂ‹ to move west\nandÂ‘ to move east. ",
 		"pressÂ” to move north\nandÂƒ to move south",
-		"hold x and pressÂ‹/ï¿½ï¿½to \nturn.",
-		"x+ï¿½ turns you clockwise,\nand x+ï¿½ï¿½turns you\ncounterclockwise.",
+		"hold x and pressÂ‹/‘½to \nturn.",
+		"x+‘turns you clockwise,\nand x+‘½turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -1304,7 +1304,6 @@ function gamedraw()
 	if dialoguetf then
 		draw_dialogue()
 	end
-	print(peek(0x5f40),0,0,7)
 	
 	else
 		--prints this to screen if player is dead
