@@ -21,13 +21,14 @@ east=1
 south=3
 west=2
 
---debugging things
+--[[--debugging things
 playerenemycount = 0
 enemyenemycount = 0
 afterenemyenemycount = 0
 playerwallcount = 0
 enemywallcount = 0
 afterenemywallcount = 0
+]]
 
 --variable used to simulate turn based movement
 pturn=true
@@ -252,6 +253,7 @@ sword = {
 --animation
 lclownwalk = {33, 32, 34, 32,33, 32, 34, 32}
 jugglerwalk = {49, 50, 51, 52, 53, 54, 55, 48}
+jugglerprojectile = 56
 
 --sprite rotation function
 --written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
@@ -486,6 +488,90 @@ function sworddirection()
 end
 
 
+function jugglershoot(i, j, direction)
+
+	--print("open fire!")
+	--wait(30)
+	delay =1
+
+	--[[
+	if skipanim then
+		--return
+	end
+	]]
+	a = 1
+	b = 1
+
+	if direction == north then
+		a = 0
+		b = -1
+	elseif direction == south then
+		a = 0
+		b = 1
+	elseif direction == west then
+		a = -1
+		b = 0
+	elseif direction == east then
+		a = 1
+		b = 0
+	else
+		x = 1/0
+	end
+
+	k = 0
+
+	--print("player.x = "..player.x)
+	--print("i = "..i)
+	--print("player.y = "..player.y)
+	--print("j = "..j)
+	--wait(30)
+	while(player.x*8 != i*8+a*k or player.y*8 != j*8+b*k) do
+	k +=1
+	--print("k = " .. k)
+	x = i*8+a*k-5
+	y = j*8+b*k-5
+
+	--floor
+	--print("floor = "..floor[x/8][y/8])
+	spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
+	--entity
+	entity = gb[flr(x/8)+1][flr(y/8)+1]
+	--print("entity: "..entity)
+	--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")")
+	--print("proj: ("..x-8 .."," .. y-8 ..")")
+	if(flr(entity/10)==12) then
+		spr(48,flr(x/8)*8,flr(y/8)*8 )
+	elseif entity == 210 then
+		spr(entity-200,flr(x/8)*8,flr(y/8)*8)
+	end
+
+	--player
+	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+
+	--projectile
+	spr(jugglerprojectile, x-3, y-3)
+
+	--cover your tracks
+	if (x+1)%8==0 or (y+1)%8==0 then
+		--floor
+		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
+		--entity
+		entity = gb[flr((x-a*8)/8)+1][flr((y-b*8)/8)+1]
+
+		if(flr(entity/10)==12) then
+			spr(48,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8 )
+		elseif entity == 210 then
+			spr(entity-200,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8)
+		end
+	end
+
+	wait(delay)
+	end
+
+	--print("and it's done")
+	wait(15)
+end
+
 function animation(a, delay, i, j, direction, enemydeath)
 
 	--a is a list of frames for animations
@@ -633,22 +719,24 @@ function lclownhorizontal(xoff, yoff, i, j)
 		--mechanics of movement
 		if (i+a)==sword.x and j==sword.y then
 			enemydeath = true
-			print("walking to my death")
+			--print("walking to my death")
 			gb[i][j]=-1
 			--gb[i+a][j]=nil should be unnecessary
 		else
 
-			ec1,wc1 = enemycount()
+			--ec1,wc1 = enemycount()
 
+			--[[
 			if(target == -1) then
 				print("taret is nil")
 			else
 				print("target = "..gb[i+a][j])
 			end
+			]]
 			gb[i+a][j] = entity+100
 			gb[i][j] = -1
 
-	 	ec2,wc2 = enemycount()
+	 	--[[ec2,wc2 = enemycount()
 
 			if ec1!=ec2 then
 				print("a="..a)
@@ -656,7 +744,7 @@ function lclownhorizontal(xoff, yoff, i, j)
 				print("j="..j)
 				wait(120)
 			end
-
+			]]
 			--print("clown ("..i..","..j..") to ("..i+a..","..j..")")
 	 end
 
@@ -683,11 +771,12 @@ function lclownvertical(xoff, yoff, i, j)
  if(spot== -1 or spot == 0) then
  	if i==sword.x and (j+b)==sword.y then
 	 	enemydeath = true
-	 	print("walking to my death")
+	 	--print("walking to my death")
 	 	gb[i][j]=-1
 	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
 
+			--[[
 			ec1,wc1 = enemycount()
 
 			if(target == -1) then
@@ -695,9 +784,11 @@ function lclownvertical(xoff, yoff, i, j)
 			else
 				print("target = "..gb[i][j+b])
 			end
+			]]
 			gb[i][j+b] = entity+100
 			gb[i][j] = -1
 
+			--[[
 	 	ec2,wc2 = enemycount()
 
 			if ec1!=ec2 then
@@ -706,6 +797,7 @@ function lclownvertical(xoff, yoff, i, j)
 				print("j="..j)
 				wait(120)
 			end
+			]]
 	 	--print("clown ("..i..","..j..") to ("..i..","..j+b..")")
  	end
 
@@ -748,9 +840,9 @@ function ai(i, j)
 		end
 
 
-	--
 	--juggler
 	elseif (flr(entity/10) ==2) then
+		death = false
 		gb[i][j] += 100
 		direction = entity%10
 
@@ -758,6 +850,7 @@ function ai(i, j)
 		if direction == north then
 			if(xoff==0 and yoff < 0) then
 				if los(i, j, direction) then
+					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
 			else
@@ -765,7 +858,12 @@ function ai(i, j)
 				spot = gb[i+c][j]
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
-					gb[i+c][j] = entity+100
+
+					if not(sword.x == i+c and sword.y == j) then
+						gb[i+c][j] = entity+100
+					else
+						death = true
+					end
 
 					if c<0 then
 						newdir = west
@@ -773,7 +871,7 @@ function ai(i, j)
 						newdir = east
 					end
 
-					animation(jugglerwalk, standarddelay, i, j, newdir)
+					animation(jugglerwalk, standarddelay, i, j, newdir, death)
 				end
 			end
 
@@ -781,6 +879,7 @@ function ai(i, j)
 		elseif direction == south then
 			if(xoff==0 and yoff > 0) then
 				if los(i, j, direction) then
+					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
 			else
@@ -788,7 +887,12 @@ function ai(i, j)
 				spot = gb[i+c][j]
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
-					gb[i+c][j] = entity+100
+
+					if not(sword.x == i+c and sword.y == j) then
+						gb[i+c][j] = entity+100
+					else
+						death = true
+					end
 
 					if c<0 then
 						newdir = west
@@ -796,7 +900,7 @@ function ai(i, j)
 						newdir = east
 					end
 
-					animation(jugglerwalk, standarddelay, i, j, newdir)
+					animation(jugglerwalk, standarddelay, i, j, newdir, death)
 				end
 			end
 
@@ -804,6 +908,7 @@ function ai(i, j)
 		elseif direction == east then
 			if(xoff>0 and yoff == 0) then
 				if los(i, j, direction) then
+					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
 			else
@@ -811,15 +916,19 @@ function ai(i, j)
 				spot = gb[i][j+c]
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
-					gb[i][j+c] = entity+100
 
+					if not(sword.x == i and sword.y == j+c) then
+						gb[i][j+c] = entity+100
+					else
+						death = true
+					end
 					if c<0 then
 						newdir = north
 					else
 						newdir = south
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir)
+					animation(jugglerwalk, 3, i, j, newdir, death)
 				end
 			end
 
@@ -827,6 +936,7 @@ function ai(i, j)
 		elseif direction == west then
 			if(xoff<0 and yoff == 0) then
 				if los(i, j, direction) then
+					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
 			else
@@ -834,7 +944,12 @@ function ai(i, j)
 				spot = gb[i][j+c]
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
-					gb[i][j+c] = entity+100
+
+					if not(sword.x == i and sword.y == j+c) then
+						gb[i+c][j] = entity+100
+					else
+						death = true
+					end
 
 					if c<0 then
 						newdir = north
@@ -842,7 +957,7 @@ function ai(i, j)
 						newdir = south
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir)
+					animation(jugglerwalk, 3, i, j, newdir, death)
 				end
 			end
 		end
@@ -1262,7 +1377,7 @@ __gfx__
 00c00000000000000000000000c0000000c000c00c000c00000000000c0000000000000000000000000000000000000000700700000007000070000000000000
 000ee0000c0ee0c0000ee0c0000ee000000ee000000ee000000ee0c0000ee0000000000000000000000000000000000007000070000000700700000000000000
 000770c0000770000007700000077000000770000007700000077000000770000000000000000000000000000000000070000007000000077000000000000000
-c0888800008888000088880cc088880cc08888000088880cc088880cc088880c0000000000000000000000000000000000000000000000000000000000000000
+c0888800008888000088880cc088880cc08888000088880cc088880cc088880c000c000000000000000000000000000000000000000000000000000000000000
 0808808008088c8008c8808008088080080880800808808008088080080880800000000000000000000000000000000000000000000000000000000000000000
 00011000000110000001100000011000000110000001100000011000000110000000000000000000000000000000000000000000000000077000000070000007
 00800800008008000080080000800800008008000080080000800800008008000000000000000000000000000000000000000000000000700700000007000070
