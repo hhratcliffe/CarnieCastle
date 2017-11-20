@@ -13,6 +13,8 @@ doors=600's
 stairs=700's
 ]]
 
+--temp boolean for win screen
+win=false
 --global directions
 north=0
 east=1
@@ -207,25 +209,39 @@ dialoguetf=true --boolean variable for dialogue
 dialogue={
 	--27 characters currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
+		"welcome to carne castle!",
 		"press to move west\nand to move east. ",
 		"press to move north\nand to move south",
-		"hold x and press /� to \nturn.",
-		"x+� turns you clockwise,\nand x+� turns you\ncounterclockwise.",
+		"hold x and press/� to \nturn.",
+		"x+� turns you clockwise,\nand x+�turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
 	--put other dialogue options in this table
-	misc={
-		"i don't need to go back\nthere..."
+	doors={
+		"i don't need to go back\nthere...",
+		"i need a key to open\nthis door.",
+		"i shouldn't leave any\ncarnes alive."
+	},
+	
+	enemies={
+		--lesserclown intro
+		"it seems like these lesser\nclowns will walk into my\nsword.",
+		"maybe i can use that\nto my advantage.",
+		--juggler intro	
+		"uh-oh, a juggler. i better\nstay out of his line\nof sight."
 	}
 }
 
 --table for player containing direction and sprite
 --"0" corresponds to player in gb matrix
 player={
-	direct = north,
-	x = 8,
-	y = 3
+	direct =.25,
+	x = 9,
+	y = 3,
+	savedx=9,
+	savedy=3,
+	saveddirect=.25
 }
 
 sword = {
@@ -306,21 +322,39 @@ function playermovement()
 									screentransition(currentfloor,currentroom,flr((gb[i+xmove][j+ymove]-700)/10),gb[i+xmove][j+ymove]%10)
 									if xmove==-1 then
 										player.x=15
+										player.direct=.25
 										gb[player.x][player.y]=0
 									elseif xmove==1 then
 										player.x=2
+										player.direct=.75
 										gb[player.x][player.y]=0
 									elseif ymove==-1 then
 										player.y=15
+										player.direct=0
 										gb[player.x][player.y]=0
 									elseif ymove==1 then
 										player.y=2
+										player.direct=.5
 										gb[player.x][player.y]=0
 									end
+										--saves player x and y for reboot
+										player.savedx=player.x
+										player.savedy=player.y
+										player.saveddirect=player.direct
+										--currentroom?
+								else
+									--plays dialogue if player tries to go through a door
+									--without killing all enemies
+									load_dialogue(dialogue.doors,3,3)
+									pturn=true
+									return
 								end
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
 								if allkeyscollected() then
 									gb[player.x][player.y]=-1
+									win=true
+								else
+									load_dialogue(dialogue.doors,2,2)
 								end
 							else
 								if gb[i+xmove][j+ymove]==501 then --picking up keys
@@ -333,6 +367,7 @@ function playermovement()
 								sword.x+=xmove
 								sword.y+=ymove
 							end
+						
 						end
 						--if(xmove==1) then
 							--rightfix+=1
@@ -370,6 +405,12 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 		end
 	elseif flags[currentfloor][currentroom].tutorial==1 then
 		music(32, 200, 2)
+	
+	--dialogue trigger to introduce lesser clowns
+	if currentroom==2 and checkforenemies() then
+		load_dialogue(dialogue.enemies,1,2)
+	elseif currentroom==4 and checkforenemies() then
+		load_dialogue(dialogue.enemies,3,3)	
 	end
 end
 
@@ -570,6 +611,15 @@ function checkdeath(gb)
 		end
 	end
 	dead=true
+end
+
+function reloadroom()
+	player.x=player.savedx
+	player.y=player.savedy
+	player.direct=player.saveddirect
+	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
+	dead=false
+	gb[player.x][player.y]=0
 end
 
 --returns whether it moves or not
@@ -868,12 +918,18 @@ function transpose(inputarray)
 end
 
 --call this to load specific dialogue
-function load_dialogue(t,dn)
+function load_dialogue(t,dn,de)
 	--t is dialogue table ex. dialogue.lvl1dialogue
 	--dn: specific dialogue message number
-	--dn is optional, the whole table will be displayed if omitted
+	--de:dialogue you want to end on. ex(dialogue,2,2) plays 2nd string in table dialogue
+	--dn and de are optional, the whole table will be displayed if omitted
 	dtable=t
 	dialoguetf=true
+	if de!=nil then
+		d_nume=de
+	else
+		d_nume=#t
+	end
 	if dn!=nil then
 		d_num=dn
 	end
@@ -884,10 +940,11 @@ end
 
 --updates the dialogue shown
 function update_dialogue()
-	if dtable[d_num+1]==nil and btnp(4)  then
+	if d_num==d_nume and btnp(4)  then
 		dialoguetf=false
 		return
 	end
+	
 	if btnp(4) then
 		d_num+=1
 	end
@@ -957,16 +1014,8 @@ function gameupdate()
 	else
 		checkdeath(gb)
 		if pturn then
-			if(lastchecked != "playermovement") then
-				playerenemycount, playerwallcount = enemycount()
-				lastchecked = "playermovement"
-			end
 			playermovement()
 		elseif not dead then
-			if(lastchecked != "enemymovement") then
-				lastchecked = "enemymovement"
-				enemyenemycount, enemywallcount = enemycount()
-			end
 			enemymovement()
 			afterenemyenemycount, afterenemywallcount = enemycount()
 			wait(3)
@@ -1053,15 +1102,31 @@ end
 --make skipable: done
 --mode=.5 is lorescreen
 function lorescreen()
-	cls()
-	lore="many years ago, you narrowly\nescaped your families castle\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carne minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnes from your home."
-	print(lore,10,10,7)
+cls()
+	if ly==nil then
+		ly=122
+	elseif ly<=0 then
+		ly=0
+	end
+	lore="many years ago, you narrowly\nescaped your families castle\nwith the help of your butler\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carne minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnes from your home."
+	print(lore,10,ly,7)
+	rectfill(0,118,128,128,0)
 	print("press z to continue",50,120,7)
+	ly-=10/30
 end
 
 function gamedraw()
 	cls()
 	pal() --resets color palette for gameplay
+	if win then
+		cls()
+		pal()
+		dead=false
+		print("thanks for playing!",25,40,7)
+		print("future features:",30,50,7)
+		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
+	else
+	
 	if not dead then
 
 		for i=1,16 do
@@ -1119,7 +1184,14 @@ function gamedraw()
 		cls()
 		poke(0x5f40,15)
 		print("the carnies got you",26,64,7)
+		print("press z to try again",40,120)
+		if btn(4) then
+			cls()
+			reloadroom()
+		end	
 	end
+	
+	end--end for win condition if-statement
 
 --[[
 print("enemies before enemymovement: " .. enemyenemycount)
@@ -1194,9 +1266,9 @@ c0888800008888000088880cc088880cc08888000088880cc088880cc088880c0000000000000000
 00011000000110000001100000011000000110000001100000011000000110000000000000000000000000000000000000000000000000077000000070000007
 00800800008008000080080000800800008008000080080000800800008008000000000000000000000000000000000000000000000000700700000007000070
 00800800008000000080080000000800008008000080000000800800000008000000000000000000000000000000000000000000000007000070000000700700
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00000000000000000000000000000000000000000000000000060e00000000000000000000000000000000000000000000000000000000000000000000000000
-0777707777077770700070777770777700000000000000000006e0e0000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008888000000
+00000000000000000000000000000000000000000000000000060e00000000000000000000000000000000000000000000000000000000000000088888800000
+0777707777077770700070777770777700000000000000000006e0e0000000000000000000000000000000000000000000000000000000000000888877880000
 07000070070700707700700070007000000000000000000000060000000000000000000000000000000000000000000000000000000000000008888887888000
 07000070070700707070700070007000000000000000000000404000000000000000000000000000000000000000000000000000000000000008888888888000
 07000077770777007007700070007777000000000000000004040400000000000000000000000000000000000000000000000000000000000008888888888000
