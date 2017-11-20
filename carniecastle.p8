@@ -223,12 +223,12 @@ dialogue={
 		"i need a key to open\nthis door.",
 		"i shouldn't leave any\ncarnes alive."
 	},
-	
+
 	enemies={
 		--lesserclown intro
 		"it seems like these lesser\nclowns will walk into my\nsword.",
 		"maybe i can use that\nto my advantage.",
-		--juggler intro	
+		--juggler intro
 		"uh-oh, a juggler. i better\nstay out of his line\nof sight."
 	}
 }
@@ -367,7 +367,7 @@ function playermovement()
 								sword.x+=xmove
 								sword.y+=ymove
 							end
-						
+
 						end
 						--if(xmove==1) then
 							--rightfix+=1
@@ -405,12 +405,13 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 		end
 	elseif flags[currentfloor][currentroom].tutorial==1 then
 		music(32, 200, 2)
-	
+	end
+
 	--dialogue trigger to introduce lesser clowns
 	if currentroom==2 and checkforenemies() then
 		load_dialogue(dialogue.enemies,1,2)
 	elseif currentroom==4 and checkforenemies() then
-		load_dialogue(dialogue.enemies,3,3)	
+		load_dialogue(dialogue.enemies,3,3)
 	end
 end
 
@@ -944,7 +945,7 @@ function update_dialogue()
 		dialoguetf=false
 		return
 	end
-	
+
 	if btnp(4) then
 		d_num+=1
 	end
@@ -1126,7 +1127,7 @@ function gamedraw()
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
 	else
-	
+
 	if not dead then
 
 		for i=1,16 do
@@ -1188,9 +1189,9 @@ function gamedraw()
 		if btn(4) then
 			cls()
 			reloadroom()
-		end	
+		end
 	end
-	
+
 	end--end for win condition if-statement
 
 --[[
