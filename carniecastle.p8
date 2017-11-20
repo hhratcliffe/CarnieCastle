@@ -35,6 +35,9 @@ pturn=true
 
 currentfloor=1
 currentroom=1
+initialx=9
+initialy=3
+initialdirection=0.25
 
 --used to skip enemy animations
 skipanim=false
@@ -104,15 +107,15 @@ gameboard={
 		},
 		{--room2
 		"210,210,210,210,210,210,210,210,821,210,210,210,210,210,210,210",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,711",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-		"713,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,711",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"713,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -122,19 +125,19 @@ gameboard={
 		},
 	 	{--room3
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,210,210,010,210,210,nil,nil,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,nil,nil,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,nil,nil,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,712",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,nil,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
+	 	"210,nil,021,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 	  },
@@ -158,18 +161,18 @@ gameboard={
 	  },
 	  {--room5
 	 	"210,210,711,210,210,210,210,210,210,210,210,210,210,711,210,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"714,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"714,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
+	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,022,nil,210",
+	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
@@ -180,10 +183,24 @@ gameboard={
 flags={
 	{--floor1
 		{--room1
-			key=1
+			key=1,
+			tutorial=1
 		},
 		{--room2
-			key=0
+			key=0,
+			tutorial=1
+		},
+		{--room3
+			key=0,
+			tutorial=0
+		},
+		{--room4
+			key=0,
+			tutorial=1
+		},
+		{--room5
+			key=0,
+			tutorial=0
 		}
 	}
 }
@@ -195,8 +212,8 @@ dialogue={
 		"welcome to carne castle!",
 		"pressÂ‹ to move west\nandÂ‘ to move east. ",
 		"pressÂ” to move north\nandÂƒ to move south",
-		"hold x and pressÂ‹/ï¿½ to \nturn.",
-		"x+ï¿½ turns you clockwise,\nand x+ï¿½turns you\ncounterclockwise.",
+		"hold x and pressÂ‹/‘ïto \nturn.",
+		"x+‘ turns you clockwise,\nand x+‹½turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -379,7 +396,16 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 	else
 		gb=previousrooms[currentfloor][currentroom]
 	end
-	
+
+	--music transitions
+	if flags[prevfloor][prevroom].tutorial==1 then
+		flags[prevfloor][prevroom].tutorial=0
+		if flags[currentfloor][currentroom].tutorial!=1 then
+			music(36, 100, 1)
+		end
+	elseif flags[currentfloor][currentroom].tutorial==1 then
+		music(32, 200, 2)
+	end
 	--dialogue trigger to introduce lesser clowns
 	if currentroom==2 and checkforenemies() then
 		load_dialogue(dialogue.enemies,1,2)
@@ -947,10 +973,10 @@ function gameinit()
 	--sets up gameboard
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
 	floor = convertstringstoarray(truefloor)
-	player.x=9
-	player.y=3
+	player.x=initialx
+	player.y=initialy
 	gb[player.x][player.y]=0
-	player.direct=.25
+	player.direct=initialdirection
 	--set up array of previous rooms
 	previousrooms={}
 	for i=1,#gameboard do
@@ -1037,7 +1063,6 @@ function titledraw()
 	rectfill(42,110,82,150,3)
 	circfill(82,130,20,3)
 	circfill(82,136,24,3)
-
 	--draws castle and title text
  sspr(40,32,64,64,40,54,128,128)
 	sspr(0,34,32,38,0,0,128,128)
@@ -1099,6 +1124,12 @@ function gamedraw()
 		print("thanks for playing!",25,40,7)
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
+		print("press z to return to title screen",20,120,7)
+		
+		if btnp(4) then
+			win=false
+			titleinit()
+		end
 	else
 	
 	if not dead then
@@ -1152,7 +1183,8 @@ function gamedraw()
 	if dialoguetf then
 		draw_dialogue()
 	end
-
+	print(peek(0x5f40),0,0,7)
+	
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -1206,7 +1238,9 @@ function los(i, j, direction)
 		end
 
 	return false
+
 end
+
 __gfx__
 00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440060000000000000000000000000000000
 00000000000560000000000000000000000000000000000000000000000000000000000066665666555555550444444056000000000000000000000000000000
@@ -1503,3 +1537,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
