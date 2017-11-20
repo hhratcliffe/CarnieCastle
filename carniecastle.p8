@@ -85,7 +85,7 @@ gameboard={
 		"210,210,210,210,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
-		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
+		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,501,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,nil,nil,nil,nil,210",
 		"210,210,nil,nil,210,210,210,210,210,210,210,210,nil,nil,nil,210",
@@ -93,7 +93,7 @@ gameboard={
 		"210,210,715,210,210,210,210,210,210,210,210,210,210,715,210,210"
 		},
 		{--room2
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,821,210,210,210,210,210,210,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,711",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -170,15 +170,14 @@ gameboard={
 flags={
 	{--floor1
 		{--room1
-			completed=1,
+			key=1,
 			dialogue=1,
 			item=0,
-			tutorial=1,
-			enemies=2
+			tutorial=1
 		},
 
 		{--room2
-			completed=1,
+			key=0,
 			dialogue=1,
 			item=0,
 			tutorial=1,
@@ -247,16 +246,10 @@ function spra(angle,n,x,y,w,h,flip_x,flip_y)
 end
 
 function playermovement()
-	--fixes east movement bug
-	rightfix=nil
 		--move player
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-					if rightfix==nil then
-					--upon entering a room, set temp to nil
-						rightfix=i+2
-					end
 
 					--sword turning
 					if btn(5) and btn(0) then
@@ -273,93 +266,66 @@ function playermovement()
 					end
 
 					--cardinal player movement
-					if btn(0) then
-						if gb[i-1][j] !=210 and gb[i-1][j]!=201 then --201 = blocks movement into doors. temporary
-								--move player 1 space left
-							if gb[i-1][j]!=nil and (gb[i-1][j]>=10 and gb[i-1][j]<=90) then  --update to a range when more enemies are introduced
+					if (btnp(0) or btnp(1) or btnp(2) or btnp(3)) then
+						if btnp(0) then --Left
+							xMove=-1
+							yMove=0
+						elseif btnp(1) then --Right
+							xMove=1
+							yMove=0
+						elseif btnp(2) then --Up
+							xMove=0
+							yMove=-1
+						elseif btnp(3) then --Down
+							xMove=0
+							yMove=1
+						end
+						if gb[i+xMove][j+yMove]!=210 and gb[i+xMove][j+yMove]!=201 then --201 = blocks movement into doors. temporary
+								--move player 1 space
+							if gb[i+xMove][j+yMove]!=nil and (gb[i+xMove][j+yMove]>=10 and gb[i+xMove][j+yMove]<100) then --update to a range when more enemies are introduced
 									gb[i][j]=nil
-							elseif gb[i-1][j]!=nil and gb[i-1][j] > 700 and gb[i-1][j] < 800 then
+							elseif gb[i+xMove][j+yMove]!=nil and gb[i+xMove][j+yMove] > 700 and gb[i+xMove][j+yMove] < 800 then --Door interaction
 								if not checkForEnemies() then
-							  	music(36, 100, 1)
-									screentransition(currentFloor,currentRoom,flr((gb[i-1][j]-700)/10),gb[i-1][j]%10)
-									player.x=15
-									gb[player.x][player.y]=0
+									screentransition(currentFloor,currentRoom,flr((gb[i+xMove][j+yMove]-700)/10),gb[i+xMove][j+yMove]%10)
+									if xMove==-1 then
+										player.x=15
+										gb[player.x][player.y]=0
+									elseif xMove==1 then
+										player.x=2
+										gb[player.x][player.y]=0
+									elseif yMove==-1 then
+										player.y=15
+										gb[player.x][player.y]=0
+									elseif yMove==1 then
+										player.y=2
+										gb[player.x][player.y]=0
+									end
+								end
+							elseif gb[i+xMove][j+yMove]!=nil and gb[i+xMove][j+yMove] > 800 and gb[i+xMove][j+yMove] < 900 then --Door interaction
+								if allKeysCollected() then
+									gb[player.x][player.y]=nil
 								end
 							else
-								gb[i-1][j]=0
+								if gb[i+xMove][j+yMove]==501 then --Picking up keys
+									flags[currentFloor][currentRoom].key-=1
+								end
+							 	gb[i+xMove][j+yMove]=0
 								gb[i][j]=nil
-								player.x-=1
-								sword.x-=1
-								rightfix-=1
+								player.x+=xMove
+								player.y+=yMove
+								sword.x+=xMove
+								sword.y+=yMove
 							end
 						end
-						pturn=false
-						
-				elseif btn(1) then
-						if i+1<rightfix and gb[i+1][j]!=210 and gb[i+1][j]!=201 then --201 = blocks movement into doors. temporary
-								--move player 1 space right
-							if gb[i+1][j]!=nil and (gb[i+1][j]>=10 and gb[i+1][j]<100) then --update to a range when more enemies are introduced
-									gb[i][j]=nil
-							elseif gb[i+1][j]!=nil and gb[i+1][j] > 700 and gb[i+1][j] < 800 then
-								if not checkForEnemies() then
-									screentransition(currentFloor,currentRoom,flr((gb[i+1][j]-700)/10),gb[i+1][j]%10)
-									player.x=2
-									gb[player.x][player.y]=0
-								end
-							else
-							 gb[i+1][j]=0
-							 gb[i][j]=nil
-							 player.x+=1
-							 sword.x+=1
-							 break
-							end
-						end
-						rightfix+=1
+						--if(xMove==1) then
+							--rightfix+=1
+						--end
 						pturn=false
 
-					elseif btn(2) then
-						if gb[i][j-1] !=210 then
-								--move player 1 up
-							if gb[i][j-1]!=nil and (gb[i][j-1]>=10 and gb[i][j-1]<100) then  --update to a range when more enemies are introduced
-									gb[i][j]=nil
-							elseif gb[i][j-1]!=nil and gb[i][j-1] > 700 and gb[i][j-1] < 800 then
-								if not checkForEnemies() then
-									screentransition(currentFloor,currentRoom,flr((gb[i][j-1]-700)/10),gb[i][j-1]%10)
-									player.y=15
-									gb[player.x][player.y]=0
-								end
-							else
-								gb[i][j-1]=0
-								gb[i][j]=nil
-								player.y-=1
-								sword.y-=1
-							end
-						end
-						pturn=false
-
-					elseif btn(3) then
-						if gb[i][j+1] != 210 then
-								--moves player 1 down
-							if gb[i][j+1]!=nil and (gb[i][j+1]>=10 and gb[i][j+1]<100) then --update to a range when more enemies are introduced
-									gb[i][j]=nil
-							elseif gb[i][j+1]!=nil and gb[i][j+1] > 700 and gb[i][j+1] < 800 then
-								if not checkForEnemies() then
-									screentransition(currentFloor,currentRoom,flr((gb[i][j+1]-700)/10),gb[i][j+1]%10)
-									player.y=2
-									gb[player.x][player.y]=0
-								end
-							else
-								gb[i][j+1]=0
-								gb[i][j]=nil
-								player.y+=1
-								sword.y+=1
-							end
-						end
-						pturn=false
+						sworddirection()
+						--breaks loop if the player is found
+						return
 					end
-					sworddirection()
-					--breaks loop if the player is found
-					break
 				end
 			end
 		end
@@ -389,6 +355,15 @@ function checkForEnemies()
 		end
 	end
 	return false
+end
+
+function allKeysCollected()
+	for i=1,#flags[currentFloor] do
+		if flags[currentFloor][i].key>0 then
+			return false
+		end
+	end
+	return true
 end
 --need to optimize
 function sworddirection()
@@ -452,7 +427,7 @@ function animation(a, delay, i, j, direction)
 	--floor
 	--entities
 	--sword
-	
+
 	q = 0
 	while q < #a do
 		q += 1
@@ -462,7 +437,7 @@ function animation(a, delay, i, j, direction)
 			skipanim = true
 			q = #a
 		end
-		
+
 		--floor
 			spr(floor[i][j], i*8-8, j*8-8)
 		if direction == north then
@@ -580,9 +555,9 @@ function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
-  
+
 	standarddelay = 2
-	
+
 	if(entity == 0 or entity == nil) then
 		return
 	elseif i==sword.x and j==sword.y then
@@ -590,10 +565,10 @@ function ai(i, j)
 		wait(3)
 		return
 	end
-	
+
 	--lesser clown
 	if(flr(entity/10) == 1) then
-		
+
 		if (abs(yoff) >= abs(xoff)) then
 			if not(lclownvertical(xoff, yoff, i, j)) and xoff != 0 then
 				lclownhorizontal(xoff, yoff, i, j)
@@ -603,8 +578,8 @@ function ai(i, j)
 				lclownvertical(xoff, yoff, i, j)
 			end
 		end
-		
-		
+
+
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		gb[i][j] += 100
@@ -713,7 +688,7 @@ end
 function enemymovement()
 
 	skipanim = false
-	
+
 	for j = 1,16 do
 		for i = 1, 16 do
 				if gb[i][j] != nil and gb[i][j] > 0 and gb[i][j] < 100 then
@@ -838,7 +813,7 @@ function gameinit()
 end
 
 function _update()
-	
+
 	if mode==0 then
 		titleupdate()
 	else
@@ -889,11 +864,11 @@ function titledraw()
 	rectfill(42,110,82,150,3)
 	circfill(82,130,20,3)
 	circfill(82,136,24,3)
-	
+
 	--draws castle and title text
  sspr(40,32,64,64,40,54,128,128)
 	sspr(0,34,32,38,0,0,128,128)
-	
+
 	--cycles colors 7-16
 	if x==nil or flr(x+1)==16 then
 		x=7
@@ -966,6 +941,14 @@ function gamedraw()
 				spr(12, i*8-8, j*8-8)
 			end
 
+			if gb[i][j]!=nil and gb[i][j] > 800 and gb[i][j] < 900 then
+				spr(27, i*8-8, j*8-8)
+			end
+
+			if gb[i][j] == 501 then
+				spr(27, i*8-8, j*8-8)
+			end
+
 				--[[error testing
 	  ent = gb[i][j]
 	  if ent != nil and ent != 0 and ent != 210 then
@@ -980,9 +963,9 @@ function gamedraw()
 	pdrawx=-1
 	pdrawy=-1
 	--print(gb[player.x+1][player.y],10,10,7)
-	
+
 	--draws any dialogue to screen
-	if dialoguetf then 
+	if dialoguetf then
 		draw_dialogue()
 	end
 
