@@ -215,10 +215,10 @@ dialogue={
 	--27 characters currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
 		"welcome to carne castle!",
-		"pressÂ to move west\nandÂ to move east. ",
-		"pressÂ to move north\nandÂ to move south",
-		"hold x and pressÂ/½to \nturn.",
-		"x+turns you clockwise,\nand x+½turns you\ncounterclockwise.",
+		"press to move west\nandÑ to move east. ",
+		"pressÔ to move north\nandÃ to move south",
+		"hold x and press/�½to \nturn.",
+		"x+� turns you clockwise,\nand x+��turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
