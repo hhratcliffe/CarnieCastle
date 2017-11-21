@@ -21,6 +21,7 @@ east=1
 south=3
 west=2
 
+
 --[[--debugging things
 playerenemycount = 0
 enemyenemycount = 0
@@ -28,7 +29,9 @@ afterenemyenemycount = 0
 playerwallcount = 0
 enemywallcount = 0
 afterenemywallcount = 0
+
 ]]
+
 
 --variable used to simulate turn based movement
 pturn=true
@@ -38,6 +41,7 @@ currentfloor=1
 currentroom=1
 initialx=9
 initialy=3
+
 initialdirection=0.25
 
 --used to skip enemy animations
@@ -118,8 +122,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -211,10 +215,10 @@ dialogue={
 	--27 characters currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
 		"welcome to carne castle!",
-		"press to move west\nand to move east. ",
-		"press to move north\nand to move south",
-		"hold x and press/� to \nturn.",
-		"x+� turns you clockwise,\nand x+�turns you\ncounterclockwise.",
+		"press <- to move west\nand -> to move east. ",
+		"pressÔ to move north\nandÃ to move south",
+		"hold x and press <-/-> to \nturn.",
+		"x+-> turns you clockwise,\nand x+<- turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -487,7 +491,6 @@ function sworddirection()
 	end
 end
 
-
 function jugglershoot(i, j, direction)
 
 	--print("open fire!")
@@ -552,7 +555,7 @@ function jugglershoot(i, j, direction)
 	spr(jugglerprojectile, x-3, y-3)
 
 	--cover your tracks
-	if (x+1)%8==0 or (y+1)%8==0 then
+	if (x)%8==0 or (y-b)%8==0 then
 		--floor
 		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
 		--entity
@@ -563,6 +566,9 @@ function jugglershoot(i, j, direction)
 		elseif entity == 210 then
 			spr(entity-200,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8)
 		end
+		--player
+		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+
 	end
 
 	wait(delay)
@@ -581,7 +587,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 
 	--if skipping animations
 	if skipanim then
-		--print('������')
+		--print('??????')
 		return --then skip
 	end
 
@@ -701,6 +707,7 @@ function checkdeath(gb)
 end
 
 function reloadroom()
+  poke(0x5f40,0)
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -727,11 +734,13 @@ function lclownhorizontal(xoff, yoff, i, j)
 			--ec1,wc1 = enemycount()
 
 			--[[
+
 			if(target == -1) then
 				print("taret is nil")
 			else
 				print("target = "..gb[i+a][j])
 			end
+
 			]]
 			gb[i+a][j] = entity+100
 			gb[i][j] = -1
@@ -745,6 +754,7 @@ function lclownhorizontal(xoff, yoff, i, j)
 				wait(120)
 			end
 			]]
+
 			--print("clown ("..i..","..j..") to ("..i+a..","..j..")")
 	 end
 
@@ -771,12 +781,14 @@ function lclownvertical(xoff, yoff, i, j)
  if(spot== -1 or spot == 0) then
  	if i==sword.x and (j+b)==sword.y then
 	 	enemydeath = true
+
 	 	--print("walking to my death")
 	 	gb[i][j]=-1
 	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
 
 			--[[
+
 			ec1,wc1 = enemycount()
 
 			if(target == -1) then
@@ -784,11 +796,13 @@ function lclownvertical(xoff, yoff, i, j)
 			else
 				print("target = "..gb[i][j+b])
 			end
+
 			]]
 			gb[i][j+b] = entity+100
 			gb[i][j] = -1
 
 			--[[
+
 	 	ec2,wc2 = enemycount()
 
 			if ec1!=ec2 then
@@ -798,6 +812,7 @@ function lclownvertical(xoff, yoff, i, j)
 				wait(120)
 			end
 			]]
+
 	 	--print("clown ("..i..","..j..") to ("..i..","..j+b..")")
  	end
 
@@ -839,7 +854,6 @@ function ai(i, j)
 			end
 		end
 
-
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		death = false
@@ -850,6 +864,7 @@ function ai(i, j)
 		if direction == north then
 			if(xoff==0 and yoff < 0) then
 				if los(i, j, direction) then
+
 					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
@@ -879,6 +894,7 @@ function ai(i, j)
 		elseif direction == south then
 			if(xoff==0 and yoff > 0) then
 				if los(i, j, direction) then
+
 					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
@@ -908,7 +924,9 @@ function ai(i, j)
 		elseif direction == east then
 			if(xoff>0 and yoff == 0) then
 				if los(i, j, direction) then
+
 					jugglershoot(i, j, direction)
+
 					gb[player.x][player.y] = -1
 				end
 			else
@@ -937,6 +955,7 @@ function ai(i, j)
 			if(xoff<0 and yoff == 0) then
 				if los(i, j, direction) then
 					jugglershoot(i, j, direction)
+
 					gb[player.x][player.y] = -1
 				end
 			else
@@ -1179,7 +1198,6 @@ function titledraw()
 	rectfill(42,110,82,150,3)
 	circfill(82,130,20,3)
 	circfill(82,136,24,3)
-
 	--draws castle and title text
  sspr(40,32,64,64,40,54,128,128)
 	sspr(0,34,32,38,0,0,128,128)
@@ -1241,6 +1259,12 @@ function gamedraw()
 		print("thanks for playing!",25,40,7)
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
+		print("press z to return to title screen",20,120,7)
+
+		if btnp(4) then
+			win=false
+			titleinit()
+		end
 	else
 
 	if not dead then
@@ -1348,15 +1372,17 @@ function los(i, j, direction)
 		end
 
 	return false
+
 end
+
 __gfx__
-00000000000560000000000000000000000000000000000000000000000000000000000066665666665666660044440060000000000000000000000000000000
-00000000000560000000000000000000000000000000000000000000000000000000000066665666555555550444444056000000000000000000000000000000
-00700700000560000000000000000000000000000000000000000000000000000000000055555555666666564444444466600000000000000000000000000000
-00077000000560000000000000000000000000000000000000000000000000000000000066566666555555554444444455560000000000000000000000000000
-0007700000056000000000000000000000000000000000000000000000000000000000006656666666566666444444a466666000000000000000000000000000
-00700700000560000000000000000000000000000000000000000000000000000000000055555555555555554444444455555600000000000000000000000000
-00000000000560000000000000000000000000000000000000000000000000000000000066665666666666564444444466666660000000000000000000000000
+0000000000056000000000000000000000000000000000000000000000000000ccccccc166665666665666660044440060000000000000000000000000000000
+0000000000056000000000000000000000000000000000000000000000000000ccccccc166665666555555550444444056000000000000000000000000000000
+0070070000056000000000000000000000000000000000000000000000000000ccccccc155555555666666564444444466600000000000000000000000000000
+0007700000056000000000000000000000000000000000000000000000000000cccccca166566666555555554444444455560000000000000000000000000000
+0007700000056000000000000000000000000000000000000000000000000000ccccccc16656666666566666444444a466666000000000000000000000000000
+0070070000056000000000000000000000000000000000000000000000000000ccccccc155555555555555554444444455555600000000000000000000000000
+0000000000056000000000000000000000000000000000000000000000000000ccccccc166665666666666564444444466666660000000000000000000000000
 00000000044444400000000000000000000000000000000000000000000000000000000066665666555555554444444455555556000000000000000000000000
 00000000044444400000000000000000000000000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
 000000000444444000000000000000000000000000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
