@@ -41,7 +41,6 @@ currentfloor=1
 currentroom=1
 initialx=9
 initialy=3
-
 initialdirection=0.25
 
 --used to skip enemy animations
@@ -193,7 +192,7 @@ flags={
 		},
 		{--room2
 			key=0,
-			tutorial=1
+			tutorial=0
 		},
 		{--room3
 			key=0,
@@ -201,7 +200,7 @@ flags={
 		},
 		{--room4
 			key=0,
-			tutorial=1
+			tutorial=0
 		},
 		{--room5
 			key=0,
@@ -214,27 +213,28 @@ dialoguetf=true --boolean variable for dialogue
 dialogue={
 	--27 characters currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
-		"welcome to carnie castle!",
-		"pressa? to move west\nanda? to move east. ",
-		"pressa? to move north\nanda? to move south",
-		"hold x and pressa?/??to \nturn.",
-		"x+?turns you clockwise,\nand x+??turns you\ncounterclockwise.",
+		"\"finally made it inside\nthe castle...!\"",
+		"\"third stall from the left;\njust as i remembered.\"",
+		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
+		"use the arrow keys\n(����) to move.",
+		"hold � and press\n� or � to turn.",
+		"� turns you clockwise,\nand � turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
 	--put other dialogue options in this table
 	doors={
-		"i don't need to go back\nthere...",
-		"i need a key to open\nthis door.",
-		"i shouldn't leave any\ncarnies alive."
+		"\"i don't need to go back\nthere...\"",
+		"\"i need a key to open\nthis door.\"",
+		"\"i shouldn't leave any\ncarnies alive.\""
 	},
 
 	enemies={
 		--lesserclown intro
-		"it seems like these lesser\nclowns will walk into my\nsword.",
-		"maybe i can use that\nto my advantage.",
+		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
+		"\"maybe i can use that\nto my advantage.\"",
 		--juggler intro
-		"uh-oh, a juggler. i better\nstay out of his line\nof sight."
+		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\""
 	}
 }
 
@@ -483,6 +483,7 @@ function sworddirection()
 		for j=1,16 do
 			if gb[i][j]!=-1 and (gb[i][j]>=10 and gb[i][j]<100) then
 				if i==sword.x and j==sword.y then
+					sfx(63)
 					gb[i][j]=-1
 				return
 				end
@@ -551,11 +552,8 @@ function jugglershoot(i, j, direction)
 	--player
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
-	--projectile
-	spr(jugglerprojectile, x-3, y-3)
-
 	--cover your tracks
-	if (x)%8==0 or (y-b)%8==0 then
+	if (x)%8==0 or (x)%8==7 or (y)%8==0 or y%8==7 then
 		--floor
 		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
 		--entity
@@ -570,6 +568,9 @@ function jugglershoot(i, j, direction)
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
 	end
+
+	--projectile
+	spr(jugglerprojectile, x-3, y-3)
 
 	wait(delay)
 	end
@@ -606,7 +607,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 		q += 1
 		--checking for skip button
 		if btn(4) then
-			print('btn 4')
+			--print('btn 4')
 			skipanim = true
 			q = #a
 		end
@@ -654,6 +655,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 	end
 
 	if enemydeath then
+ 	sfx(63)
 		if direction == north then
 			--floor
 			spr(floor[i][j], i*8-8, j*8-16)
@@ -707,7 +709,7 @@ function checkdeath(gb)
 end
 
 function reloadroom()
-  poke(0x5f40,0)
+ poke(0x5f40,0)
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -781,13 +783,13 @@ function lclownvertical(xoff, yoff, i, j)
  if(spot== -1 or spot == 0) then
  	if i==sword.x and (j+b)==sword.y then
 	 	enemydeath = true
-
 	 	--print("walking to my death")
 	 	gb[i][j]=-1
 	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
 
 			--[[
+
 
 			ec1,wc1 = enemycount()
 
@@ -868,7 +870,7 @@ function ai(i, j)
 					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
 				if(spot == o or spot == -1) then
@@ -898,7 +900,7 @@ function ai(i, j)
 					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
 				if(spot == o or spot == -1) then
@@ -929,7 +931,7 @@ function ai(i, j)
 
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif(yoff!=0) then
 				c = yoff/abs(yoff)
 				spot = gb[i][j+c]
 				if(spot == o or spot == -1) then
@@ -946,7 +948,7 @@ function ai(i, j)
 						newdir = south
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir, death)
+					animation(jugglerwalk, standarddelay, i, j, newdir, death)
 				end
 			end
 
@@ -958,14 +960,20 @@ function ai(i, j)
 
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif(y0ff!=0) then
 				c = yoff/abs(yoff)
+
+				--west-facing jugglers can spaz out if you sneak up on them
+				if(c==nil or abs(c) !=1) then
+					return
+				end
+				--print("c= "..c)
 				spot = gb[i][j+c]
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
 					if not(sword.x == i and sword.y == j+c) then
-						gb[i+c][j] = entity+100
+						gb[i][j+c] = entity+100
 					else
 						death = true
 					end
@@ -976,7 +984,7 @@ function ai(i, j)
 						newdir = south
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir, death)
+					animation(jugglerwalk, standarddelay, i, j, newdir, death)
 				end
 			end
 		end
@@ -1242,7 +1250,9 @@ cls()
 	elseif ly<=0 then
 		ly=0
 	end
-	lore="many years ago, you narrowly\nescaped your families castle\nwith the help of your butler\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carnie minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnies from your home."
+
+	lore="many years ago, you narrowly\nescaped your family's castle\nwith the help of your butler\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carnie minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnies from your home."
+
 	print(lore,10,ly,7)
 	rectfill(0,118,128,128,0)
 	print("press z to continue",50,120,7)
@@ -1294,7 +1304,7 @@ function gamedraw()
 					spr(7, i*8-8, j*8-8)
 				elseif gb[i][j]==212 then
 					spr(8, i*8-8, j*8-8)
-					
+
 				--door things
 			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
@@ -1380,19 +1390,19 @@ function los(i, j, direction)
 end
 
 __gfx__
-00000000000560000000000000000000000000000000000000000000000d0000cccccccc66665666665666660044440060000000000000000000000000000000
-00000000000560000000000000000000000000000000000000000000000dd000cccccccc66665666555555550444444056000000000000000000000000000000
-00700700000560000000000000000000000000000000000000000000000d0d00cccccccc55555555666666564444444466600000000000000000000000000000
-00077000000560000000000000000000000000000000000000000000766d6667cccccc5c66566666555555554444444455560000000000000000000000000000
-0007700000056000000000000000000000000000000000000000000076666667cccccccc6656666666566666444444a466666000000000000000000000000000
-0070070000056000000000000000000000000000000000000000000077666677cccccccc55555555555555554444444455555600000000000000000000000000
-0000000000056000000000000000000000000000000000000000000007777770cccccccc66665666666666564444444466666660000000000000000000000000
-0000000004444440000000000000000000000000000000000000000000000000c000000c66665666555555554444444455555556000000000000000000000000
+00000000000005600000000000000000000000000000000000000000000d0000cccccccc66665666665666660044440060000000000000000000000000000000
+00000000000005600000000000000000000000000000000000000000000dd000cccccccc66665666555555550444444056000000000000000000000000000000
+00700700000005600000000000000000000000000000000000000000000d0d00cccccccc55555555666666564444444466600000000000000000000000000000
+00077000000005600000000000000000000000000000000000000000766d6667ccccccac66566666555555554444444455560000000000000000000000000000
+0007700000000560000000000000000000000000000000000000000076666667cccccccc6656666666566666444444a466666000000000000000000000000000
+0070070000000560000000000000000000000000000000000000000077666677cccccccc55555555555555554444444455555600000000000000000000000000
+00000000000005f0000000000000000000000000000000000000000007777770cccccccc66665666666666564444444466666660000000000000000000000000
+0000000000000ff0000000000000000000000000000000000000000000000000c000000c66665666555555554444444455555556000000000000000000000000
 00000000044444400000000000000000000000000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
 000000000444444000000000000000000000000000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
 000000000444444000000000000000000000000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
 000000000444444000000000000000000000000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
-0000000000000000000000000000000000000000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
+0000000000444400000000000000000000000000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
 0000000000000000000000000000000000000000000000000000000000000000000000001222111100000000444a4444000a0000000000000000000000000000
 0000000000000000000000000000000000000000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000025111112000000004444444400000000000000000000000000000000
@@ -1608,8 +1618,8 @@ __sfx__
 001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+015200002763500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+010100002966027660020702666025650040702265021650050701f6401f640070701d6401c640090701a630196300c07017620166200e07014620136101261010613066130e6030c6030b603086000760004600
 __music__
 00 00010507
 00 0b020607
