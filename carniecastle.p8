@@ -41,7 +41,6 @@ currentfloor=1
 currentroom=1
 initialx=9
 initialy=3
-
 initialdirection=0.25
 
 --used to skip enemy animations
@@ -217,9 +216,9 @@ dialogue={
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
-		"use the arrow keys\n(‹‘”ƒ) to move.",
-		"hold — and press\n‹ or ‘ to turn.",
-		"‘ turns you clockwise,\nand ‹ turns you\ncounterclockwise.",
+		"use the arrow keys\n(ï¿½ï¿½ï¿½ï¿½) to move.",
+		"hold ï¿½ and press\nï¿½ or ï¿½ to turn.",
+		"ï¿½ turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
@@ -553,11 +552,8 @@ function jugglershoot(i, j, direction)
 	--player
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)	
 	
-	--projectile
-	spr(jugglerprojectile, x-3, y-3)
-	
 	--cover your tracks
-	if (x)%8==0 or (y-b)%8==0 then
+	if (x)%8==0 or (x)%8==7 or (y)%8==0 or y%8==7 then
 		--floor
 		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
 		--entity
@@ -572,6 +568,9 @@ function jugglershoot(i, j, direction)
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 	
 	end
+	
+	--projectile
+	spr(jugglerprojectile, x-3, y-3)
 	
 	wait(delay)
 	end
@@ -608,7 +607,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 		q += 1
 		--checking for skip button
 		if btn(4) then
-			print('btn 4')
+			--print('btn 4')
 			skipanim = true
 			q = #a
 		end
@@ -791,6 +790,7 @@ function lclownvertical(xoff, yoff, i, j)
 			
 			--[[
 
+
 			ec1,wc1 = enemycount()
 
 			if(target == -1) then
@@ -870,7 +870,7 @@ function ai(i, j)
 					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
 				if(spot == o or spot == -1) then
@@ -901,7 +901,7 @@ function ai(i, j)
 					jugglershoot(i, j, direction)
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
 				if(spot == o or spot == -1) then
@@ -932,7 +932,7 @@ function ai(i, j)
 
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif(yoff!=0) then
 				c = yoff/abs(yoff)
 				spot = gb[i][j+c]
 				if(spot == o or spot == -1) then
@@ -949,7 +949,7 @@ function ai(i, j)
 						newdir = south
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir, death)
+					animation(jugglerwalk, standarddelay, i, j, newdir, death)
 				end
 			end
 
@@ -961,14 +961,20 @@ function ai(i, j)
 
 					gb[player.x][player.y] = -1
 				end
-			else
+			elseif(y0ff!=0) then
 				c = yoff/abs(yoff)
+				
+				--west-facing jugglers can spaz out if you sneak up on them
+				if(c==nil or abs(c) !=1) then
+					return
+				end
+				--print("c= "..c)
 				spot = gb[i][j+c]
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
 					if not(sword.x == i and sword.y == j+c) then
-						gb[i+c][j] = entity+100
+						gb[i][j+c] = entity+100
 					else
 						death = true
 					end
@@ -979,7 +985,7 @@ function ai(i, j)
 						newdir = south
 					end
 
-					animation(jugglerwalk, 3, i, j, newdir, death)
+					animation(jugglerwalk, standarddelay, i, j, newdir, death)
 				end
 			end
 		end
@@ -1245,7 +1251,9 @@ cls()
 	elseif ly<=0 then
 		ly=0
 	end
-	lore="many years ago, you narrowly\nescaped your families castle\nwith the help of your butler\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carnie minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family!\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnies from your home."
+
+	lore="many years ago, you narrowly\nescaped your family's castle\nwith the help of your butler\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carnie minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnies from your home."
+
 	print(lore,10,ly,7)
 	rectfill(0,118,128,128,0)
 	print("press z to continue",50,120,7)
