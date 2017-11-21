@@ -37,8 +37,8 @@ afterenemywallcount = 0
 pturn=true
 
 
-currentfloor=1
-currentroom=1
+initialfloor=1
+initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
@@ -1115,6 +1115,8 @@ function gameinit()
 	mode=1
 	music(32, 200, 2)
 	--sets up gameboard
+	currentfloor=initialfloor
+	currentroom=initialroom
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
 	floor = convertstringstoarray(truefloor)
 	player.x=initialx
