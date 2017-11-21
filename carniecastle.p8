@@ -216,9 +216,9 @@ dialogue={
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
-		"use the arrow keys\n(‹‘”ƒ) to move.",
-		"hold — and press\n‹ or ‘ to turn.",
-		"‘ turns you clockwise,\nand ‹ turns you\ncounterclockwise.",
+		"use the arrow keys\n(ï¿½ï¿½ï¿½ï¿½) to move.",
+		"hold ï¿½ and press\nï¿½ or ï¿½ to turn.",
+		"ï¿½ turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
