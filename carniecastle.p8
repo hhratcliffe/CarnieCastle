@@ -37,8 +37,8 @@ afterenemywallcount = 0
 pturn=true
 
 
-currentfloor=1
-currentroom=1
+initialfloor=1
+initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
@@ -228,12 +228,12 @@ dialogue={
 		"\"i need a key to open\nthis door.\"",
 		"\"i shouldn't leave any\ncarnies alive.\""
 	},
-	
+
 	enemies={
 		--lesserclown intro
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
 		"\"maybe i can use that\nto my advantage.\"",
-		--juggler intro	
+		--juggler intro
 		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\""
 	}
 }
@@ -374,7 +374,7 @@ function playermovement()
 								sword.x+=xmove
 								sword.y+=ymove
 							end
-						
+
 						end
 						--if(xmove==1) then
 							--rightfix+=1
@@ -418,7 +418,7 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 	if currentroom==2 and checkforenemies() then
 		load_dialogue(dialogue.enemies,1,2)
 	elseif currentroom==4 and checkforenemies() then
-		load_dialogue(dialogue.enemies,3,3)	
+		load_dialogue(dialogue.enemies,3,3)
 	end
 end
 
@@ -498,7 +498,7 @@ function jugglershoot(i, j, direction)
 	--print("open fire!")
 	--wait(30)
 	delay =1
-	
+
 	--[[
 	if skipanim then
 		--return
@@ -506,7 +506,7 @@ function jugglershoot(i, j, direction)
 	]]
 	a = 1
 	b = 1
-	
+
 	if direction == north then
 		a = 0
 		b = -1
@@ -520,11 +520,11 @@ function jugglershoot(i, j, direction)
 		a = 1
 		b = 0
 	else
-		x = 1/0	
+		x = 1/0
 	end
-	
+
 	k = 0
-	
+
 	--print("player.x = "..player.x)
 	--print("i = "..i)
 	--print("player.y = "..player.y)
@@ -535,47 +535,47 @@ function jugglershoot(i, j, direction)
 	--print("k = " .. k)
 	x = i*8+a*k-5
 	y = j*8+b*k-5
-	
+
 	--floor
 	--print("floor = "..floor[x/8][y/8])
 	spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
 	--entity
 	entity = gb[flr(x/8)+1][flr(y/8)+1]
 	--print("entity: "..entity)
-	--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")") 
+	--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")")
 	--print("proj: ("..x-8 .."," .. y-8 ..")")
 	if(flr(entity/10)==12) then
 		spr(48,flr(x/8)*8,flr(y/8)*8 )
 	elseif entity == 210 then
-		spr(entity-200,flr(x/8)*8,flr(y/8)*8) 
+		spr(entity-200,flr(x/8)*8,flr(y/8)*8)
 	end
-	
+
 	--player
-	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)	
-	
+	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+
 	--cover your tracks
 	if (x)%8==0 or (x)%8==7 or (y)%8==0 or y%8==7 then
 		--floor
 		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
 		--entity
 		entity = gb[flr((x-a*8)/8)+1][flr((y-b*8)/8)+1]
-		
+
 		if(flr(entity/10)==12) then
 			spr(48,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8 )
 		elseif entity == 210 then
-			spr(entity-200,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8) 
-		end		
+			spr(entity-200,flr((x-a*8)/8)*8,flr((y-b*8)/8)*8)
+		end
 		--player
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
-	
+
 	end
-	
+
 	--projectile
 	spr(jugglerprojectile, x-3, y-3)
-	
+
 	wait(delay)
 	end
-	
+
 	--print("and it's done")
 	wait(15)
 end
@@ -735,7 +735,7 @@ function lclownhorizontal(xoff, yoff, i, j)
 		else
 
 			--ec1,wc1 = enemycount()
-			
+
 			--[[
 
 			if(target == -1) then
@@ -788,7 +788,7 @@ function lclownvertical(xoff, yoff, i, j)
 	 	gb[i][j]=-1
 	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
-			
+
 			--[[
 
 
@@ -877,7 +877,6 @@ function ai(i, j)
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
-					
 					if not(sword.x == i+c and sword.y == j) then
 						gb[i+c][j] = entity+100
 					else
@@ -964,7 +963,7 @@ function ai(i, j)
 				end
 			elseif(y0ff!=0) then
 				c = yoff/abs(yoff)
-				
+
 				--west-facing jugglers can spaz out if you sneak up on them
 				if(c==nil or abs(c) !=1) then
 					return
@@ -979,7 +978,7 @@ function ai(i, j)
 					else
 						death = true
 					end
-					
+
 					if c<0 then
 						newdir = north
 					else
@@ -1089,7 +1088,7 @@ function update_dialogue()
 		dialoguetf=false
 		return
 	end
-	
+
 	if btnp(4) then
 		d_num+=1
 	end
@@ -1116,6 +1115,8 @@ function gameinit()
 	mode=1
 	music(32, 200, 2)
 	--sets up gameboard
+	currentfloor=initialfloor
+	currentroom=initialroom
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
 	floor = convertstringstoarray(truefloor)
 	player.x=initialx
@@ -1272,13 +1273,13 @@ function gamedraw()
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
 		print("press z to return to title screen",20,120,7)
-		
+
 		if btnp(4) then
 			win=false
 			titleinit()
 		end
 	else
-	
+
 	if not dead then
 
 		for i=1,16 do
@@ -1306,7 +1307,7 @@ function gamedraw()
 					spr(7, i*8-8, j*8-8)
 				elseif gb[i][j]==212 then
 					spr(8, i*8-8, j*8-8)
-					
+
 				--door things
 			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
@@ -1317,7 +1318,7 @@ function gamedraw()
 
     		elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-          
+
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
 
@@ -1344,9 +1345,9 @@ function gamedraw()
 		if btn(4) then
 			cls()
 			reloadroom()
-		end	
+		end
 	end
-	
+
 	end--end for win condition if-statement
 
 --[[
@@ -1687,4 +1688,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
