@@ -217,8 +217,8 @@ dialogue={
 		"welcome to carne castle!",
 		"press to move west\nandÑ to move east. ",
 		"pressÔ to move north\nandÃ to move south",
-		"hold x and press/�½to \nturn.",
-		"x+� turns you clockwise,\nand x+��turns you\ncounterclockwise.",
+		"hold x and press/�½to \nturn.",
+		"x+� turns you clockwise,\nand x+��turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
