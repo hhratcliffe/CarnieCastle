@@ -577,7 +577,7 @@ function jugglershoot(i, j, direction)
 	end
 
 	--print("and it's done")
-	wait(15)
+	wait(5)
 end
 
 function animation(a, delay, i, j, direction, enemydeath)
@@ -701,12 +701,11 @@ function checkdeath(gb)
 	for i=1,16 do
 		for j=1,16 do
 			if gb[i][j]==0 then
-				dead=false
-				return
+				return false
 			end
 		end
 	end
-	dead=true
+	return true
 end
 
 function reloadroom()
@@ -715,7 +714,6 @@ function reloadroom()
 	player.y=player.savedy
 	player.direct=player.saveddirect
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
-	dead=false
 	gb[player.x][player.y]=0
 end
 
@@ -840,7 +838,7 @@ function ai(i, j)
 
 	standarddelay = 1
 
-	if(entity == 0 or entity == -1 or entity > 200) then
+	if(checkdeath(gb) or entity == 0 or entity == -1 or entity > 200) then
 		return
 	end
 
@@ -1158,13 +1156,12 @@ function gameupdate()
 	if dialoguetf then
 		update_dialogue()
 	else
-		checkdeath(gb)
-		if pturn then
+		if pturn and not(checkdeath(gb)) then
 			playermovement()
-		elseif not dead then
+		elseif not checkdeath(gb) then
 			enemymovement()
 			afterenemyenemycount, afterenemywallcount = enemycount()
-			wait(3)
+			wait(1)
 		end
 	end
 end
@@ -1268,7 +1265,7 @@ function gamedraw()
 	if win then
 		cls()
 		pal()
-		dead=false
+		
 		print("thanks for playing!",25,40,7)
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
@@ -1280,7 +1277,7 @@ function gamedraw()
 		end
 	else
 
-	if not dead then
+	if not checkdeath(gb) then
 
 		for i=1,16 do
 			for j=1,16 do
@@ -1347,7 +1344,7 @@ function gamedraw()
 			reloadroom()
 		end
 	end
-
+	
 	end--end for win condition if-statement
 
 --[[
@@ -1688,3 +1685,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
