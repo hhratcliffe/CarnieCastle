@@ -234,7 +234,9 @@ dialogue={
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
 		"\"maybe i can use that\nto my advantage.\"",
 		--juggler intro
-		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\""
+		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\"",
+		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
+		"each jugglers line of sight\nis shown by the white\narrow on their body."	
 	}
 }
 
@@ -497,10 +499,13 @@ function screentransition(prevfloor,prevroom,nextfloor,nextroom)
 	end
 
 	--dialogue trigger to introduce lesser clowns
-	if currentroom==2 and checkforenemies() then
-		load_dialogue(dialogue.enemies,1,2)
-	elseif currentroom==4 and checkforenemies() then
-		load_dialogue(dialogue.enemies,3,3)
+	if currentfloor==1 then
+		if currentroom==2 and checkforenemies() then
+			load_dialogue(dialogue.enemies,1,2)
+		elseif (currentroom==4 or currentroom==3) and checkforenemies() and metjuggler==nil then
+			load_dialogue(dialogue.enemies,3,5)
+			metjuggler=true
+		end
 	end
 end
 
