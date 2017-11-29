@@ -42,6 +42,11 @@ initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
+--Directions:
+--left:0.25
+--Rigth:0.75
+--Up:0
+--Down:0.50
 
 --used to skip enemy animations
 skipanim=false
@@ -121,8 +126,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -153,15 +158,15 @@ gameboard={
 	 	"210,210,210,210,210,210,210,210,nil,nil,nil,nil,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,nil,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,nil,210,210,210,210",
-	 	"210,020,nil,nil,nil,nil,nil,nil,nil,210,nil,nil,nil,nil,nil,210",
-	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,715",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+	 	"210,020,nil,nil,nil,nil,nil,nil,nil,210,nil,nil,210,210,210,210",
+	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,717,210,210,210,210,210,210,210"
 	  },
 	  {--room5
 	 	"210,210,711,210,210,210,210,210,210,210,210,210,210,711,210,210",
@@ -172,7 +177,7 @@ gameboard={
 	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
 	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
-	 	"714,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
+	 	"717,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,nil,022,nil,210",
 	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,022,nil,210",
@@ -183,20 +188,56 @@ gameboard={
 		},
 		{--room6
 		"210,210,210,210,210,210,210,713,210,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,010,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,210,210,210,210,210,nil,210",
+		"210,210,210,210,210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,020,nil,210,210,210,210,nil,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,nil,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,010,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+		},
+		{--room7
+		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,021,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+	 	"210,210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,020,715",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 	"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+		},
+		{--room8
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		}
 	}
@@ -221,6 +262,18 @@ flags={
 			tutorial=0
 		},
 		{--room5
+			key=0,
+			tutorial=0
+		},
+		{--room6
+			key=0,
+			tutorial=0
+		},
+		{--room7
+			key=0,
+			tutorial=0
+		},
+		{--room8
 			key=0,
 			tutorial=0
 		}
@@ -308,6 +361,9 @@ function playermovement()
 			for j=1,16 do
 				if gb[i][j]==0 then
 
+					--When doorflag is set to true it means that the player has moved to a new room and should not lose priority
+					doorflag=false
+
 					--sword turning
 					if btn(5) and btn(0) then
 						player.direct+=.125
@@ -343,6 +399,7 @@ function playermovement()
 									gb[i][j]=-1
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
 								if not checkforenemies() then
+									doorflag=true
 									screentransition(currentfloor,currentroom,flr((gb[i+xmove][j+ymove]-700)/10),gb[i+xmove][j+ymove]%10)
 									if xmove==-1 then
 										player.x=15
@@ -375,6 +432,7 @@ function playermovement()
 								end
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
 								if allkeyscollected() then
+									doorflag=true
 									gb[player.x][player.y]=-1
 									win=true
 								else
@@ -397,7 +455,7 @@ function playermovement()
 						--if(xmove==1) then
 							--rightfix+=1
 						--end
-						pturn=false
+						pturn=doorflag
 
 						sworddirection()
 						--breaks loop if the player is found
