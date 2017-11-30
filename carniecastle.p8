@@ -400,7 +400,7 @@ function playermovement()
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
 								if not checkforenemies() then
 									doorflag=true
-									screentransition(currentfloor,currentroom,flr((gb[i+xmove][j+ymove]-700)/10),gb[i+xmove][j+ymove]%10)
+									screentransition(currentfloor,currentroom,gb[i+xmove][j+ymove]%10)--flr((gb[i+xmove][j+ymove]-700)/10)
 									if xmove==-1 then
 										player.x=15
 										player.direct=.25
@@ -466,8 +466,7 @@ function playermovement()
 		end
 end
 
-function screentransition(prevfloor,prevroom,nextfloor,nextroom)
-	currentfloor=nextfloor
+function screentransition(prevfloor,prevroom,nextroom)
 	currentroom=nextroom
 	--remove player from map
 	gb[player.x][player.y]=-1
