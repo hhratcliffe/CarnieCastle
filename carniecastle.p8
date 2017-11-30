@@ -302,13 +302,13 @@ function playermovement()
 					end
 					--sword turning
 					if btn(5) and btn(0) then
-						player.direct+=.125
+						playeranimate(player.direct+.125,1)
 						pturn=false
 						sworddirection()
 						break
 					end
 					if btn(5) and btn(1) then
-						player.direct-=.125
+						playeranimate(player.direct-.125,-1)
 						pturn=false
 						sworddirection()
 						break
@@ -471,7 +471,57 @@ function arrowshoot(i, j, direction)
 			end
 			wait(1)
 		end
+end
+
+--pretty much finished
+--need to optimize
+function playeranimate(rotateaf,sign)
+	angle=0.03125*sign
+	while player.direct<rotateaf or player.direct>rotateaf do
+		player.direct+=angle
 		
+		for i=player.x-1,player.x+1 do
+			for j=player.y-1,player.y+1 do
+				--floor first
+				spr(floor[i][j], (i-1)*8, (j-1)*8)
+
+				--enemy things
+			if(not(gb[i][j] == -1) and gb[i][j] > 0 and gb[i][j] < 100) then
+					if gb[i][j]<20 then
+						spr(32,(i-1)*8,(j-1)*8)
+					elseif gb[i][j] < 30 then
+						spr(60+gb[i][j]%10, i*8-8, j*8-8)
+						spr(48,(i-1)*8,(j-1)*8)
+					end
+
+				--wall things
+				elseif gb[i][j]==210 then --200=wall
+					spr(10, i*8-8, j*8-8)
+				elseif gb[i][j]==211 then
+					spr(7, i*8-8, j*8-8)
+				elseif gb[i][j]==212 then
+					spr(8, i*8-8, j*8-8)
+
+				--door things
+			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
+					spr(11, i*8-8, j*8-8)
+
+				--stairway
+				elseif gb[i][j] == 202 then
+					spr(12, i*8-8, j*8-8)
+
+    elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
+					spr(27, i*8-8, j*8-8)
+
+				elseif gb[i][j] == 501 then
+					spr(28, i*8-8, j*8-8)
+				end
+			end
+		end
+		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+		wait(1)
+			
+	end
 end
 
 function screentransition(prevfloor,prevroom,nextfloor,nextroom)
