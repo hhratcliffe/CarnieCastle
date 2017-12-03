@@ -247,19 +247,23 @@ flags={
 	{--floor1
 		{--room1
 			key=1,
-			tutorial=1
+			tutorial=1,
+			arrow=0
 		},
 		{--room2
 			key=0,
-			tutorial=0
+			tutorial=0,
+			arrow=0
 		},
 		{--room3
 			key=0,
-			tutorial=0
+			tutorial=0,
+			arrow=1
 		},
 		{--room4
 			key=0,
-			tutorial=0
+			tutorial=0,
+			arrow=0
 		},
 		{--room5
 			key=0,
@@ -305,7 +309,9 @@ dialogue={
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
 		"\"maybe i can use that\nto my advantage.\"",
 		--juggler intro
-		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\""
+		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\"",
+		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
+		"each jugglers line of sight\nis shown by the white\narrow on their body."	
 	}
 }
 
@@ -317,7 +323,8 @@ player={
 	y = 3,
 	savedx=9,
 	savedy=3,
-	saveddirect=.25
+	saveddirect=.25,
+	arrows=0
 }
 
 sword = {
@@ -364,32 +371,41 @@ function playermovement()
 					--When doorflag is set to true it means that the player has moved to a new room and should not lose priority
 					doorflag=false
 
+					--shooting arrows
+					if btn(5) and btn(2) and player.arrows>0 then
+						arrowshoot(player.x,player.y,player.direct)
+						pturn=false
+						break
+					elseif btn(5) and btn(2) then
+						break
+					end
 					--sword turning
 					if btn(5) and btn(0) then
-						player.direct+=.125
+						playeranimate(player.direct+.125,1)
 						pturn=false
 						sworddirection()
 						break
 					end
+					--sword turning
 					if btn(5) and btn(1) then
-						player.direct-=.125
+						playeranimate(player.direct-.125,-1)
 						pturn=false
 						sworddirection()
 						break
 					end
 
 					--cardinal player movement
-					if (btnp(0) or btnp(1) or btnp(2) or btnp(3)) then
-						if btnp(0) then --left
+					if (btn(0) or btn(1) or btn(2) or btn(3)) then
+						if btn(0) then --left
 							xmove=-1
 							ymove=0
-						elseif btnp(1) then --right
+						elseif btn(1) then --right
 							xmove=1
 							ymove=0
-						elseif btnp(2) then --up
+						elseif btn(2) then --up
 							xmove=0
 							ymove=-1
-						elseif btnp(3) then --down
+						elseif btn(3) then --down
 							xmove=0
 							ymove=1
 						end
@@ -442,8 +458,11 @@ function playermovement()
 								if gb[i+xmove][j+ymove]==501 then --picking up keys
 								 sfx(62)
 									flags[currentfloor][currentroom].key-=1
+								elseif gb[i+xmove][j+ymove]==510 then --picking up arrows
+									player.arrows+=1
+									flags[currentfloor][currentroom].arrow-=1
 								end
-							 	gb[i+xmove][j+ymove]=0
+							 gb[i+xmove][j+ymove]=0
 								gb[i][j]=-1
 								player.x+=xmove
 								player.y+=ymove
@@ -464,6 +483,132 @@ function playermovement()
 				end
 			end
 		end
+end
+
+--fires arrow from player
+--can only shoot up,down,left,right
+function arrowshoot(i, j, direction)
+		if direction == 0 then
+			a = 0
+			b = -1
+			j=player.y-1
+			sp=4
+		elseif direction ==.5 or direction==-.5 then
+			a = 0
+			b = 1
+			j=player.y+1
+			sp=20
+		elseif direction ==.25 or direction==-.75 then
+			a = -1
+			b = 0
+			i=player.x-1
+			sp=3
+		elseif direction ==.75 or direction==-.25 then
+			a = 1
+			b = 0
+			i=player.x+1
+			sp=19
+		else
+			return
+		end
+		k = 0
+	 player.arrows-=1
+	
+		while(player.x*8 != i*8+a*k or player.y*8 != j*8+b*k) do
+			k +=2 --controls "speed" of arrow
+		--print("k = " .. k)
+			x = i*8+a*k-5
+			y = j*8+b*k-5
+	
+			if gb[flr(x/8)+1][flr(y/8)+1]>=200 then
+				return
+			end
+			--floor
+			--print("floor = "..floor[x/8][y/8])
+			spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
+			--entity
+			entity = gb[flr(x/8)+1][flr(y/8)+1]
+			--print("entity: "..entity)
+			--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")")
+			--print("proj: ("..x-8 .."," .. y-8 ..")")
+			if flr(entity)>=10 and flr(entity)<100 then
+				gb[flr(x/8)+1][flr(y/8)+1]=-1
+				return
+			end
+
+			--player
+			spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+
+			--cover your tracks
+			if (x)%8>=0 and x%8<=7 and (y)%8>=0 and y%8<=7 then
+				--floor
+				spr(floor[flr((x-a*8)/8)+1][flr((y-b*8)/8)+1], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
+				--entity
+				--player
+				spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+			end
+			--projectile
+
+			if gb[flr(x/8)+1][flr(y/8)+1]>=200 then
+				return
+			else
+				spr(sp, x-3, y-3)
+			end
+			wait(1)
+		end
+end
+
+--animates player while turning
+function playeranimate(rotateaf,sign)
+	angle=0.03125*sign
+	while player.direct<rotateaf or player.direct>rotateaf do
+		player.direct+=angle
+		
+		for i=player.x-1,player.x+1 do
+			for j=player.y-1,player.y+1 do
+				--floor first
+				spr(floor[i][j], (i-1)*8, (j-1)*8)
+
+				--enemy things
+			if(not(gb[i][j] == -1) and gb[i][j] > 0 and gb[i][j] < 100) then
+					if gb[i][j]<20 then
+						spr(32,(i-1)*8,(j-1)*8)
+					elseif gb[i][j] < 30 then
+						spr(60+gb[i][j]%10, i*8-8, j*8-8)
+						spr(48,(i-1)*8,(j-1)*8)
+					end
+
+				--wall things
+				elseif gb[i][j]==210 then --200=wall
+					spr(10, i*8-8, j*8-8)
+				elseif gb[i][j]==211 then
+					spr(7, i*8-8, j*8-8)
+				elseif gb[i][j]==212 then
+					spr(8, i*8-8, j*8-8)
+
+				--door things
+			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
+					spr(11, i*8-8, j*8-8)
+
+				--stairway
+				elseif gb[i][j] == 202 then
+					spr(12, i*8-8, j*8-8)
+
+    elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
+					spr(27, i*8-8, j*8-8)
+
+				elseif gb[i][j] == 501 then
+					spr(28, i*8-8, j*8-8)
+				elseif gb[i][j] == 510 then
+					spr(3,i*8-8,j*8-8)
+				end
+			end
+		end
+		--draw player
+		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+		wait(1)--allows turning to be seen by player
+			
+	end
 end
 
 function screentransition(prevfloor,prevroom,nextroom)
@@ -490,10 +635,13 @@ function screentransition(prevfloor,prevroom,nextroom)
 	end
 
 	--dialogue trigger to introduce lesser clowns
-	if currentroom==2 and checkforenemies() then
-		load_dialogue(dialogue.enemies,1,2)
-	elseif currentroom==4 and checkforenemies() then
-		load_dialogue(dialogue.enemies,3,3)
+	if currentfloor==1 then
+		if currentroom==2 and checkforenemies() then
+			load_dialogue(dialogue.enemies,1,2)
+		elseif (currentroom==4 or currentroom==3) and checkforenemies() and metjuggler==nil then
+			load_dialogue(dialogue.enemies,3,5)
+			metjuggler=true
+		end
 	end
 end
 
@@ -652,7 +800,7 @@ function jugglershoot(i, j, direction)
 	end
 
 	--print("and it's done")
-	wait(15)
+	wait(5)
 end
 
 function animation(a, delay, i, j, direction, enemydeath)
@@ -776,12 +924,11 @@ function checkdeath(gb)
 	for i=1,16 do
 		for j=1,16 do
 			if gb[i][j]==0 then
-				dead=false
-				return
+				return false
 			end
 		end
 	end
-	dead=true
+	return true
 end
 
 function reloadroom()
@@ -790,7 +937,6 @@ function reloadroom()
 	player.y=player.savedy
 	player.direct=player.saveddirect
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
-	dead=false
 	gb[player.x][player.y]=0
 end
 
@@ -915,7 +1061,7 @@ function ai(i, j)
 
 	standarddelay = 1
 
-	if(entity == 0 or entity == -1 or entity > 200) then
+	if(checkdeath(gb) or entity == 0 or entity == -1 or entity > 200) then
 		return
 	end
 
@@ -1233,13 +1379,12 @@ function gameupdate()
 	if dialoguetf then
 		update_dialogue()
 	else
-		checkdeath(gb)
-		if pturn then
+		if pturn and not(checkdeath(gb)) then
 			playermovement()
-		elseif not dead then
+		elseif not checkdeath(gb) then
 			enemymovement()
 			afterenemyenemycount, afterenemywallcount = enemycount()
-			wait(3)
+			wait(2)
 		end
 	end
 end
@@ -1343,7 +1488,7 @@ function gamedraw()
 	if win then
 		cls()
 		pal()
-		dead=false
+		
 		print("thanks for playing!",25,40,7)
 		print("future features:",30,50,7)
 		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
@@ -1355,7 +1500,7 @@ function gamedraw()
 		end
 	else
 
-	if not dead then
+	if not checkdeath(gb) then
 
 		for i=1,16 do
 			for j=1,16 do
@@ -1398,12 +1543,19 @@ function gamedraw()
 
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
-
+				
+				elseif gb[i][j]==510 then
+					spr(3,i*8-8, j*8-8)
+				
 				elseif gb[i][j] != -1 then
 					spr(0, i*8-8, j*8-8)
 				end
 			end
 		end
+		--[[puts arrow counter on screen
+		spr(3,105,0-1)
+		print("x"..player.arrows,115,0,7)
+		]]
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
 	--print(gb[player.x+1][player.y],10,10,7)
@@ -1424,7 +1576,7 @@ function gamedraw()
 			reloadroom()
 		end
 	end
-
+	
 	end--end for win condition if-statement
 
 --[[
@@ -1470,22 +1622,22 @@ function los(i, j, direction)
 end
 
 __gfx__
-00000000000005600000000000000000000000000000000000000000000d0000cccccccc66665666665666660044440060000000000000000000000000000000
-00000000000005600000000000000000000000000000000000000000000dd000cccccccc66665666555555550444444056000000000000000000000000000000
-00700700000005600000000000000000000000000000000000000000000d0d00cccccccc55555555666666564444444466600000000000000000000000000000
-00077000000005600000000000000000000000000000000000000000766d6667ccccccac66566666555555554444444455560000000000000000000000000000
-0007700000000560000000000000000000000000000000000000000076666667cccccccc6656666666566666444444a466666000000000000000000000000000
-0070070000000560000000000000000000000000000000000000000077666677cccccccc55555555555555554444444455555600000000000000000000000000
-00000000000005f0000000000000000000000000000000000000000007777770cccccccc66665666666666564444444466666660000000000000000000000000
-0000000000000ff0000000000000000000000000000000000000000000000000c000000c66665666555555554444444455555556000000000000000000000000
-00000000044444400000000000000000000000000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
-000000000444444000000000000000000000000000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
-000000000444444000000000000000000000000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
-000000000444444000000000000000000000000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
-0000000000444400000000000000000000000000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
-0000000000000000000000000000000000000000000000000000000000000000000000001222111100000000444a4444000a0000000000000000000000000000
-0000000000000000000000000000000000000000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000025111112000000004444444400000000000000000000000000000000
+00000000000005600000000000000000000500000000000000000000000d0000cccccccc66665666665666660044440060000000000000000000000000000000
+00000000000005600000000000500007005550000000000000000000000dd000cccccccc66665666555555550444444056000000000000000000000000000000
+00700700000005600000000005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000000000000000000000
+00077000000005600000000055444440000400000000000000000000766d6667ccccccac66566666555555554444444455560000000000000000000000000000
+0007700000000560000000000500007000040000000000000000000076666667cccccccc6656666666566666444444a466666000000000000000000000000000
+0070070000000560000000000050000700040000000000000000000077666677cccccccc55555555555555554444444455555600000000000000000000000000
+00000000000005f0000000000000000000747000000000000000000007777770cccccccc66665666666666564444444466666660000000000000000000000000
+0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556000000000000000000000000
+00000000044444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
+000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
+000000000444444000000000700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
+000000000444444000000000070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
+0000000000444400000000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
+0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000000000000000000000000000
+0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000000000000
+00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 000ee000000ee000000ee00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00077000000770000007700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -1765,3 +1917,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
