@@ -42,11 +42,11 @@ initialroom=1
 initialx=9
 initialy=3
 initialdirection=0
---Directions:
+--directions:
 --left:0.25
---Rigth:0.75
---Up:0
---Down:0.50
+--rigth:0.75
+--up:0
+--down:0.50
 
 --used to skip enemy animations
 skipanim=false
@@ -369,7 +369,7 @@ function playermovement()
 			for j=1,16 do
 				if gb[i][j]==0 then
 
-					--When doorflag is set to true it means that the player has moved to a new room and should not lose priority
+					--when doorflag is set to true it means that the player has moved to a new room and should not lose priority
 					doorflag=false
 
 					--shooting arrows
@@ -940,6 +940,7 @@ end
 
 function reloadroom()
  poke(0x5f40,0)
+ spawncount=0
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -1227,35 +1228,37 @@ function ai(i, j)
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
  	
- 	if xoff<=yoff then
- 		if abs(xoff)<3 then
- 		spot = gb[i-a][j]
- 		if(spot == -1 or spot == 0) then
-			--mechanics of movement
-				if (i-a)==sword.x and j==sword.y then
-					enemydeath = true
-					gb[i][j]=-1
-				else
-					gb[i-a][j] = entity+100
-					gb[i][j] = -1
-				end
-	 	end
-	 	end
- 	elseif yoff<=xoff then
- 		if abs(yoff)<3 then
- 		spot = gb[i][j-b]
- 		if(spot == -1 or spot == 0) then
-			--mechanics of movement
-				if i==sword.x and j-b==sword.y then
-					enemydeath = true
-					gb[i][j]=-1
-				else
-					gb[i][j-b] = entity+100
-					gb[i][j] = -1
-				end
-	 	end
-	 	end
+ 	--if spawncount hasnt started, set it to 0
+ 	if spawncount==nil then
+ 		spawncount=0
+ 	else
+ 		spawncount+=1
  	end
+ 	
+		if abs(xoff)<=3 and abs(yoff)<=3 then
+ 	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
+ 	 	gb[i-a][j]=entity+100
+ 	 	gb[i][j]=-1
+ 	 elseif gb[i][j-b]==-1 then
+ 	 	gb[i][j-b]=entity+100
+ 	 	gb[i][j]=-1
+ 	 end 
+ 	end
+ 	
+ 	if	spawncount==10 then
+ 		spawncount=0
+ 		
+ 		for l=i-1,i+1 do
+ 			for k=j-1,j+1 do
+ 				if gb[l][k]==-1 then
+ 					--spawned lesser clowns designated 011
+ 					--erases them on reload
+ 					gb[l][k]=011+100
+ 				end
+ 			end
+ 		end
+ 	end
+ 	
 	else
 		z = 1/0
 	--]]
