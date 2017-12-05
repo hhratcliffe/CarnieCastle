@@ -3,14 +3,12 @@ version 8
 __lua__
 --[[
 player=0
-enemies=0's
-floor=100's
+enemies=0's and 100's
 walls=200's
-obstacles=300's
 hazards=400's
 items=500's
-doors=600's
-stairs=700's
+doors=700's
+stairs=800's
 ]]
 
 --temp boolean for win screen
@@ -32,16 +30,13 @@ afterenemywallcount = 0
 
 ]]
 
-
 --variable used to simulate turn based movement
 pturn=true
-
 
 initialfloor=1
 initialroom=1
 initialx=9
 initialy=3
-
 initialdirection=0.25
 --Directions:
 --left:0.25
@@ -122,7 +117,7 @@ gameboard={
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,nil,711",
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
-		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
+		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,030,210,nil,nil,210",
 		"713,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
@@ -576,6 +571,7 @@ sword = {
 lclownwalk = {33, 32, 34, 32,33, 32, 34, 32}
 jugglerwalk = {49, 50, 51, 52, 53, 54, 55, 48}
 jugglerprojectile = 56
+fwalk = {37, 38, 39, 36, 37, 38, 39, 36}
 clowncarmove={179,179,179,179,179,179,179,179}
 
 --sprite rotation function
@@ -1071,8 +1067,22 @@ function jugglershoot(i, j, direction)
 	wait(2)
 end
 
-function animation(a, delay, i, j, direction, enemydeath)
+function inchazards()
+	for i = 1,#gb do
+		for j = 1,#gb[i] do
+			ent = gb[i][j]
+				if ent<500 and ent >399 and rnd(20) < 1 then
+					gb[i][j] = 10*flr(ent/10) + flr(rnd(5))
+				
+					spr(floor[i][j], i*8-8, j*8-8)
+					spr(41+gb[i][j]%10)
+				end
+		end
+	end
+end
 
+function animation(a, delay, i, j, direction, enemydeath)
+	
 	--a is a list of frames for animations
 	--delay is how many frames to wait for each frame
 	--i, j are the x,y coordinates where the animation starts
@@ -1108,40 +1118,43 @@ function animation(a, delay, i, j, direction, enemydeath)
 			spr(floor[i][j], i*8-8, j*8-8)
 		if direction == north then
 			--floor
-			spr(floor[i][j], i*8-8, j*8-16)
+			spr(floor[i][j-1], i*8-8, j*8-16)
 			--entities
-			spr()
-
+			if(gb[i][j-1] < 420 and gb[i][j-1] >409) then
+				spr(41 + gb[i][j-1]-410, i*8-8, j*8-16)
+			end
 			--animation
 			spr(a[q], i*8-8, j*8-q-8)
 		elseif direction == east then
 			--floor
-			spr(floor[i][j], i*8, j*8-8)
+			spr(floor[i+1][j], i*8, j*8-8)
 			--entities
-			spr()
-
+			if(gb[i+1][j] < 420 and gb[i+1][j] >409) then
+				spr(41 + gb[i+1][j]-410, i*8, j*8-8)
+			end
 			--animation
 			spr(a[q], i*8+q-8, j*8-8)
 		elseif direction == south then
 			--floor
-			spr(floor[i][j], i*8-8, j*8)
+			spr(floor[i][j+1], i*8-8, j*8)
 			--entities
-			spr()
-
+			if(gb[i][j+1] < 420 and gb[i][j+1] >409) then
+				spr(41 + gb[i][j+1]-410, i*8-8, j*8)
+			end
 			--animation
 			spr(a[q], i*8-8, j*8+q-8)
 		elseif direction == west then
 			--floor
-			spr(floor[i][j], i*8-16, j*8-8)
+			spr(floor[i-1][j], i*8-16, j*8-8)
 			--entities
-			spr()
-
+			if(gb[i-1][j] < 420 and gb[i-1][j] >409) then
+				spr(41 + gb[i-1][j]-410, i*8-16, j*8-8)
+			end
 			--animation
 			spr(a[q], i*8-q-8, j*8-8)
 		else
 			print("problem!!!!")
 		end
-		--redraw sword/player
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 		wait(delay)
 	end
@@ -1150,31 +1163,37 @@ function animation(a, delay, i, j, direction, enemydeath)
  	sfx(63)
 		if direction == north then
 			--floor
-			spr(floor[i][j], i*8-8, j*8-16)
+			spr(floor[i][j-1], i*8-8, j*8-16)
 			--entities
-			spr()
+			if(gb[i][j-1] < 420 and gb[i][j-1] >409) then
+				spr(41 + gb[i][j-1]-410, i*8-8, j*8-16)
+			end
 
 		elseif direction == east then
 			--floor
 			spr(floor[i][j], i*8, j*8-8)
 			--entities
-			spr()
-
+			if(gb[i+1][j] < 420 and gb[i+1][j] >409) then
+				spr(41 + gb[i+1][j]-410, i*8, j*8-8)
+			end
 		elseif direction == south then
 			--floor
 			spr(floor[i][j], i*8-8, j*8)
 			--entities
-			spr()
-
+			if(gb[i][j+1] < 420 and gb[i][j+1] >409) then
+				spr(41 + gb[i][j+1]-410, i*8-8, j*8)
+			end
 		elseif direction == west then
 			--floor
 			spr(floor[i][j], i*8-16, j*8-8)
 			--entities
-			spr()
-
+			if(gb[i-1][j] < 420 and gb[i-1][j] >409) then
+				spr(41 + gb[i-1][j]-410, i*8-16, j*8-8)
+			end
 		else
 			print("problem!!!!")
 		end
+		inchazards()
 		--redraw sword/player
 		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 	end
@@ -1216,9 +1235,9 @@ function lclownhorizontal(xoff, yoff, i, j)
  enemydeath = false
  a = xoff/abs(xoff)
 	spot = gb[i+a][j]
-	if(spot == -1 or spot == 0) then
+	if(spot == -1 or spot == 0 or (spot < 500 and spot > 399)) then
 		--mechanics of movement
-		if (i+a)==sword.x and j==sword.y then
+		if ((i+a)==sword.x and j==sword.y) or (gb[i+a][j]>399 and gb[i+a][j]<500) then
 			enemydeath = true
 			--print("walking to my death")
 			gb[i][j]=-1
@@ -1272,8 +1291,8 @@ function lclownvertical(xoff, yoff, i, j)
  enemydeath = false
  b = yoff/abs(yoff)
  spot = gb[i][j+b]
- if(spot== -1 or spot == 0) then
- 	if i==sword.x and (j+b)==sword.y then
+ if(spot== -1 or spot == 0or (spot < 500 and spot > 399)) then
+ 	if (i==sword.x and (j+b)==sword.y) or (gb[i][j+b]>399 and gb[i][j+b]<500) then
 	 	enemydeath = true
 	 	--print("walking to my death")
 	 	gb[i][j]=-1
@@ -1324,11 +1343,64 @@ function lclownvertical(xoff, yoff, i, j)
  return false
 end
 
+--sets fire on previoius spot when moving
+--turns right when blocked
+
+function firestarter_action(i, j)
+	entity = gb[i][j]
+	direction = entity%10
+		
+	if(direction == north) then
+		a = 0
+		b = -1
+	
+	elseif direction == south then
+		a = 0
+		b = 1
+	
+	elseif direction == east then
+		a = 1
+		b = 0
+		
+	else
+		a = -1
+		b = 0
+	end	
+		
+	move = gb[i+a][j+b] < 1 or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
+	fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399) 
+	
+	if(move) then
+		--set fire
+		gb[i][j] = 410 + flr(rnd(5))
+		--animation
+		animation(fwalk, 1, i, j, direction, fdeath)
+		spr(41+gb[i][j]%10, i*8-8, j*8-8)
+		--if still alive
+		if(not(fdeath)) then
+			gb[i+a][j+b] = 10*flr(entity/10)+direction+100
+		end
+		
+	else
+		if direction == north then
+			direction = east
+		elseif direction == east then
+			direction = south
+		elseif direction == south then
+			direction = west
+		else
+			direction = north	
+		end
+	gb[i][j] = 10*flr(entity/10)+direction+100		
+	end
+	
+end
+
 function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
-
+	
 	standarddelay = 1
 
 	if(checkdeath(gb) or entity == 0 or entity == -1 or entity > 200) then
@@ -1347,7 +1419,11 @@ function ai(i, j)
 				lclownvertical(xoff, yoff, i, j)
 			end
 		end
-
+	
+	--firestarter	
+	elseif(flr(entity/10) == 3) then
+		firestarter_action(i, j)
+	
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		death = false
@@ -1368,10 +1444,10 @@ function ai(i, j)
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
-					if not(sword.x == i+c and sword.y == j) then
-						gb[i+c][j] = entity+100
-					else
+					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
 						death = true
+					else
+						gb[i+c][j] = entity+100
 					end
 
 					if c<0 then
@@ -1398,10 +1474,10 @@ function ai(i, j)
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
-					if not(sword.x == i+c and sword.y == j) then
-						gb[i+c][j] = entity+100
-					else
+					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
 						death = true
+					else
+				  gb[i+c][j] = entity+100
 					end
 
 					if c<0 then
@@ -1429,10 +1505,10 @@ function ai(i, j)
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
-					if not(sword.x == i and sword.y == j+c) then
-						gb[i][j+c] = entity+100
-					else
+					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[i][j+c] < 500) then
 						death = true
+					else
+						gb[i][j+c] = entity+100
 					end
 					if c<0 then
 						newdir = north
@@ -1464,10 +1540,10 @@ function ai(i, j)
 				if(spot == o or spot == -1) then
 					gb[i][j] = -1
 
-					if not(sword.x == i and sword.y == j+c) then
-						gb[i][j+c] = entity+100
-					else
+					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[c][j+c] < 500) then
 						death = true
+					else
+						gb[i][j+c] = entity+100
 					end
 
 					if c<0 then
@@ -1710,6 +1786,7 @@ function gameupdate()
 	if dialoguetf then
 		update_dialogue()
 	else
+	inchazards()
 		if pturn and not(checkdeath(gb)) then
 			playermovement()
 		elseif not checkdeath(gb) then
@@ -1849,23 +1926,32 @@ function gamedraw()
 					elseif gb[i][j] < 30 then
 						spr(60+gb[i][j]%10, i*8-8, j*8-8)
 						spr(48,(i-1)*8,(j-1)*8)
+					elseif gb[i][j] < 40 then
+						spr(60+gb[i][j]%10, i*8-8, j*8-8)
+				  spr(36,(i-1)*8,(j-1)*8)
 					elseif gb[i][j]<50 then
 						spr(179,(i-1)*8,(j-1)*8)
 					end
 
-				--wall things
-				elseif gb[i][j]==210 then --200=wall
-					spr(10, i*8-8, j*8-8)
-				elseif gb[i][j]==211 then
-					spr(7, i*8-8, j*8-8)
-				elseif gb[i][j]==212 then
-					spr(8, i*8-8, j*8-8)
+			--wall things
+			elseif gb[i][j]==210 then --200=wall
+				spr(10, i*8-8, j*8-8)
+			elseif gb[i][j]==211 then
+				spr(7, i*8-8, j*8-8)
+			elseif gb[i][j]==212 then
+				spr(8, i*8-8, j*8-8)
 
-				--door things
+			--door things
 			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
-					if flr((gb[i][j]-700)/10)==1 then
-						spr(11, i*8-8, j*8-8)
-					end
+				if flr((gb[i][j]-700)/10)==1 then
+					spr(11, i*8-8, j*8-8)
+				end
+				
+			--hazards
+			elseif gb[i][j] > 399 and gb[i][j] <500 then
+				if(flr((gb[i][j]-400)/10) == 1) then
+					spr(41+gb[i][j]%10,i*8-8, j*8-8) 
+				end
 
 				--stairway
 				elseif gb[i][j] == 202 then
@@ -1973,14 +2059,14 @@ __gfx__
 0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000000000000000000000000000
 0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000000000000
 00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000000000000000000000000000
-00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-000ee000000ee000000ee00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00077000000770000007700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00888800008888000088880000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-08088080080880800808808000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00011000000110000001100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00800800008008000080080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-00800800008000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000a9a00000aaa00000a9a000000a00000000000000000000000000000000000000000000000000000000000000000
+000ee000000ee000000ee00000000000000ee989000eea89000ee98a000eeaaa0000000000000000000000000000000000000000000000000000000000000000
+00077000000770000007700000000000000770400007704000077040000779890000000000008000000090000000090000008000000000000000000000000000
+00888800008888000088880000000000008888400088884000888840008880400000000000088000000999000009980000088800000aaa000000000000000000
+08088080080880800808808000000000080880400808804008088040080888400000000000088000008889000099889000888800000a9aa00000000000000000
+000110000001100000011000000000000001100000011000000110000001104000000000008898000989880009aa8a900889988000a999a00000000000000000
+0080080000800800008008000000000000800800008008000080080000800800000000000889998888aa98900aa88aa00899aa880a99889a0000000000000000
+008008000080000000000800000000000080080000000800008008000080000000000000889888988aa889800a9899a00899aaa8a988889a0000000000000000
 00c00000000000000000000000c0000000c000c00c000c00000000000c0000000000000000000000000000000000000000700700000007000070000000000000
 000ee0000c0ee0c0000ee0c0000ee000000ee000000ee000000ee0c0000ee0000000000000000000000000000000000007000070000000700700000000000000
 000770c0000770000007700000077000000770000007700000077000000770000000000000000000000000000000000070000007000000077000000000000000
