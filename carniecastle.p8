@@ -41,12 +41,13 @@ initialfloor=1
 initialroom=1
 initialx=9
 initialy=3
+
 initialdirection=0.25
 --Directions:
 --left:0.25
---Rigth:0.75
---Up:0
---Down:0.50
+--rigth:0.75
+--up:0
+--down:0.50
 
 --used to skip enemy animations
 skipanim=false
@@ -575,6 +576,7 @@ sword = {
 lclownwalk = {33, 32, 34, 32,33, 32, 34, 32}
 jugglerwalk = {49, 50, 51, 52, 53, 54, 55, 48}
 jugglerprojectile = 56
+clowncarmove={179,179,179,179,179,179,179,179}
 
 --sprite rotation function
 --written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
@@ -606,7 +608,6 @@ function playermovement()
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-
 					--shooting arrows
 					if btn(5) and btn(2) and player.arrows>0 then
 						arrowshoot(player.x,player.y,player.direct)
@@ -1200,6 +1201,7 @@ end
 
 function reloadroom()
  poke(0x5f40,0)
+ spawncount=nil
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -1487,35 +1489,60 @@ function ai(i, j)
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
  	
- 	if xoff<=yoff then
- 		if abs(xoff)<3 then
- 		spot = gb[i-a][j]
- 		if(spot == -1 or spot == 0) then
-			--mechanics of movement
-				if (i-a)==sword.x and j==sword.y then
-					enemydeath = true
-					gb[i][j]=-1
-				else
-					gb[i-a][j] = entity+100
-					gb[i][j] = -1
-				end
-	 	end
-	 	end
- 	elseif yoff<=xoff then
- 		if abs(yoff)<3 then
- 		spot = gb[i][j-b]
- 		if(spot == -1 or spot == 0) then
-			--mechanics of movement
-				if i==sword.x and j-b==sword.y then
-					enemydeath = true
-					gb[i][j]=-1
-				else
-					gb[i][j-b] = entity+100
-					gb[i][j] = -1
-				end
-	 	end
-	 	end
+ 	--if spawncount hasnt started, set it to 0
+ 	if spawncount==nil then
+ 		spawncount=1
+ 	else
+ 		spawncount+=1
  	end
+ 	
+ 		if spawncount==9 then
+ 		for g=1,6 do
+ 			for h=179,182 do
+ 				spr(h,(i-1)*8,(j-1)*8)
+ 				wait(1)
+ 			end
+ 		end
+ 	elseif	spawncount==10 then
+ 		spawncount=0
+ 		
+ 		for l=i-1,i+1 do
+ 			for k=j-1,j+1 do
+ 				if gb[l][k]==-1 and (l!=sword.x or k!=sword.y) then
+ 					--spawned lesser clowns designated 011
+ 					--erases them on reload
+ 					gb[l][k]=011+100
+ 				end
+ 			end
+ 		end
+ 	end
+ 	
+		if abs(xoff)<=3 and abs(yoff)<=3 then
+ 	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
+ 	 	gb[i-a][j]=entity+100
+ 	 	gb[i][j]=-1
+ 	 	
+ 	 	if a==1 then
+ 	 		direction=west
+ 	 	elseif a==-1 then
+ 	 		direction=east
+ 	 	end
+ 	 	animation(clowncarmove, standarddelay, i, j,direction, death)
+ 	 elseif gb[i][j-b]==-1 then
+ 	 	gb[i][j-b]=entity+100
+ 	 	gb[i][j]=-1
+ 	 	
+ 	 	if b==1 then
+ 	 		direction=north
+ 	 	elseif b==-1 then
+ 	 		direction=south
+ 	 	end
+ 	 	animation(clowncarmove, standarddelay, i, j,direction, death)
+ 	 end
+		end
+ 	
+ 	
+ 
 	else
 		z = 1/0
 	--]]
@@ -1873,6 +1900,7 @@ function gamedraw()
 		draw_dialogue()
 	end
 
+	print(spawncount,0,0,7)
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -2019,12 +2047,12 @@ c0888800008888000088880cc088880cc08888000088880cc088880cc088880c000c000000000000
 00000c5c555a5a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000707070707070707070707070
 0000c55c555a55800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000777777777777777777777770
 000e55ccbbbaa5580000000000000000000000000000000000000000000000000000000000000000000000000000000000000000777777777707077777777770
-0eeeccccbbbaaa8800000000000cbb00000000000000000000000000000000000000000000000000000000000000000000000000770707777077707777070770
-eeeeccccbbbaaa880000000000c5bbe0000000000000000000000000000000000000000000000000000000000000000000000000707070770770770770707070
-eeee55ccbbba5588000000000855bbe0000000000000000000000000000000000000000000000000000000000000000000000000777777707700077077777770
-0ee5555cbbb555580000000088ccbbee000000000000000000000000000000000000000000000000000000000000000000000000770707777000007777070770
-000555500005555000000000855cb55e000000000000000000000000000000000000000000000000000000000000000000000000770707770000000777070770
-00005500000055000000000005500550000000000000000000000000000000000000000000000000000000000000000000000000770707770000000777070770
+0eeeccccbbbaaa8800000000000cbb000008cc00000e8800000bee00000000000000000000000000000000000000000000000000770707777077707777070770
+eeeeccccbbbaaa880000000000c5bbe00085ccb000e588c000b5ee80000000000000000000000000000000000000000000000000707070770770770770707070
+eeee55ccbbba5588000000000855bbe00e55ccb00b5588c00c55ee80000000000000000000000000000000000000000000000000777777707700077077777770
+0ee5555cbbb555580000000088ccbbeeee88ccbbbbee88ccccbbee88000000000000000000000000000000000000000000000000770707777000007777070770
+000555500005555000000000855cb55ee558c55bb55e855cc55be558000000000000000000000000000000000000000000000000770707770000000777070770
+00005500000055000000000005500550055005500550055005500550000000000000000000000000000000000000000000000000770707770000000777070770
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
