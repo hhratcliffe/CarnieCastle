@@ -38,7 +38,7 @@ initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
---Directions:
+--directions:
 --left:0.25
 --rigth:0.75
 --up:0
@@ -535,7 +535,8 @@ dialogue={
 	doors={
 		"\"i don't need to go back\nthere...\"",
 		"\"i need a key to open\nthis door.\"",
-		"\"i shouldn't leave any\ncarnies alive.\""
+		"\"i shouldn't leave any\ncarnies alive.\"",
+		"\"it looks like i need\nanother key\""
 	},
 
 	enemies={
@@ -545,7 +546,15 @@ dialogue={
 		--juggler intro
 		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\"",
 		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
-		"each jugglers line of sight\nis shown by the white\narrow on their body."
+		"each jugglers line of sight\nis shown by the white\narrow on their body.",
+		--firebreather intro
+		"\"phew, its getting hot in\nhere. must be those\nfirebreathers up ahead.\"",
+		"firebreathers leave a trail\nof fire behind them as\nthey move across a room.",
+		"they move in a straight\nline, turning to the right\nwhen they hit an object.",
+		"a firebreathers current\ndirection is shown by the\nwhite line on its body.",
+		--clown car
+		"\"a clown car! i better\ndestory it before a bunch\nof clowns get out.\"",
+		"clown cars will run from\nyou and spawn lesser\nclowns every 10 turns."
 	}
 }
 
@@ -644,7 +653,7 @@ function playermovement()
 						end
 						if flr(gb[i+xmove][j+ymove]/100)!=2 and gb[i+xmove][j+ymove]!=201 then --201 = blocks movement into doors. temporary
 								--move player 1 space
-							if gb[i+xmove][j+ymove]!=-1 and (gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) then --update to a range when more enemies are introduced
+							if gb[i+xmove][j+ymove]!=-1 and (gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) then
 									gb[i][j]=-1
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
 								if not checkforenemies() then
@@ -1559,7 +1568,6 @@ function ai(i, j)
 		--don't forget to add 100
 	
 	--clown car
-	--still needs animations (ugh)
 	elseif flr(entity/10)==4 then
 		enemydeath = false
  	a=xoff/abs(xoff)
@@ -1616,14 +1624,9 @@ function ai(i, j)
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
  	 end
 		end
- 	
- 	
- 
 	else
 		z = 1/0
-	--]]
 	end
-	--wait(7)
 end
 
 function enemymovement()
@@ -1649,6 +1652,8 @@ function enemymovement()
 	pturn = true
 end
 
+--pauses game engine
+--useful for playing animations
 function wait(i)
  for j = 1, i do
  	flip()
@@ -1722,8 +1727,8 @@ function update_dialogue()
 	end
 end
 
+--draws dialogue box and dialogue statement
 function draw_dialogue()
-	--draws dialogue box and dialogue statement
 	rectfill(8,100,120,122,0)
 	rect(8,100,120,122,7)
 	print(dtable[d_num],10,102,7)
@@ -1759,7 +1764,7 @@ function gameinit()
 			previousrooms[i][j]=-1
 		end
 	end
-	--load with tutorial level
+	--load with tutorial level (floor 1, room1)
 	load_dialogue(dialogue.t_dialogue)
 end
 
@@ -1797,6 +1802,7 @@ function gameupdate()
 	end
 end
 
+--is this still needed?
 function enemycount()
 	count = 0
 	wallcount = 0
@@ -1871,11 +1877,11 @@ function generateballoons()
 	end
 end
 
---black screen with lore descending? or ascending?
---make skipable: done
+--black screen with lore ascending
+--skipable
 --mode=.5 is lorescreen
 function lorescreen()
-cls()
+	cls()
 	if ly==nil then
 		ly=122
 	elseif ly<=0 then
@@ -1974,19 +1980,15 @@ function gamedraw()
 		--[[puts arrow counter on screen
 		spr(3,105,0-1)
 		print("x"..player.arrows,115,0,7)
-		]]
-	--temporary draw for clown car	
+		]]	
 			
-		spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
-
-	--print(gb[player.x+1][player.y],10,10,7)
+	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
 	--draws any dialogue to screen
 	if dialoguetf then
 		draw_dialogue()
 	end
 
-	print(spawncount,0,0,7)
 	else
 		--prints this to screen if player is dead
 		cls()
@@ -2043,14 +2045,14 @@ function los(i, j, direction)
 
 end
 __gfx__
-00000000000005600000000000000000000500000000000000000000000d0000cccccccc66665666665666660044440060000000000000000000000000000000
-00000000000005600000000000500007005550000000000000000000000dd000cccccccc66665666555555550444444056000000000000000000000000000000
-00700700000005600000000005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000000000000000000000
-00077000000005600000000055444440000400000000000000000000766d6667ccccccac66566666555555554444444455560000000000000000000000000000
-0007700000000560000000000500007000040000000000000000000076666667cccccccc6656666666566666444444a466666000000000000000000000000000
-0070070000000560000000000050000700040000000000000000000077666677cccccccc55555555555555554444444455555600000000000000000000000000
-00000000000005f0000000000000000000747000000000000000000007777770cccccccc66665666666666564444444466666660000000000000000000000000
-0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556000000000000000000000000
+00000000000005600000000000000000000500000000000000000000000d0000cccccccc666656666656666600444400600000000000000033333b3356665666
+00000000000005600000000000500007005550000000000000000000000dd000cccccccc6666566655555555044444405600000000000000333333b356665666
+00700700000005600000000005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000003b3333b356665666
+00077000000005600000000055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000000000000b3333b3355555555
+0007700000000560000000000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600000000000333b333356665666
+0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556000000000033b333b356665666
+00000000000005f0000000000000000000747000000000000000000007777770cccccccc6666566666666656444444446666666000000000333b333b56665666
+0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556000000003333333355555555
 00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
 000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
 000000000444444000000000700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
@@ -2338,3 +2340,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
