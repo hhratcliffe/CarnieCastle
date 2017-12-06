@@ -38,7 +38,7 @@ initialfloor=1
 initialroom=1
 initialx=9
 initialy=3
-initialdirection=0.50
+initialdirection=0.25
 --directions:
 --left:0.25
 --rigth:0.75
@@ -526,9 +526,9 @@ dialogue={
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
-		"use the arrow keys\n(ï¿½ï¿½ï¿½ï¿½) to move.",
-		"hold ï¿½ and press\nï¿½ or ï¿½ to turn.",
-		"ï¿½ turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
+		"use the arrow keys to move.",
+		"hold x and press\n � or � to turn.",
+		"Ë turns you clockwise,\nand � turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"stuck? press \"tab\" to reset\nthe current room.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
@@ -816,8 +816,8 @@ function arrowshoot(i, j, direction)
 			end
 			--floor
 
-			spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
-			--entity
+			drawfloor(flr(x/8),flr(y/8),0,0)
+			--entityflr(x/8)
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
 
 			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
@@ -831,7 +831,7 @@ function arrowshoot(i, j, direction)
 			--cover your tracks
 			if (x)%8>=0 and x%8<=7 and (y)%8>=0 and y%8<=7 then
 				--floor
-				spr(floor[flr((x-a*8)/8)+1][flr((y-b*8)/8)+1], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
+				drawfloor(flr((x-a*8)/8)+1,flr((y-b*8)/8)+1,0,0)
 				--entity
 				--player
 				spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
@@ -1939,8 +1939,9 @@ function gamedraw()
 
 		print("you got the deed and\nreclaimed your castle!",25,40,7)
 		print("thanks for playing!",25,60,7)
-		print("created by:",25,70,7)
-		if btnp(4) then
+		print("created by:\nperry gordon\ntyler jones\nalex proctor\nharrison ratcliffe",25,70,7)
+		print("press x to return to main menu",8,120,7)
+		if btnp(5) then
 			win=false
 			titleinit()
 		end
@@ -2411,3 +2412,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
