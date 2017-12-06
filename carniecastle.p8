@@ -38,7 +38,7 @@ initialfloor=1
 initialroom=1
 initialx=9
 initialy=3
-initialdirection=0.50
+initialdirection=0.25
 --directions:
 --left:0.25
 --rigth:0.75
@@ -689,7 +689,7 @@ function playermovement()
 										gb[player.x][player.y]=0
 									end
 										--saves player x and y for reboot
-										player.savfedx=player.x
+										player.savedx=player.x
 										player.savedy=player.y
 										player.saveddirect=player.direct
 										player.savedarrows=player.arrows
