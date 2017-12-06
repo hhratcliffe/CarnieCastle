@@ -35,9 +35,9 @@ pturn=true
 
 initialfloor=2
 initialroom=1
-initialx=9
-initialy=3
-initialdirection=0.25
+initialx=15
+initialy=15
+initialdirection=0
 --directions:
 --left:0.25
 --rigth:0.75
@@ -279,14 +279,14 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,210,031,nil,nil,nil,nil,nil,nil,033,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,nil,210,nil,nil,210",
+		"210,nil,nil,210,nil,nil,nil,nil,nil,nil,031,nil,210,nil,nil,210",
+		"210,nil,nil,210,030,210,210,210,210,210,210,nil,210,nil,nil,210",
 		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
 		"713,nil,nil,nil,nil,210,nil,nil,nil,nil,210,nil,nil,nil,nil,711",
 		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
 		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,030,nil,nil,nil,nil,nil,nil,032,210,nil,nil,210",
+		"210,nil,nil,210,nil,210,210,210,210,210,210,033,210,nil,nil,210",
+		"210,nil,nil,210,nil,032,nil,nil,nil,nil,nil,nil,210,nil,nil,210",
 		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
@@ -299,15 +299,15 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,021,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,032,nil,712",
+		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,210",
 		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
 	  },
 	  {--room4
@@ -1379,7 +1379,7 @@ function firestarter_action(i, j)
 	end
 
 	move = gb[i+a][j+b] < 1 or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
-	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399) 
+	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
 	fdeath = false
 	if(move) then
 		--set fire
@@ -2342,4 +2342,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
