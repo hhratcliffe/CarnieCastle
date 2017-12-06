@@ -531,14 +531,12 @@ dialogue={
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
-	--put other dialogue options in this table
 	doors={
 		"\"i don't need to go back\nthere...\"",
 		"\"i need a key to open\nthis door.\"",
 		"\"i shouldn't leave any\ncarnies alive.\"",
-		"\"it looks like i need\nanother key\""
+		"\"it looks like i need\nanother key.\""
 	},
-
 	enemies={
 		--lesserclown intro
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
@@ -547,14 +545,22 @@ dialogue={
 		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\"",
 		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
 		"each jugglers line of sight\nis shown by the white\narrow on their body.",
-		--firebreather intro
-		"\"phew, its getting hot in\nhere. must be those\nfirebreathers up ahead.\"",
-		"firebreathers leave a trail\nof fire behind them as\nthey move across a room.",
-		"they move in a straight\nline, turning to the right\nwhen they hit an object.",
-		"a firebreathers current\ndirection is shown by the\nwhite line on its body.",
+		--firestarters intro
+		"\"those people setting fires\nlook familiar...oh no!\nthey're my families\"",
+		"\"servants! they must be\nunder the carnies control.\ni better not hurt them.\"",
+		"firestarters leave a trail\nof fire behind them as\nthey move across a room",
+		"in a straight line, turning\nright when they hit an\nobstacle.",
+		"a firestarters current\ndirection is shown by the\nwhite line on its body.",
+		"firestarters cannot be\nkilled, but do not stop\nyou from leaving rooms.",
 		--clown car
 		"\"a clown car! i better\ndestory it before a bunch\nof clowns get out.\"",
-		"clown cars will run from\nyou and spawn lesser\nclowns every 10 turns."
+		"clown cars will run from\nyou if you get too close and\nspawn lesser clowns every 10 turns.",
+		"the clown cars color scheme will\nflash the turn before spawning\na set of lesser clowns."
+	},
+	misc={
+		--arrow explanation
+		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
+		"hold x and press � to fire\nan arrow in the direction\nyou are facing."
 	}
 }
 
@@ -651,9 +657,9 @@ function playermovement()
 							xmove=0
 							ymove=1
 						end
-						if flr(gb[i+xmove][j+ymove]/100)!=2 and gb[i+xmove][j+ymove]!=201 then --201 = blocks movement into doors. temporary
+						if flr(gb[i+xmove][j+ymove]/100)!=2 then
 								--move player 1 space
-							if gb[i+xmove][j+ymove]!=-1 and (gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) then
+							if gb[i+xmove][j+ymove]!=-1 and ((gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) or (gb[i+xmove][j+ymove]>=400 and gb[i+xmove][j+ymove]<500)) then
 									gb[i][j]=-1
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
 								if not checkforenemies() then
@@ -685,8 +691,6 @@ function playermovement()
 										player.savedy=player.y
 										player.saveddirect=player.direct
 										player.savedarrows=player.arrows
-										--currentroom?
-
 
 										return
 								else
@@ -725,6 +729,10 @@ function playermovement()
 								 sfx(62)
 									flags[currentfloor][currentroom].key-=1
 								elseif gb[i+xmove][j+ymove]==510 then --picking up arrows
+									if arrowdflag==nil then
+										load_dialogue(dialogue.misc,1,2)
+										arrowdflag=true
+									end
 									player.arrows+=1
 									flags[currentfloor][currentroom].arrow-=1
 								end
@@ -978,7 +986,7 @@ function sworddirection()
 	--checks if enemy is on the sword after the sword has moved
 	for i=1,16 do
 		for j=1,16 do
-			if gb[i][j]!=-1 and (gb[i][j]>=10 and gb[i][j]<100) then
+			if gb[i][j]!=-1 and gb[i][j]>=10 and gb[i][j]<100 and not (gb[i][j]>=30 and gb[i][j]<40) then
 				if i==sword.x and j==sword.y then
 					sfx(63)
 					gb[i][j]=-1
