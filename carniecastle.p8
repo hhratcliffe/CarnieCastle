@@ -312,20 +312,20 @@ gameboard={
 	  },
 	  {--room4
 		"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,nil,031,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,020,020,020,020,020,020,210,nil,nil,210,210",
+		"210,nil,nil,nil,022,210,210,210,210,210,210,210,nil,nil,nil,210",
+		"210,nil,nil,nil,022,nil,nil,nil,nil,nil,nil,210,nil,nil,nil,210",
+		"715,nil,nil,030,022,nil,nil,nil,nil,nil,nil,210,nil,nil,nil,210",
+		"210,nil,nil,nil,022,nil,nil,nil,nil,nil,nil,210,nil,nil,nil,210",
+		"210,nil,nil,nil,022,nil,nil,nil,nil,nil,nil,210,nil,nil,nil,210",
+		"210,nil,nil,nil,022,210,210,210,210,210,210,210,nil,nil,nil,210",
+		"210,nil,nil,nil,210,023,023,023,023,023,023,210,nil,nil,210,210",
+		"210,nil,nil,nil,210,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"715,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 	  },
 	  {--room5
@@ -471,7 +471,7 @@ flags={
 	},
 	{--floor2
 		{--room1
-			key=1,
+			key=0,
 			tutorial=1,
 			arrow=0
 		},
@@ -563,7 +563,7 @@ dialogue={
 		"hold x and press � to fire\nan arrow in the direction\nyou are facing."
 	},
 	cl_speech={
-	
+
 	}
 }
 
@@ -622,7 +622,7 @@ function playermovement()
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-	
+
 					if btn(5) then
 						--shoot arrow
 						if btn(2) and player.arrows>0 then
@@ -1595,12 +1595,12 @@ function ai(i, j)
 		enemydeath = false
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
- 	
+
  	--40 to 49
  	--on 49, spawn new clowns
  	--reset to 40
  	--on 48,flash colors
-		 	
+
 		--adds 1 to entity code
 		gb[i][j]=entity+1
 		--if entity=48, signal spawning
@@ -1624,12 +1624,12 @@ function ai(i, j)
  			end
  		end
  	end
- 	
+
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
  	 	gb[i-a][j]=entity+101
  	 	gb[i][j]=-1
- 	 	
+
  	 	if a==1 then
  	 		direction=west
  	 	elseif a==-1 then
@@ -1639,14 +1639,14 @@ function ai(i, j)
  	 elseif gb[i][j-b]==-1 and gb[i][j-b]!=sword.y then
  	 	gb[i][j-b]=entity+101
  	 	gb[i][j]=-1
-			
+
  	 	if b==1 then
  	 		direction=north
  	 	elseif b==-1 then
  	 		direction=south
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
- 	 
+
  	 elseif b==(0/0) and gb[i][j+1]==-1 then
 					gb[i][j+1]=entity+101
  	 		gb[i][j]=-1
@@ -1820,7 +1820,7 @@ function titleupdate()
 end
 
 function gameupdate()
-	
+
 	if dialoguetf then
 		update_dialogue()
 	else
@@ -1830,7 +1830,7 @@ function gameupdate()
 			wait(10)
 			reloadroom()
 		end
-		
+
 		if pturn and not(checkdeath(gb)) then
 			playermovement()
 		elseif not checkdeath(gb) then
@@ -2021,7 +2021,7 @@ function gamedraw()
 		rectfill(0,0,20,4,9)
 		spr(3,0,-1)
 		print("x"..player.arrows,10,0,7)
-		
+
 	if btn(5) then
 		print("x",40,40,7)
 	end
