@@ -855,6 +855,9 @@ function playeranimate(rotateaf,sign)
 					elseif gb[i][j] < 30 then
 						spr(60+gb[i][j]%10, i*8-8, j*8-8)
 						spr(48,(i-1)*8,(j-1)*8)
+					elseif gb[i][j]<40 then
+						spr(60+gb[i][j]%10, i*8-8, j*8-8)
+				  spr(36,(i-1)*8,(j-1)*8)
 					elseif gb[i][j] < 50 then
 						spr(179,(i-1)*8,(j-1)*8)
 					end
