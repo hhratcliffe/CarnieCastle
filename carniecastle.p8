@@ -277,37 +277,37 @@ gameboard={
 		{--room2
 		"210,210,210,210,210,210,210,210,718,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,210,nil,nil,nil,nil,nil,nil,031,nil,210,nil,nil,210",
-		"210,nil,nil,210,030,210,210,210,210,210,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"713,nil,nil,nil,nil,210,nil,nil,nil,nil,210,nil,nil,nil,nil,711",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,033,210,nil,nil,210",
-		"210,nil,nil,210,nil,032,nil,nil,nil,nil,nil,nil,210,nil,nil,210",
-		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
+		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,031,nil,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,030,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"713,nil,nil,nil,210,210,nil,nil,nil,nil,210,210,nil,nil,nil,711",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,033,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,nil,032,nil,nil,nil,nil,nil,nil,nil,210,nil,210",
+		"210,nil,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,715,210,210,210,210,210,210,210"
 		},
 	 	{--room3
 		"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
-		"210,nil,021,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,032,nil,712",
-		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+		"210,nil,210,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
+		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
 	  },
 	  {--room4
@@ -1460,7 +1460,7 @@ function ai(i, j)
 			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
@@ -1490,7 +1490,7 @@ function ai(i, j)
 			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
@@ -1521,7 +1521,7 @@ function ai(i, j)
 			elseif(yoff!=0) then
 				c = yoff/abs(yoff)
 				spot = gb[i][j+c]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[i][j+c] < 500) then
@@ -1556,7 +1556,7 @@ function ai(i, j)
 				end
 				--print("c= "..c)
 				spot = gb[i][j+c]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[c][j+c] < 500) then
