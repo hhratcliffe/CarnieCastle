@@ -810,7 +810,7 @@ function arrowshoot(i, j, direction)
 			--print("entity: "..entity)
 			--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")")
 			--print("proj: ("..x-8 .."," .. y-8 ..")")
-			if flr(entity)>=10 and flr(entity)<100 then
+			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
 			end
@@ -1242,7 +1242,6 @@ end
 
 function reloadroom()
  poke(0x5f40,0)
- spawncount=nil
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -1585,24 +1584,25 @@ function ai(i, j)
 		enemydeath = false
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
-
- 	--if spawncount hasnt started, set it to 0
- 	if spawncount==nil then
- 		spawncount=1
- 	else
- 		spawncount+=1
- 	end
-
- 		if spawncount==9 then
+ 	
+ 	--40 to 49
+ 	--on 49, spawn new clowns
+ 	--reset to 40
+ 	--on 48,flash colors
+		 	
+		--adds 1 to entity code
+		gb[i][j]=entity+1
+		--if entity=48, signal spawning
+ 	if entity%10==8 then
  		for g=1,6 do
  			for h=179,182 do
  				spr(h,(i-1)*8,(j-1)*8)
  				wait(1)
  			end
  		end
- 	elseif	spawncount==10 then
- 		spawncount=0
-
+ 	--if entity=49, spawn, reset entity to 40
+ 	elseif	entity%10==9 then
+ 		gb[i][j]=40
  		for l=i-1,i+1 do
  			for k=j-1,j+1 do
  				if gb[l][k]==-1 and (l!=sword.x or k!=sword.y) then
@@ -1613,28 +1613,37 @@ function ai(i, j)
  			end
  		end
  	end
-
+ 	
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
- 	 	gb[i-a][j]=entity+100
+ 	 	gb[i-a][j]=entity+101
  	 	gb[i][j]=-1
-
+ 	 	
  	 	if a==1 then
  	 		direction=west
  	 	elseif a==-1 then
  	 		direction=east
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
- 	 elseif gb[i][j-b]==-1 then
- 	 	gb[i][j-b]=entity+100
+ 	 elseif gb[i][j-b]==-1 and gb[i][j-b]!=sword.y then
+ 	 	gb[i][j-b]=entity+101
  	 	gb[i][j]=-1
-
+			
  	 	if b==1 then
  	 		direction=north
  	 	elseif b==-1 then
  	 		direction=south
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
+ 	 
+ 	 elseif b==(0/0) and gb[i][j+1]==-1 then
+					gb[i][j+1]=entity+101
+ 	 		gb[i][j]=-1
+ 	 		animation(clowncarmove, standarddelay, i, j,south, death)
+ 	 elseif a==(0/0) and gb[i+1][j]==-1 then
+					gb[i+1][j]=entity+101
+ 	 		gb[i][j]=-1
+ 	 	animation(clowncarmove, standarddelay, i, j,east, death)
  	 end
 		end
 	else
