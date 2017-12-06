@@ -33,7 +33,7 @@ afterenemywallcount = 0
 --variable used to simulate turn based movement
 pturn=true
 
-initialfloor=2
+initialfloor=1
 initialroom=1
 initialx=9
 initialy=3
@@ -617,7 +617,7 @@ dialogue={
 	misc={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
-		"press s¿to fire an arrow\nin the direction you are\nfacing.",
+		"press sï¿½to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
 		"\"its rude to shoot a man\nwhile he is talking\""
 	},
@@ -655,7 +655,7 @@ clowncarmove={179,179,179,179,179,179,179,179}
 --written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
 function spra(angle,n,x,y,w,h,flip_x,flip_y)
  w=w*8
- h=h*8 
+ h=h*8
  local diag,w,h=flr(sqrt(w*w+h*h))/2,w/2,h/2
  flip_x,flip_y=flip_x and -1 or 1,flip_y and -1 or 1
  local cosa,sina,nx,ny=cos(angle),sin(angle),n%16*8,flr(n/16)*8
@@ -685,7 +685,7 @@ function playermovement()
 						elseif btn(3,1) then
 							break
 						end
-					
+
 					if btn(5) then
 						--sword turning
 						if btn(0) then
@@ -835,7 +835,7 @@ function arrowshoot(i, j, direction)
 			load_dialogue(dialogue.misc,4,4)
 			return
 		end
-		
+
 		if direction == 0 then
 			a = 0
 			b = -1
@@ -872,11 +872,11 @@ function arrowshoot(i, j, direction)
 				return
 			end
 			--floor
-			
+
 			spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
 			--entity
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
-			
+
 			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
@@ -943,7 +943,7 @@ function playeranimate(rotateaf,sign)
 
     elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-				
+
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)
@@ -1000,7 +1000,7 @@ function screentransition(prevfloor,prevroom,nextroom)
 		elseif currentroom==8 or currentroom==9 then
 		 	load_dialogue(dialogue.enemies,12,14)
 		end
-	end	
+	end
 end
 
 --checks current room for enemies
@@ -2028,7 +2028,7 @@ function gamedraw()
 			print("x"..player.arrows,10,0,7)
 		end
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
-	
+
 	--draws any dialogue to screen
 	if dialoguetf then
 		draw_dialogue()
@@ -2056,7 +2056,7 @@ function drawfloor(i,j,a,b)
 	if b==nil then
 		b=8
 	end
-	if currentfloor==1 then 
+	if currentfloor==1 then
 				spr(floor[i][j], i*8-a, j*8-b)
 			elseif currentfloor==2 then
 				spr(29, i*8-a, j*8-b)
@@ -2066,7 +2066,7 @@ function drawfloor(i,j,a,b)
 end
 
 function drawwall(i,j)
-	if currentfloor==1 then 
+	if currentfloor==1 then
 					spr(10, i*8-8, j*8-8)
 				elseif currentfloor==2 then
 					spr(10, i*8-8, j*8-8)
@@ -2402,4 +2402,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
