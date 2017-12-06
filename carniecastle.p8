@@ -531,14 +531,12 @@ dialogue={
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
-	--put other dialogue options in this table
 	doors={
 		"\"i don't need to go back\nthere...\"",
 		"\"i need a key to open\nthis door.\"",
 		"\"i shouldn't leave any\ncarnies alive.\"",
-		"\"it looks like i need\nanother key\""
+		"\"it looks like i need\nanother key.\""
 	},
-
 	enemies={
 		--lesserclown intro
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
@@ -547,14 +545,22 @@ dialogue={
 		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\"",
 		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
 		"each jugglers line of sight\nis shown by the white\narrow on their body.",
-		--firebreather intro
-		"\"phew, its getting hot in\nhere. must be those\nfirebreathers up ahead.\"",
-		"firebreathers leave a trail\nof fire behind them as\nthey move across a room.",
-		"they move in a straight\nline, turning to the right\nwhen they hit an object.",
-		"a firebreathers current\ndirection is shown by the\nwhite line on its body.",
+		--firestarters intro
+		"\"those people setting fires\nlook familiar...oh no!\nthey're my families\"",
+		"\"servants! they must be\nunder the carnies control.\ni better not hurt them.\"",
+		"firestarters leave a trail\nof fire behind them as\nthey move across a room",
+		"in a straight line, turning\nright when they hit an\nobstacle.",
+		"a firestarters current\ndirection is shown by the\nwhite line on its body.",
+		"firestarters cannot be\nkilled, but do not stop\nyou from leaving rooms.",
 		--clown car
 		"\"a clown car! i better\ndestory it before a bunch\nof clowns get out.\"",
-		"clown cars will run from\nyou and spawn lesser\nclowns every 10 turns."
+		"clown cars will run from\nyou if you get too close and\nspawn lesser clowns every 10 turns.",
+		"the clown cars color scheme will\nflash the turn before spawning\na set of lesser clowns."
+	},
+	misc={
+		--arrow explanation
+		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
+		"hold x and press � to fire\nan arrow in the direction\nyou are facing."
 	}
 }
 
@@ -651,9 +657,9 @@ function playermovement()
 							xmove=0
 							ymove=1
 						end
-						if flr(gb[i+xmove][j+ymove]/100)!=2 and gb[i+xmove][j+ymove]!=201 then --201 = blocks movement into doors. temporary
+						if flr(gb[i+xmove][j+ymove]/100)!=2 then
 								--move player 1 space
-							if gb[i+xmove][j+ymove]!=-1 and (gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) then
+							if gb[i+xmove][j+ymove]!=-1 and ((gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) or (gb[i+xmove][j+ymove]>=400 and gb[i+xmove][j+ymove]<500)) then
 									gb[i][j]=-1
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
 								if not checkforenemies() then
@@ -685,9 +691,7 @@ function playermovement()
 										player.savedy=player.y
 										player.saveddirect=player.direct
 										player.savedarrows=player.arrows
-										--currentroom?
-										
-										
+
 										return
 								else
 									--plays dialogue if player tries to go through a door
@@ -725,6 +729,10 @@ function playermovement()
 								 sfx(62)
 									flags[currentfloor][currentroom].key-=1
 								elseif gb[i+xmove][j+ymove]==510 then --picking up arrows
+									if arrowdflag==nil then
+										load_dialogue(dialogue.misc,1,2)
+										arrowdflag=true
+									end
 									player.arrows+=1
 									flags[currentfloor][currentroom].arrow-=1
 								end
@@ -978,7 +986,7 @@ function sworddirection()
 	--checks if enemy is on the sword after the sword has moved
 	for i=1,16 do
 		for j=1,16 do
-			if gb[i][j]!=-1 and (gb[i][j]>=10 and gb[i][j]<100) then
+			if gb[i][j]!=-1 and gb[i][j]>=10 and gb[i][j]<100 and not (gb[i][j]>=30 and gb[i][j]<40) then
 				if i==sword.x and j==sword.y then
 					sfx(63)
 					gb[i][j]=-1
@@ -1082,7 +1090,7 @@ function inchazards()
 			ent = gb[i][j]
 				if ent<500 and ent >399 and rnd(20) < 1 then
 					gb[i][j] = 10*flr(ent/10) + flr(rnd(5))
-				
+
 					spr(floor[i][j], i*8-8, j*8-8)
 					spr(41+gb[i][j]%10)
 				end
@@ -1091,7 +1099,7 @@ function inchazards()
 end
 
 function animation(a, delay, i, j, direction, enemydeath)
-	
+
 	--a is a list of frames for animations
 	--delay is how many frames to wait for each frame
 	--i, j are the x,y coordinates where the animation starts
@@ -1358,27 +1366,27 @@ end
 function firestarter_action(i, j)
 	entity = gb[i][j]
 	direction = entity%10
-		
+
 	if(direction == north) then
 		a = 0
 		b = -1
-	
+
 	elseif direction == south then
 		a = 0
 		b = 1
-	
+
 	elseif direction == east then
 		a = 1
 		b = 0
-		
+
 	else
 		a = -1
 		b = 0
-	end	
-		
+	end
+
 	move = gb[i+a][j+b] < 1 or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
-	fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399) 
-	
+	fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
+
 	if(move) then
 		--set fire
 		gb[i][j] = 410 + flr(rnd(5))
@@ -1389,7 +1397,7 @@ function firestarter_action(i, j)
 		if(not(fdeath)) then
 			gb[i+a][j+b] = 10*flr(entity/10)+direction+100
 		end
-		
+
 	else
 		if direction == north then
 			direction = east
@@ -1398,18 +1406,18 @@ function firestarter_action(i, j)
 		elseif direction == south then
 			direction = west
 		else
-			direction = north	
+			direction = north
 		end
-	gb[i][j] = 10*flr(entity/10)+direction+100		
+	gb[i][j] = 10*flr(entity/10)+direction+100
 	end
-	
+
 end
 
 function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
 	yoff = player.y - j
-	
+
 	standarddelay = 1
 
 	if(checkdeath(gb) or entity == 0 or entity == -1 or entity > 200) then
@@ -1428,11 +1436,11 @@ function ai(i, j)
 				lclownvertical(xoff, yoff, i, j)
 			end
 		end
-	
-	--firestarter	
+
+	--firestarter
 	elseif(flr(entity/10) == 3) then
 		firestarter_action(i, j)
-	
+
 	--juggler
 	elseif (flr(entity/10) ==2) then
 		death = false
@@ -1566,20 +1574,20 @@ function ai(i, j)
 			end
 		end
 		--don't forget to add 100
-	
+
 	--clown car
 	elseif flr(entity/10)==4 then
 		enemydeath = false
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
- 	
+
  	--if spawncount hasnt started, set it to 0
  	if spawncount==nil then
  		spawncount=1
  	else
  		spawncount+=1
  	end
- 	
+
  		if spawncount==9 then
  		for g=1,6 do
  			for h=179,182 do
@@ -1589,7 +1597,7 @@ function ai(i, j)
  		end
  	elseif	spawncount==10 then
  		spawncount=0
- 		
+
  		for l=i-1,i+1 do
  			for k=j-1,j+1 do
  				if gb[l][k]==-1 and (l!=sword.x or k!=sword.y) then
@@ -1600,12 +1608,12 @@ function ai(i, j)
  			end
  		end
  	end
- 	
+
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
  	 	gb[i-a][j]=entity+100
  	 	gb[i][j]=-1
- 	 	
+
  	 	if a==1 then
  	 		direction=west
  	 	elseif a==-1 then
@@ -1615,7 +1623,7 @@ function ai(i, j)
  	 elseif gb[i][j-b]==-1 then
  	 	gb[i][j-b]=entity+100
  	 	gb[i][j]=-1
- 	 	
+
  	 	if b==1 then
  	 		direction=north
  	 	elseif b==-1 then
@@ -1952,11 +1960,11 @@ function gamedraw()
 				if flr((gb[i][j]-700)/10)==1 then
 					spr(11, i*8-8, j*8-8)
 				end
-				
+
 			--hazards
 			elseif gb[i][j] > 399 and gb[i][j] <500 then
 				if(flr((gb[i][j]-400)/10) == 1) then
-					spr(41+gb[i][j]%10,i*8-8, j*8-8) 
+					spr(41+gb[i][j]%10,i*8-8, j*8-8)
 				end
 
 				--stairway
@@ -1980,8 +1988,8 @@ function gamedraw()
 		--[[puts arrow counter on screen
 		spr(3,105,0-1)
 		print("x"..player.arrows,115,0,7)
-		]]	
-			
+		]]
+
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
 	--draws any dialogue to screen
