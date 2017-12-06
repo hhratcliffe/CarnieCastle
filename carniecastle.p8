@@ -35,9 +35,9 @@ pturn=true
 
 initialfloor=2
 initialroom=1
-initialx=9
-initialy=3
-initialdirection=0.25
+initialx=15
+initialy=15
+initialdirection=0
 --directions:
 --left:0.25
 --rigth:0.75
@@ -277,55 +277,55 @@ gameboard={
 		{--room2
 		"210,210,210,210,210,210,210,210,718,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,210,031,nil,nil,nil,nil,nil,nil,033,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"713,nil,nil,nil,nil,210,nil,nil,nil,nil,210,nil,nil,nil,nil,711",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,030,nil,nil,nil,nil,nil,nil,032,210,nil,nil,210",
-		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
+		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,031,nil,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,030,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"713,nil,nil,nil,210,210,nil,nil,nil,nil,210,210,nil,nil,nil,711",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,033,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,nil,032,nil,nil,nil,nil,nil,nil,nil,210,nil,210",
+		"210,nil,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,715,210,210,210,210,210,210,210"
 		},
 	 	{--room3
 		"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+		"210,nil,210,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
+		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
 	  },
 	  {--room4
 		"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"715,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,032,022,210,210,210,210,210,210",
+		"210,210,nil,nil,210,020,020,020,020,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"715,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,nil,nil,210,023,023,023,023,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,031,022,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 	  },
 	  {--room5
@@ -366,15 +366,15 @@ gameboard={
 		},
 		{--room7
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"718,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,210,nil,nil,nil,nil,nil,nil,031,nil,nil,210,210,210",
+		"210,nil,nil,210,nil,210,210,210,210,210,210,210,nil,210,210,210",
+		"210,nil,nil,210,nil,210,010,010,010,010,010,210,nil,210,210,210",
+		"210,nil,nil,210,nil,210,010,010,010,010,010,nil,nil,210,210,210",
+		"210,nil,nil,210,030,210,010,010,010,010,010,210,033,210,210,210",
+		"718,nil,nil,nil,nil,210,210,210,210,210,210,210,nil,210,210,210",
+		"210,nil,nil,210,nil,nil,nil,nil,032,nil,nil,nil,nil,210,210,210",
+		"210,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -471,7 +471,7 @@ flags={
 	},
 	{--floor2
 		{--room1
-			key=1,
+			key=0,
 			tutorial=1,
 			arrow=0
 		},
@@ -563,7 +563,7 @@ dialogue={
 		"hold x and press � to fire\nan arrow in the direction\nyou are facing."
 	},
 	cl_speech={
-	
+
 	}
 }
 
@@ -622,7 +622,7 @@ function playermovement()
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-	
+
 					if btn(5) then
 						--shoot arrow
 						if btn(2) and player.arrows>0 then
@@ -1400,7 +1400,7 @@ function firestarter_action(i, j)
 	end
 
 	move = gb[i+a][j+b] < 1 or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
-	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399) 
+	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
 	fdeath = false
 	if(move) then
 		--set fire
@@ -1473,7 +1473,7 @@ function ai(i, j)
 			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
@@ -1503,7 +1503,7 @@ function ai(i, j)
 			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
@@ -1534,7 +1534,7 @@ function ai(i, j)
 			elseif(yoff!=0) then
 				c = yoff/abs(yoff)
 				spot = gb[i][j+c]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[i][j+c] < 500) then
@@ -1569,7 +1569,7 @@ function ai(i, j)
 				end
 				--print("c= "..c)
 				spot = gb[i][j+c]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[c][j+c] < 500) then
@@ -1595,12 +1595,12 @@ function ai(i, j)
 		enemydeath = false
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
- 	
+
  	--40 to 49
  	--on 49, spawn new clowns
  	--reset to 40
  	--on 48,flash colors
-		 	
+
 		--adds 1 to entity code
 		gb[i][j]=entity+1
 		--if entity=48, signal spawning
@@ -1624,12 +1624,12 @@ function ai(i, j)
  			end
  		end
  	end
- 	
+
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
  	 	gb[i-a][j]=entity+101
  	 	gb[i][j]=-1
- 	 	
+
  	 	if a==1 then
  	 		direction=west
  	 	elseif a==-1 then
@@ -1639,14 +1639,14 @@ function ai(i, j)
  	 elseif gb[i][j-b]==-1 and gb[i][j-b]!=sword.y then
  	 	gb[i][j-b]=entity+101
  	 	gb[i][j]=-1
-			
+
  	 	if b==1 then
  	 		direction=north
  	 	elseif b==-1 then
  	 		direction=south
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
- 	 
+
  	 elseif b==(0/0) and gb[i][j+1]==-1 then
 					gb[i][j+1]=entity+101
  	 		gb[i][j]=-1
@@ -1820,7 +1820,7 @@ function titleupdate()
 end
 
 function gameupdate()
-	
+
 	if dialoguetf then
 		update_dialogue()
 	else
@@ -1830,7 +1830,7 @@ function gameupdate()
 			wait(10)
 			reloadroom()
 		end
-		
+
 		if pturn and not(checkdeath(gb)) then
 			playermovement()
 		elseif not checkdeath(gb) then
@@ -2021,7 +2021,7 @@ function gamedraw()
 		rectfill(0,0,20,4,9)
 		spr(3,0,-1)
 		print("x"..player.arrows,10,0,7)
-		
+
 	if btn(5) then
 		print("x",40,40,7)
 	end
@@ -2384,4 +2384,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
