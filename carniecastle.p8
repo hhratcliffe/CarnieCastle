@@ -346,23 +346,23 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
-		{--room6
-		"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,715",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+		{--room 6
+			"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	  "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+ 	 "210,210,031,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	 "210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	 "210,210,031,nil,nil,nil,010,nil,010,nil,nil,nil,nil,nil,nil,210",
+ 	 "210,210,nil,nil,210,210,210,nil,210,nil,210,nil,210,nil,nil,210",
+ 	 "210,210,031,nil,nil,nil,nil,010,nil,nil,nil,010,nil,nil,nil,715",
+ 	 "210,210,nil,nil,210,nil,210,nil,210,nil,210,nil,210,nil,210,210",
+ 	 "210,210,210,020,nil,nil,210,nil,210,nil,nil,nil,210,020,210,210",
+ 	 "210,210,210,nil,210,210,210,210,210,210,210,210,210,nil,210,210",
+ 	 "210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
 		{--room7
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -889,6 +889,11 @@ function playeranimate(rotateaf,sign)
 
     elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
+				
+				elseif gb[i][j] > 399 and gb[i][j] <500 then
+					if(flr((gb[i][j]-400)/10) == 1) then
+						spr(41+gb[i][j]%10,i*8-8, j*8-8)
+					end
 
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
@@ -1943,11 +1948,9 @@ function gamedraw()
 		cls()
 		pal()
 
-		print("thanks for playing!",25,40,7)
-		print("future features:",30,50,7)
-		print("more floors and rooms\nmore enemy types\nharder puzzles\nitems\n",30,60,7)
-		print("press z to return to title screen",20,120,7)
-
+		print("you got the deed and\nreclaimed your castle!",25,40,7)
+		print("thanks for playing!",25,60,7)
+		print("created by:",25,70,7)
 		if btnp(4) then
 			win=false
 			titleinit()
@@ -2022,12 +2025,8 @@ function gamedraw()
 		spr(3,0,-1)
 		print("x"..player.arrows,10,0,7)
 
-	if btn(5) then
-		print("x",40,40,7)
-	end
-
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
-
+	
 	--draws any dialogue to screen
 	if dialoguetf then
 		draw_dialogue()
@@ -2384,3 +2383,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
