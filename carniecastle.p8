@@ -34,10 +34,10 @@ afterenemywallcount = 0
 --variable used to simulate turn based movement
 pturn=true
 
-initialfloor=4
+initialfloor=1
 initialroom=1
-initialx=5
-initialy=2
+initialx=9
+initialy=3
 initialdirection=0.50
 --directions:
 --left:0.25
@@ -357,7 +357,7 @@ gameboard={
  	 "210,210,nil,nil,210,210,210,nil,210,nil,210,nil,210,nil,nil,210",
  	 "210,210,031,nil,nil,nil,nil,010,nil,nil,nil,010,nil,nil,nil,715",
  	 "210,210,nil,nil,210,nil,210,nil,210,nil,210,nil,210,nil,210,210",
- 	 "210,210,210,020,nil,nil,210,nil,210,nil,nil,nil,210,020,210,210",
+ 	 "210,210,210,020,nil,nil,210,501,210,nil,nil,nil,210,020,210,210",
  	 "210,210,210,nil,210,210,210,210,210,210,210,210,210,nil,210,210",
  	 "210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210",
  	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -418,84 +418,6 @@ gameboard={
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
-		}
-	},
-	{--floor 3
-		{--room1
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-		},
-		{--room2
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-		},
-		{--room3
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,219",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-		}
-	},
-	{--floor three
-	},
-	{--floor four
-		{--boss room
-		"210,210,210,210,715,210,210,210,210,210,210,210,210,210,210,210",
-		"210,nil,nil,033,nil,033,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,909,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210",
-		"210,nil,nil,nil,nil,030,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,030,nil,nil,210,nil,nil,210,nil,nil,nil,210,nil,210",
-		"210,nil,nil,210,nil,nil,210,nil,nil,210,nil,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		}
 	}
 }
@@ -575,7 +497,7 @@ flags={
 			arrow=0
 		},
 		{--room6
-			key=0,
+			key=1,
 			tutorial=0,
 			arrow=0
 		},
@@ -590,7 +512,7 @@ flags={
 			arrow=0
 		},
 		{--room9
-			key=0,
+			key=1,
 			tutorial=0,
 			arrow=0
 		}
@@ -640,25 +562,8 @@ dialogue={
 	misc={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
-		"press s¿to fire an arrow\nin the direction you are\nfacing.",
+		"press s�to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
-	},
-	boss = {
-		{
-			""
-		},
-		{
-			""
-		},
-		{
-			""
-		},
-		{
-			""
-		},
-		{
-			"test"
-		}
 	}
 }
 
@@ -691,7 +596,7 @@ clowncarmove={179,179,179,179,179,179,179,179}
 --written by mimick on https://www.lexaloffle.com/bbs/?tid=2592
 function spra(angle,n,x,y,w,h,flip_x,flip_y)
  w=w*8
- h=h*8 
+ h=h*8
  local diag,w,h=flr(sqrt(w*w+h*h))/2,w/2,h/2
  flip_x,flip_y=flip_x and -1 or 1,flip_y and -1 or 1
  local cosa,sina,nx,ny=cos(angle),sin(angle),n%16*8,flr(n/16)*8
@@ -721,7 +626,7 @@ function playermovement()
 						elseif btn(3,1) then
 							break
 						end
-					
+
 					if btn(5) then
 						--sword turning
 						if btn(0) then
@@ -808,8 +713,10 @@ function playermovement()
 										player.direct=0
 										gb[player.x][player.y]=0
 									elseif nextfloor==3 then
+										win=true
 										player.x=2
-										player.direct=.75
+										player.y=15
+										player.direct=0.75
 										gb[player.x][player.y]=0
 									end
 									--saves player x,y,direction for reloading rooms
@@ -871,7 +778,7 @@ function arrowshoot(i, j, direction)
 			load_dialogue(dialogue.misc,4,4)
 			return
 		end
-		
+
 		if direction == 0 then
 			a = 0
 			b = -1
@@ -908,11 +815,11 @@ function arrowshoot(i, j, direction)
 				return
 			end
 			--floor
-			
+
 			spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
 			--entity
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
-			
+
 			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
@@ -978,7 +885,7 @@ function playeranimate(rotateaf,sign)
 
     elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-				
+
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)
@@ -988,18 +895,18 @@ function playeranimate(rotateaf,sign)
 					spr(28, i*8-8, j*8-8)
 				elseif gb[i][j] == 510 then
 					spr(3,i*8-8,j*8-8)
-				
+
 				--bosses (just the one, really)
 				elseif gb[i][j] >899 and gb[i][j] < 1000 then
 					if gb[i][j] < 910 then
 						spr(105, i*8-8, j*8-8, 2, 2)
-					
+
 					elseif gb[i][j] == 910 then
 						spr(107, i*8-8, j*8-8, 2, 2)
 					end
-					
+
 				end
-				
+
 			end
 		end
 		--draw player
@@ -1046,7 +953,7 @@ function screentransition(prevfloor,prevroom,nextroom)
 		elseif currentroom==8 or currentroom==9 then
 		 	load_dialogue(dialogue.enemies,12,14)
 		end
-	end	
+	end
 end
 
 --checks current room for enemies
@@ -1759,7 +1666,7 @@ function bossai(i, j)
 			gb[i+1][j] = -1
 			gb[i][j+1] = -1
 			gb[i+1][j+1] = -1
-		end			
+		end
 	end
 end
 
@@ -2097,14 +2004,14 @@ function gamedraw()
 					spr(3,i*8-8, j*8-8)
 				elseif (gb[i][j] == 520) then
 					spr(109 ,i*8-8, j*8-8)
-			
+
 				--debug case
 				elseif gb[i][j] != -1 and gb[i][j] < 900 then
 					spr(0, i*8-8, j*8-8)
 				end
 			end
 		end
-		
+
 		--bosses (just the one, really)
 				if gb[14][7] >899 and gb[14][7] < 1000 then
 					if gb[14][7] < 910 then
@@ -2113,7 +2020,7 @@ function gamedraw()
 						spr(floor[14][8], 14*8-8, 8*8-8)
 						spr(floor[15][8], 15*8-8, 8*8-8)
 						spr(105, 14*8-8,7*8-8, 2, 2)
-					
+
 					elseif gb[14][7] == 910 then
 						spr(floor[14][7], 14*8-8, 7*8-8)
 						spr(floor[15][7], 15*8-8, 7*8-8)
@@ -2122,7 +2029,7 @@ function gamedraw()
 						spr(107, 14*8-8, 7*8-8, 2, 2)
 					end
 				end
-	
+
 		--puts arrow counter on screen
 		if arrowdflag!=nil then
 			rectfill(0,0,20,4,9)
@@ -2130,7 +2037,7 @@ function gamedraw()
 			print("x"..player.arrows,10,0,7)
 		end
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
-	
+
 	--draws any dialogue to screen
 	if dialoguetf then
 		draw_dialogue()
@@ -2158,7 +2065,7 @@ function drawfloor(i,j,a,b)
 	if b==nil then
 		b=8
 	end
-	if currentfloor==1 then 
+	if currentfloor==1 then
 				spr(floor[i][j], i*8-a, j*8-b)
 			elseif currentfloor==2 then
 				spr(29, i*8-a, j*8-b)
@@ -2168,7 +2075,7 @@ function drawfloor(i,j,a,b)
 end
 
 function drawwall(i,j)
-	if currentfloor==1 then 
+	if currentfloor==1 then
 					spr(10, i*8-8, j*8-8)
 				elseif currentfloor==2 then
 					spr(10, i*8-8, j*8-8)
@@ -2504,4 +2411,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
