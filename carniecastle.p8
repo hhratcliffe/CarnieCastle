@@ -520,7 +520,7 @@ flags={
 --dialogue
 dialoguetf=true --boolean variable for dialogue
 dialogue={
-	--27 characters currently fit on one line.
+	--27 characters (including spaces) currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
@@ -531,7 +531,7 @@ dialogue={
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
-	doors={
+	doors={ --dialogue for interacting with doors
 		"\"i don't need to go back\nthere...\"",
 		"\"i need a key to open\nthis door.\"",
 		"\"i shouldn't leave any\ncarnies alive.\"",
@@ -561,6 +561,9 @@ dialogue={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
 		"hold x and press � to fire\nan arrow in the direction\nyou are facing."
+	},
+	cl_speech={
+	
 	}
 }
 
@@ -619,27 +622,30 @@ function playermovement()
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-					--shooting arrows
-					if btn(5) and btn(2) and player.arrows>0 then
-						arrowshoot(player.x,player.y,player.direct)
-						pturn=false
-						break
-					elseif btn(5) and btn(2) then
-						break
-					end
-					--sword turning
-					if btn(5) and btn(0) then
-						playeranimate(player.direct+.125,1)
-						pturn=false
-						sworddirection()
-						break
-					end
-					--sword turning
-					if btn(5) and btn(1) then
-						playeranimate(player.direct-.125,-1)
-						pturn=false
-						sworddirection()
-						break
+	
+					if btn(5) then
+						--shoot arrow
+						if btn(2) and player.arrows>0 then
+							arrowshoot(player.x,player.y,player.direct)
+							pturn=false
+							break
+						elseif btn(2) then
+							break
+						end
+						--sword turning
+						if btn(0) then
+							playeranimate(player.direct+.125,1)
+							pturn=false
+							sworddirection()
+							break
+						end
+						--sword turning
+						if btn(1) then
+							playeranimate(player.direct-.125,-1)
+							pturn=false
+							sworddirection()
+							break
+						end
 					end
 
 					--cardinal player movement
@@ -700,6 +706,7 @@ function playermovement()
 									pturn=true
 									return
 								end
+							--interacting with key doors
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
 								if allkeyscollected() then
 									nextfloor=flr((gb[i+xmove][j+ymove]-800)/10)
@@ -714,7 +721,7 @@ function playermovement()
 										player.direct=.75
 										gb[player.x][player.y]=0
 									end
-									--saves player x and y for reboot
+									--saves player x,y,direction for reloading rooms
 									player.savedx=player.x
 									player.savedy=player.y
 									player.saveddirect=player.direct
@@ -725,9 +732,11 @@ function playermovement()
 									return
 								end
 							else
+								--picking up keys
 								if gb[i+xmove][j+ymove]==501 then --picking up keys
 								 sfx(62)
 									flags[currentfloor][currentroom].key-=1
+								--picking up arrows
 								elseif gb[i+xmove][j+ymove]==510 then --picking up arrows
 									if arrowdflag==nil then
 										load_dialogue(dialogue.misc,1,2)
@@ -948,7 +957,9 @@ function allkeyscollected()
 	end
 	return true
 end
---need to optimize
+
+--determines direction of sword based on sprite rotatin
+--sd=sword direction
 function sworddirection()
 	sd=player.direct*8
 
@@ -980,7 +991,7 @@ function sworddirection()
 		sword.x=player.x+1
 		sword.y=player.y-1
 	end
-	if sd==0 or player.direct>=1 or player.direct<=-1 then
+	if sd==0 or abs(sd)==8 then
 		player.direct = 0
 		sword.x=player.x
 		sword.y=player.y-1
@@ -1809,10 +1820,17 @@ function titleupdate()
 end
 
 function gameupdate()
-
+	
 	if dialoguetf then
 		update_dialogue()
 	else
+		--press tab to reset room
+		if btnp(4,1) then
+			rectfill(0,0,128,128,0)
+			wait(10)
+			reloadroom()
+		end
+		
 		if pturn and not(checkdeath(gb)) then
 			playermovement()
 		elseif not checkdeath(gb) then
@@ -1999,10 +2017,14 @@ function gamedraw()
 				end
 			end
 		end
-		--[[puts arrow counter on screen
-		spr(3,105,0-1)
-		print("x"..player.arrows,115,0,7)
-		]]
+		--puts arrow counter on screen
+		rectfill(0,0,20,4,9)
+		spr(3,0,-1)
+		print("x"..player.arrows,10,0,7)
+		
+	if btn(5) then
+		print("x",40,40,7)
+	end
 
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
@@ -2069,17 +2091,17 @@ end
 __gfx__
 00000000000005600000000000000000000500000000000000000000000d0000cccccccc666656666656666600444400600000000000000033333b3356665666
 00000000000005600000000000500007005550000000000000000000000dd000cccccccc6666566655555555044444405600000000000000333333b356665666
-00700700000005600000000005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000003b3333b356665666
-00077000000005600000000055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000000000000b3333b3355555555
-0007700000000560000000000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600000000000333b333356665666
+00700700000005600050070005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000003b3333b356665666
+00077000000005600554400055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000000000000b3333b3355555555
+0007700000000560005007000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600000000000333b333356665666
 0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556000000000033b333b356665666
 00000000000005f0000000000000000000747000000000000000000007777770cccccccc6666566666666656444444446666666000000000333b333b56665666
 0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556000000003333333355555555
 00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
 000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
-000000000444444000000000700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
-000000000444444000000000070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
-0000000000444400000000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
+0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
+0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
+0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
 0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000000000000000000000000000
 0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000000000000
 00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000000000000000000000000000
