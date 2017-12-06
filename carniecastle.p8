@@ -520,7 +520,7 @@ flags={
 --dialogue
 dialoguetf=true --boolean variable for dialogue
 dialogue={
-	--27 characters currently fit on one line.
+	--27 characters (including spaces) currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
@@ -531,7 +531,7 @@ dialogue={
 		"touching enemies with your\nsword will kill them.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
 	},
-	doors={
+	doors={ --dialogue for interacting with doors
 		"\"i don't need to go back\nthere...\"",
 		"\"i need a key to open\nthis door.\"",
 		"\"i shouldn't leave any\ncarnies alive.\"",
@@ -561,6 +561,9 @@ dialogue={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
 		"hold x and press � to fire\nan arrow in the direction\nyou are facing."
+	},
+	cl_speech={
+	
 	}
 }
 
@@ -619,27 +622,30 @@ function playermovement()
 		for i=1,16 do --iterate through gb to find player
 			for j=1,16 do
 				if gb[i][j]==0 then
-					--shooting arrows
-					if btn(5) and btn(2) and player.arrows>0 then
-						arrowshoot(player.x,player.y,player.direct)
-						pturn=false
-						break
-					elseif btn(5) and btn(2) then
-						break
-					end
-					--sword turning
-					if btn(5) and btn(0) then
-						playeranimate(player.direct+.125,1)
-						pturn=false
-						sworddirection()
-						break
-					end
-					--sword turning
-					if btn(5) and btn(1) then
-						playeranimate(player.direct-.125,-1)
-						pturn=false
-						sworddirection()
-						break
+	
+					if btn(5) then
+						--shoot arrow
+						if btn(2) and player.arrows>0 then
+							arrowshoot(player.x,player.y,player.direct)
+							pturn=false
+							break
+						elseif btn(2) then
+							break
+						end
+						--sword turning
+						if btn(0) then
+							playeranimate(player.direct+.125,1)
+							pturn=false
+							sworddirection()
+							break
+						end
+						--sword turning
+						if btn(1) then
+							playeranimate(player.direct-.125,-1)
+							pturn=false
+							sworddirection()
+							break
+						end
 					end
 
 					--cardinal player movement
@@ -700,6 +706,7 @@ function playermovement()
 									pturn=true
 									return
 								end
+							--interacting with key doors
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
 								if allkeyscollected() then
 									nextfloor=flr((gb[i+xmove][j+ymove]-800)/10)
@@ -714,7 +721,7 @@ function playermovement()
 										player.direct=.75
 										gb[player.x][player.y]=0
 									end
-									--saves player x and y for reboot
+									--saves player x,y,direction for reloading rooms
 									player.savedx=player.x
 									player.savedy=player.y
 									player.saveddirect=player.direct
@@ -725,9 +732,11 @@ function playermovement()
 									return
 								end
 							else
+								--picking up keys
 								if gb[i+xmove][j+ymove]==501 then --picking up keys
 								 sfx(62)
 									flags[currentfloor][currentroom].key-=1
+								--picking up arrows
 								elseif gb[i+xmove][j+ymove]==510 then --picking up arrows
 									if arrowdflag==nil then
 										load_dialogue(dialogue.misc,1,2)
@@ -810,7 +819,7 @@ function arrowshoot(i, j, direction)
 			--print("entity: "..entity)
 			--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")")
 			--print("proj: ("..x-8 .."," .. y-8 ..")")
-			if flr(entity)>=10 and flr(entity)<100 then
+			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
 			end
@@ -855,6 +864,9 @@ function playeranimate(rotateaf,sign)
 					elseif gb[i][j] < 30 then
 						spr(60+gb[i][j]%10, i*8-8, j*8-8)
 						spr(48,(i-1)*8,(j-1)*8)
+					elseif gb[i][j]<40 then
+						spr(60+gb[i][j]%10, i*8-8, j*8-8)
+				  spr(36,(i-1)*8,(j-1)*8)
 					elseif gb[i][j] < 50 then
 						spr(179,(i-1)*8,(j-1)*8)
 					end
@@ -945,7 +957,9 @@ function allkeyscollected()
 	end
 	return true
 end
---need to optimize
+
+--determines direction of sword based on sprite rotatin
+--sd=sword direction
 function sworddirection()
 	sd=player.direct*8
 
@@ -977,7 +991,7 @@ function sworddirection()
 		sword.x=player.x+1
 		sword.y=player.y-1
 	end
-	if sd==0 or player.direct>=1 or player.direct<=-1 then
+	if sd==0 or abs(sd)==8 then
 		player.direct = 0
 		sword.x=player.x
 		sword.y=player.y-1
@@ -1239,7 +1253,6 @@ end
 
 function reloadroom()
  poke(0x5f40,0)
- spawncount=nil
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -1582,24 +1595,25 @@ function ai(i, j)
 		enemydeath = false
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
-
- 	--if spawncount hasnt started, set it to 0
- 	if spawncount==nil then
- 		spawncount=1
- 	else
- 		spawncount+=1
- 	end
-
- 		if spawncount==9 then
+ 	
+ 	--40 to 49
+ 	--on 49, spawn new clowns
+ 	--reset to 40
+ 	--on 48,flash colors
+		 	
+		--adds 1 to entity code
+		gb[i][j]=entity+1
+		--if entity=48, signal spawning
+ 	if entity%10==8 then
  		for g=1,6 do
  			for h=179,182 do
  				spr(h,(i-1)*8,(j-1)*8)
  				wait(1)
  			end
  		end
- 	elseif	spawncount==10 then
- 		spawncount=0
-
+ 	--if entity=49, spawn, reset entity to 40
+ 	elseif	entity%10==9 then
+ 		gb[i][j]=40
  		for l=i-1,i+1 do
  			for k=j-1,j+1 do
  				if gb[l][k]==-1 and (l!=sword.x or k!=sword.y) then
@@ -1610,28 +1624,37 @@ function ai(i, j)
  			end
  		end
  	end
-
+ 	
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
- 	 	gb[i-a][j]=entity+100
+ 	 	gb[i-a][j]=entity+101
  	 	gb[i][j]=-1
-
+ 	 	
  	 	if a==1 then
  	 		direction=west
  	 	elseif a==-1 then
  	 		direction=east
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
- 	 elseif gb[i][j-b]==-1 then
- 	 	gb[i][j-b]=entity+100
+ 	 elseif gb[i][j-b]==-1 and gb[i][j-b]!=sword.y then
+ 	 	gb[i][j-b]=entity+101
  	 	gb[i][j]=-1
-
+			
  	 	if b==1 then
  	 		direction=north
  	 	elseif b==-1 then
  	 		direction=south
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
+ 	 
+ 	 elseif b==(0/0) and gb[i][j+1]==-1 then
+					gb[i][j+1]=entity+101
+ 	 		gb[i][j]=-1
+ 	 		animation(clowncarmove, standarddelay, i, j,south, death)
+ 	 elseif a==(0/0) and gb[i+1][j]==-1 then
+					gb[i+1][j]=entity+101
+ 	 		gb[i][j]=-1
+ 	 	animation(clowncarmove, standarddelay, i, j,east, death)
  	 end
 		end
 	else
@@ -1797,10 +1820,17 @@ function titleupdate()
 end
 
 function gameupdate()
-
+	
 	if dialoguetf then
 		update_dialogue()
 	else
+		--press tab to reset room
+		if btnp(4,1) then
+			rectfill(0,0,128,128,0)
+			wait(10)
+			reloadroom()
+		end
+		
 		if pturn and not(checkdeath(gb)) then
 			playermovement()
 		elseif not checkdeath(gb) then
@@ -1987,10 +2017,14 @@ function gamedraw()
 				end
 			end
 		end
-		--[[puts arrow counter on screen
-		spr(3,105,0-1)
-		print("x"..player.arrows,115,0,7)
-		]]
+		--puts arrow counter on screen
+		rectfill(0,0,20,4,9)
+		spr(3,0,-1)
+		print("x"..player.arrows,10,0,7)
+		
+	if btn(5) then
+		print("x",40,40,7)
+	end
 
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
@@ -2057,17 +2091,17 @@ end
 __gfx__
 00000000000005600000000000000000000500000000000000000000000d0000cccccccc666656666656666600444400600000000000000033333b3356665666
 00000000000005600000000000500007005550000000000000000000000dd000cccccccc6666566655555555044444405600000000000000333333b356665666
-00700700000005600000000005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000003b3333b356665666
-00077000000005600000000055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000000000000b3333b3355555555
-0007700000000560000000000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600000000000333b333356665666
+00700700000005600050070005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000000000003b3333b356665666
+00077000000005600554400055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000000000000b3333b3355555555
+0007700000000560005007000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600000000000333b333356665666
 0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556000000000033b333b356665666
 00000000000005f0000000000000000000747000000000000000000007777770cccccccc6666566666666656444444446666666000000000333b333b56665666
 0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556000000003333333355555555
 00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000000000000000000000000000
 000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000000000000
-000000000444444000000000700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
-000000000444444000000000070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
-0000000000444400000000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
+0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000000000000
+0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000000000000
+0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000000000000
 0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000000000000000000000000000
 0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000000000000
 00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000000000000000000000000000
