@@ -284,20 +284,20 @@ gameboard={
 		},
 	 	{--room3
 		"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,712",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,021,nil,nil,nil,nil,210,nil,210,210,210,210,210,210,210",
+		"210,nil,021,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
+		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+		"210,nil,021,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
 	  },
 	  {--room4
@@ -384,12 +384,12 @@ gameboard={
 		},
 		{--room9
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,210,210,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,040,nil,nil,210,210,210,210,210,210,210,210,210",
 		"210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210",
-		"210,210,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
 		"210,nil,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
 		"210,nil,210,210,210,nil,nil,210,nil,nil,nil,210,210,210,210,210",
 		"210,nil,210,nil,nil,nil,nil,031,nil,210,nil,210,210,210,210,210",
+		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,210,210",
 		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,718",
 		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,210",
 		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -793,8 +793,9 @@ function arrowshoot(i, j, direction)
 				return
 			end
 			--floor
+
 			drawfloor(flr(x/8),flr(y/8),0,0)
-			--entity to be killed
+			--entityflr(x/8)
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
 
 			--if entity is an enemy, kill that enemy
