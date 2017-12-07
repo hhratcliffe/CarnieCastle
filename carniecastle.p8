@@ -300,10 +300,10 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,021,nil,nil,nil,nil,210,nil,210,210,210,210,210,210,210",
+		"210,nil,021,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
 		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
-		"210,nil,210,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
-		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,021,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
@@ -403,12 +403,12 @@ gameboard={
 		},
 		{--room9
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,210,210,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,040,nil,nil,210,210,210,210,210,210,210,210,210",
 		"210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210",
-		"210,210,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
 		"210,nil,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
 		"210,nil,210,210,210,nil,nil,210,nil,nil,nil,210,210,210,210,210",
 		"210,nil,210,nil,nil,nil,nil,031,nil,210,nil,210,210,210,210,210",
+		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,210,210",
 		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,718",
 		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,210",
 		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -527,8 +527,8 @@ dialogue={
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
 		"use the arrow keys to move.",
-		"hold x and press\n ‹ or ‘ to turn.",
-		"Ã‹ turns you clockwise,\nand ‘ turns you\ncounterclockwise.",
+		"hold x and press\n ï¿½ or ï¿½ to turn.",
+		"Ã‹ turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"stuck? press \"tab\" to reset\nthe current room.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
@@ -2412,4 +2412,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
