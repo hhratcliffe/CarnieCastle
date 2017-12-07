@@ -784,7 +784,7 @@ function arrowshoot(i, j, direction)
 			return
 		end
 
-		--set
+		--set arrow direction
 		if direction == 0 then
 			a = 0
 			b = -1
@@ -831,7 +831,7 @@ function arrowshoot(i, j, direction)
 				return
 			end
 
-			--player
+			--drawing player
 			spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
 			--cover your tracks
@@ -1054,6 +1054,7 @@ function jugglershoot(i, j, direction)
 	a = 1
 	b = 1
 
+	--determine direction of juggler
 	if direction == north then
 		a = 0
 		b = -1
@@ -1144,7 +1145,6 @@ function animation(a, delay, i, j, direction, enemydeath)
 
 	--if skipping animations
 	if skipanim then
-		--print('??????')
 		return --then skip
 	end
 
@@ -1290,7 +1290,7 @@ function lclownhorizontal(xoff, yoff, i, j)
 			gb[i][j] = -1
 	 end
 
-		--animation
+		--animation for lesser clown moving horizontally
 		if a == -1 then
 			direction = west
 		elseif a == 1 then
@@ -1319,7 +1319,7 @@ function lclownvertical(xoff, yoff, i, j)
 			gb[i][j] = -1
  	end
 
- 	--animation
+ 	--animation for lesser clown moving vertically
  	if b == -1 then
  		direction = north
   elseif b == 1 then
@@ -1355,8 +1355,7 @@ function firestarter_action(i, j)
 	end
 
 	move = gb[i+a][j+b] < 1 or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
-	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
-	fdeath = false
+	fdeath = false --cannot die
 	if(move) then
 		--set fire
 		gb[i][j] = 414
@@ -1395,7 +1394,7 @@ function ai(i, j)
 		return
 	end
 
-	--lesser clown
+	--lesser clown ai
 	if(flr(entity/10) == 1) then
 
 		if (abs(yoff) >= abs(xoff)) then
@@ -1408,17 +1407,17 @@ function ai(i, j)
 			end
 		end
 
-	--firestarter
+	--firestarter ai
 	elseif(flr(entity/10) == 3) then
 		firestarter_action(i, j)
 
-	--juggler
+	--juggler ai
 	elseif (flr(entity/10) ==2) then
 		death = false
 		gb[i][j] += 100
 		direction = entity%10
 
-		--juggler north
+		--juggler facing north
 		if direction == north then
 			if(xoff==0 and yoff < 0) then
 				if los(i, j, direction) then
@@ -1448,7 +1447,7 @@ function ai(i, j)
 				end
 			end
 
-		--juggler south
+		--juggler facing south
 		elseif direction == south then
 			if(xoff==0 and yoff > 0) then
 				if los(i, j, direction) then
@@ -1478,7 +1477,7 @@ function ai(i, j)
 				end
 			end
 
-		--juggler east
+		--juggler facing east
 		elseif direction == east then
 			if(xoff>0 and yoff == 0) then
 				if los(i, j, direction) then
@@ -1508,7 +1507,7 @@ function ai(i, j)
 				end
 			end
 
-		--juggler west
+		--juggler facing west
 		elseif direction == west then
 			if(xoff<0 and yoff == 0) then
 				if los(i, j, direction) then
@@ -1546,7 +1545,7 @@ function ai(i, j)
 		end
 		--don't forget to add 100
 
-	--clown car
+	--clown car ai
 	elseif flr(entity/10)==4 then
 		enemydeath = false
  		a=xoff/abs(xoff)
@@ -1567,7 +1566,7 @@ function ai(i, j)
  					wait(1)
  				end
  			end
- 		--if entity=49, spawn, reset entity to 40
+ 		--if entity=49, spawn clowns, reset entity to 40
  		elseif	entity==49 then
  			gb[i][j]=40
  			for l=i-1,i+1 do
@@ -1618,6 +1617,9 @@ function ai(i, j)
 	end
 end
 
+--ai for boss (carne lord)
+--does not move, only says stuff and dies
+--drops castle deed on death
 function bossai(i, j)
 
 	ent = gb[i][j]
@@ -1671,8 +1673,8 @@ function bossai(i, j)
 	end
 end
 
+--iterates through gameboard to move enemies
 function enemymovement()
-
 	skipanim = false
 
 	for j = 1,16 do
@@ -1765,7 +1767,7 @@ function update_dialogue()
 		dialoguetf=false
 		return
 	end
-
+	--load next text block
 	if btnp(4) then
 		d_num+=1
 	end
