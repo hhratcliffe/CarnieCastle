@@ -552,14 +552,14 @@ dialogue={
 		"firestarters cannot be\nkilled, but do not stop\nyou from leaving rooms.",
 		"arrows won't hurt\nfirestarters, and are\nburned when shot at fire",
 		--clown car
-		"\"a clown car! i better\ndestory it before a bunch\nof clowns get out.\"",
-		"clown cars will run from\nyou if you get too close and\nspawn lesser clowns every 10 turns.",
-		"the clown cars color scheme will\nflash the turn before spawning\na set of lesser clowns."
+	"\"a clown car! i better\ndestroy it before a bunch\nof clowns get out.\"",
+		"clown cars run from you if\nyou get too close, spawning\nclowns every 10 turns.",
+		"the clown car's colors will\ncycle before spawning a\nset of clowns."
 	},
 	misc={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
-		"press sï¿½to fire an arrow\nin the direction you are\nfacing.",
+		"press s½to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
 	}
 }
@@ -573,7 +573,7 @@ player={
 	savedx=9,
 	savedy=3,
 	saveddirect=.25,
-	arrows=1,
+	arrows=0,
 	savedarrows=0
 }
 
@@ -743,7 +743,6 @@ function playermovement()
 										arrowdflag=true
 									end
 									player.arrows+=1
-									flags[currentfloor][currentroom].arrow-=1
 								--picking up deed to castle
 								elseif gb[i+xmove][j+ymove]==520 then
 									win=true
