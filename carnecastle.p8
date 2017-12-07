@@ -23,11 +23,11 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
-initialfloor=3
+initialfloor=1
 initialroom=1
-initialx=5
-initialy=2
-initialdirection=0.625
+initialx=9
+initialy=3
+initialdirection=0.25
 --directions:
 --left:0.25
 --rigth:0.75
@@ -1637,7 +1637,7 @@ function bossai(i, j)
 				load_dialogue({"carnie bandit lord: \"that\n sword... is it ...was it\n your father's?\""}, 1, 1)
 			end
 			gb[i][j] -= 1
-			
+
 			if die then
 			gb[i][j] = 910
 			drawfloor(i,j)
@@ -1654,7 +1654,7 @@ function bossai(i, j)
 			"freed servants: \"jon cluade\n- lord claude - has\nsaved us!\""
 			}
 			load_dialogue(end_dialogue, 1, 2)
-			
+
 			--restore room
 			for x = 1,16 do
 				for y = 1,16 do
@@ -1664,9 +1664,9 @@ function bossai(i, j)
 						gb[x][y] = -1
 					end
 				end
-			end			
-			end		
-		end	
+			end
+			end
+		end
 	end
 end
 
@@ -1988,8 +1988,8 @@ function gamedraw()
 			--freed servants are like walls, right?
 			elseif gb[i][j] == 213 then
 				spr(21, i*8-8, j*8-8)
-			
-			
+
+
 			--door things
 			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 				if flr((gb[i][j]-700)/10)==1 then
@@ -2426,4 +2426,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
