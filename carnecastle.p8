@@ -23,8 +23,8 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
-initialfloor=2
-initialroom=8
+initialfloor=1
+initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
@@ -408,6 +408,26 @@ gameboard={
 "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 "210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
 }
+	},
+	{--floor 3
+		{--boss room
+		"210,210,210,210,715,210,210,210,210,210,210,210,210,210,210,210",
+		"210,030,210,033,nil,033,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,nil,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,909,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210",
+		"210,nil,nil,nil,nil,030,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,030,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,030,032,nil,210,nil,nil,210,nil,nil,nil,210,nil,210",
+		"210,nil,nil,210,nil,nil,210,nil,nil,210,nil,nil,210,nil,nil,210",
+		"210,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+  }
 	}
 }
 
@@ -415,77 +435,83 @@ flags={
 	{--floor1
 		{--room1
 			key=1,
-			tutorial=1,
+			tutorial=1
 		},
 		{--room2
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room3
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room4
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room5
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room6
 			key=1,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room7
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room8
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--specialroom
 			key=0,
-			tutorial=0,
+			tutorial=0
 		}
 	},
 	{--floor2
 		{--room1
 			key=0,
-			tutorial=1,
+			tutorial=1
 		},
 		{--room2
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room3
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room4
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room5
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room6
-			key=0, --key here
-			tutorial=0,
+			key=1, --key here
+			tutorial=0
 		},
 		{--room7
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room8
 			key=0,
-			tutorial=0,
+			tutorial=0
 		},
 		{--room9
-			key=0, --key here
-			tutorial=0,
+			key=1, --key here
+			tutorial=0
+		}
+	},
+	{--floor3
+		{--boss room
+			key=0,
+			tutorial=0
 		}
 	}
 }
@@ -685,7 +711,8 @@ function playermovement()
 										player.direct=0
 										gb[player.x][player.y]=0
 									elseif nextfloor==3 then
-										win=true
+										floortransition(currentfloor,currentroom,nextfloor)
+										
 										player.x=2
 										player.y=15
 										player.direct=0.75
@@ -714,6 +741,9 @@ function playermovement()
 									end
 									player.arrows+=1
 									flags[currentfloor][currentroom].arrow-=1
+								--picking up deed to castle
+								elseif gb[i+xmove][j+ymove]==520 then
+									win=true
 								end
 							 gb[i+xmove][j+ymove]=0
 								gb[i][j]=-1
@@ -1619,23 +1649,22 @@ function bossai(i, j)
 		if(d < code) then
 			code -= 1
 			load_dialogue({"code: "..code},1,1)
-			if (code <= #(dialogue.boss)) then
+	--[[	if (code <= #(dialogue.boss)) then
 				--load_dialogue(dialog.boss[code])
-			end
+			end]]
 			gb[i][j] -= 1
 		elseif die then
 			gb[i][j] = 910
-			spr(floor[i][j], i*8-8, j*8-8)
-			spr(floor[i+1][j], i*8, j*8-8)
-			spr(floor[i][j+1], i*8-8, j*8)
-			spr(floor[i+1][j+1], i*8, j*8)
+			drawfloor(i,j)
+			drawfloor(i,j+1,8,0)
+			
 			spr(107, 14*8-8, 7*8-8, 2, 2)
 			spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 			wait(30)
 			gb[i][j] = 520
 			gb[i+1][j] = -1
 			gb[i][j+1] = -1
-			gb[i+1][j+1] = -1
+			gb[i+1][j+1] = -1	
 		end
 	end
 end
@@ -1987,17 +2016,17 @@ function gamedraw()
 		--bosses (just the one, really)
 				if gb[14][7] >899 and gb[14][7] < 1000 then
 					if gb[14][7] < 910 then
-						spr(floor[14][7], 14*8-8, 7*8-8)
-						spr(floor[15][7], 15*8-8, 7*8-8)
-						spr(floor[14][8], 14*8-8, 8*8-8)
-						spr(floor[15][8], 15*8-8, 8*8-8)
+						drawfloor(14,7)
+						drawfloor(15,7)
+						drawfloor(14,8)
+						drawfloor(15,8)
 						spr(105, 14*8-8,7*8-8, 2, 2)
 
 					elseif gb[14][7] == 910 then
-						spr(floor[14][7], 14*8-8, 7*8-8)
-						spr(floor[15][7], 15*8-8, 7*8-8)
-						spr(floor[14][8], 14*8-8, 8*8-8)
-						spr(floor[15][8], 15*8-8, 8*8-8)
+						drawfloor(14,7)
+						drawfloor(15,7)
+						drawfloor(14,8)
+						drawfloor(15,8)
 						spr(107, 14*8-8, 7*8-8, 2, 2)
 					end
 				end
@@ -2038,18 +2067,22 @@ function drawfloor(i,j,a,b)
 		b=8
 	end
 	if currentfloor==1 then
-				spr(floor[i][j], i*8-a, j*8-b)
-			elseif currentfloor==2 then
-				spr(29, i*8-a, j*8-b)
-			end
+		spr(floor[i][j], i*8-a, j*8-b)
+	elseif currentfloor==2 then
+		spr(29, i*8-a, j*8-b)
+	elseif currentfloor==3 then
+		spr(31, i*8-a, j*8-b)
+	end
 end
 
 function drawwall(i,j)
 	if currentfloor==1 then
-					spr(10, i*8-8, j*8-8)
-				elseif currentfloor==2 then
-					spr(10, i*8-8, j*8-8)
-				end
+		spr(10, i*8-8, j*8-8)
+	elseif currentfloor==2 then
+		spr(10, i*8-8, j*8-8)
+	elseif currentfloor==3 then
+		spr(15, i*8-8, j*8-8)
+	end
 end
 
 function los(i, j, direction)
@@ -2092,14 +2125,14 @@ __gfx__
 0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556001111111133b333b355522555
 00000000000005f0000000000000000000747000000000000000000007777770cccccccc66665666666666564444444466666660cccccc1c333b333b66666656
 0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556111111113333333355555555
-00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000333311110000000055555555
-000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00333311110000000059922995
-0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00333311110000000059922995
-0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00333311110000000052222225
-0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000111133330000000052222225
-0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000111133330000000059922995
-0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000111133330000000059922995
-00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000111133330000000055555555
+00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000333311110000000011111111
+000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00333311110000000011222211
+0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00333311110000000012222221
+0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00333311110000000012222221
+0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000111133330000000012222221
+0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000111133330000000012222221
+0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000111133330000000011222211
+00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000111133330000000011111111
 0000000000000000000000000000000000000a9a00000aaa00000a9a000000a00000000000000000000000000000000000000000000000000000000000000000
 000ee000000ee000000ee00000000000000ee989000eea89000ee98a000eeaaa0000000000000000000000000000000000000000000090000000000000000000
 00077000000770000007700000000000000770400007704000077040000779890000000000000000000000000000900000aa9900000990000000000000000000
