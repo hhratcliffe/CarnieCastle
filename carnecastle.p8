@@ -28,7 +28,7 @@ initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
---directions:
+--player directions:
 --left:0.25
 --rigth:0.75
 --up:0
@@ -527,8 +527,9 @@ dialogue={
 		"hold x and press\n ï¿½ or ï¿½ to turn.",
 		"Ã turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
+		"enemy animations too\ntedious? hold z to\nskip enemy animations.",
 		"stuck? press \"tab\" to reset\nthe current room.",
-		"plan your movements, and\nyou shall succeed.\ngood luck!"
+		"plan your movements and\nyou shall succeed.\ngood luck!"
 		},
 	doors={ --dialogue for interacting with doors
 		"\"i don't need to go back\nthere...\"",
@@ -2426,4 +2427,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
