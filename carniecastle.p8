@@ -20,25 +20,14 @@ east=1
 south=3
 west=2
 
-
---[[--debugging things
-playerenemycount = 0
-enemyenemycount = 0
-afterenemyenemycount = 0
-playerwallcount = 0
-enemywallcount = 0
-afterenemywallcount = 0
-
-]]
-
 --variable used to simulate turn based movement
 pturn=true
 
-initialfloor=1
+initialfloor=2
 initialroom=1
 initialx=9
 initialy=3
-initialdirection=0.50
+initialdirection=0.25
 --directions:
 --left:0.25
 --rigth:0.75
@@ -427,94 +416,76 @@ flags={
 		{--room1
 			key=1,
 			tutorial=1,
-			arrow=0
 		},
 		{--room2
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room3
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room4
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room5
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room6
 			key=1,
 			tutorial=0,
-			arrow=0
 		},
 		{--room7
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room8
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--specialroom
 			key=0,
 			tutorial=0,
-			arrow=1
 		}
 	},
 	{--floor2
 		{--room1
 			key=0,
 			tutorial=1,
-			arrow=0
 		},
 		{--room2
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room3
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room4
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room5
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room6
 			key=1,
 			tutorial=0,
-			arrow=0
 		},
 		{--room7
 			key=0,
 			tutorial=0,
-			arrow=1
 		},
 		{--room8
 			key=0,
 			tutorial=0,
-			arrow=0
 		},
 		{--room9
 			key=1,
 			tutorial=0,
-			arrow=0
 		}
 	}
 }
@@ -526,9 +497,9 @@ dialogue={
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
-		"use the arrow keys\n(ï¿½ï¿½ï¿½ï¿½) to move.",
-		"hold ï¿½ and press\nï¿½ or ï¿½ to turn.",
-		"ï¿½ turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
+		"use the arrow keys to move.",
+		"hold x and press\n � or � to turn.",
+		"Ë turns you clockwise,\nand � turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"stuck? press \"tab\" to reset\nthe current room.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
@@ -619,7 +590,7 @@ function playermovement()
 			for j=1,16 do
 				if gb[i][j]==0 then
 					--shoot arrow
-						if btn(3,1) and player.arrows>0 then
+						if btn(0,1) and player.arrows>0 then
 							arrowshoot(player.x,player.y,player.direct)
 							pturn=false
 							break
@@ -689,7 +660,7 @@ function playermovement()
 										gb[player.x][player.y]=0
 									end
 										--saves player x and y for reboot
-										player.savfedx=player.x
+										player.savedx=player.x
 										player.savedy=player.y
 										player.saveddirect=player.direct
 										player.savedarrows=player.arrows
@@ -752,9 +723,6 @@ function playermovement()
 							end
 
 						end
-						--if(xmove==1) then
-							--rightfix+=1
-						--end
 						pturn=false
 
 						sworddirection()
@@ -774,17 +742,19 @@ end
 --fires arrow from player
 --can only shoot up,down,left,right
 function arrowshoot(i, j, direction)
+		--if in boss room
 		if currentfloor==4 then
 			load_dialogue(dialogue.misc,4,4)
 			return
 		end
-
+		
+		--set
 		if direction == 0 then
 			a = 0
 			b = -1
 			j=player.y-1
 			sp=4
-		elseif direction ==.5 or direction==-.5 then
+		elseif abs(direction)==.5 then
 			a = 0
 			b = 1
 			j=player.y+1
@@ -815,11 +785,11 @@ function arrowshoot(i, j, direction)
 				return
 			end
 			--floor
-
-			spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
-			--entity
+			drawfloor(flr(x/8),flr(y/8),0,0)
+			--entity to be killed
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
 
+			--if entity is an enemy, kill that enemy
 			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
@@ -831,13 +801,11 @@ function arrowshoot(i, j, direction)
 			--cover your tracks
 			if (x)%8>=0 and x%8<=7 and (y)%8>=0 and y%8<=7 then
 				--floor
-				spr(floor[flr((x-a*8)/8)+1][flr((y-b*8)/8)+1], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
-				--entity
+				drawfloor(flr((x-a*8)/8)+1,flr((y-b*8)/8)+1)
 				--player
 				spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 			end
 			--projectile
-
 			if gb[flr(x/8)+1][flr(y/8)+1]>=200 then
 				return
 			else
@@ -849,10 +817,11 @@ end
 
 --animates player while turning
 function playeranimate(rotateaf,sign)
-	angle=0.03125*sign
+	angle=0.03125*sign --angle to rotate player by per iteration
 	while player.direct<rotateaf or player.direct>rotateaf do
 		player.direct+=angle
-
+		
+		--drawing everything to screen during rotation
 		for i=player.x-1,player.x+1 do
 			for j=player.y-1,player.y+1 do
 				--floor first
@@ -882,15 +851,18 @@ function playeranimate(rotateaf,sign)
 				--door things
 				elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
-
+					
+				--locked door
     elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-
+				
+				--hazards/fire
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)
 					end
-
+				
+				--keys and arrows
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
 				elseif gb[i][j] == 510 then
@@ -946,12 +918,18 @@ function screentransition(prevfloor,prevroom,nextroom)
 		elseif (currentroom==4 or currentroom==3) and checkforenemies() and metjuggler==nil then
 			load_dialogue(dialogue.enemies,3,5)
 			metjuggler=true
-		end
+		end	
+	--dialogue trigger for firebreather intro
+	--fsmet= firestarter met
 	elseif currentfloor==2 then
-		if currentroom==1 then
+		if currentroom==1 and fsmet==nil then
+				fsmet=true
 				load_dialogue(dialogue.enemies,6,12)
-		elseif currentroom==8 or currentroom==9 then
-		 	load_dialogue(dialogue.enemies,12,14)
+		--dialogue trigger for clown car intro.
+		--cmet=clown car met
+		elseif (currentroom==5 or currentroom==8 or currentroom==9) and cmet==nil then
+				cmet=true
+		 	load_dialogue(dialogue.enemies,13,14)
 		end
 	end
 end
@@ -1031,6 +1009,7 @@ function sworddirection()
 	end
 end
 
+--juggler throws ball at player
 function jugglershoot(i, j, direction)
 	delay =1
 
@@ -1099,6 +1078,7 @@ function jugglershoot(i, j, direction)
 	wait(2)
 end
 
+--animates fire
 function update_fire()
 	for i = 1,#gb do
 		for j = 1,#gb[i] do
@@ -1116,6 +1096,7 @@ function update_fire()
 	end
 end
 
+--animation function for enemies
 function animation(a, delay, i, j, direction, enemydeath)
 
 	--a is a list of frames for animations
@@ -1144,7 +1125,6 @@ function animation(a, delay, i, j, direction, enemydeath)
 		q += 1
 		--checking for skip button
 		if btn(4) then
-			--print('btn 4')
 			skipanim = true
 			q = #a
 		end
@@ -1234,12 +1214,6 @@ function animation(a, delay, i, j, direction, enemydeath)
 
 end
 
-function wait(z)
-	for i = 1,z do
-		flip()
-	end
-end
-
 --checks if the player is in the current gameboard (gb). if player is absent, then they are dead
 function checkdeath(gb)
 	for i=1,16 do
@@ -1264,7 +1238,6 @@ end
 
 --returns whether it moves or not
 function lclownhorizontal(xoff, yoff, i, j)
-
  enemydeath = false
  a = xoff/abs(xoff)
 	spot = gb[i+a][j]
@@ -1342,8 +1315,6 @@ function lclownvertical(xoff, yoff, i, j)
  		direction = north
   elseif b == 1 then
  		direction = south
- 	else
- 		print("problem: b="..b)
  	end
  	animation(lclownwalk,standarddelay,i,j,direction, enemydeath)
  	return true
@@ -1580,7 +1551,7 @@ function ai(i, j)
 		--adds 1 to entity code
 		gb[i][j]=entity+1
 		--if entity=48, signal spawning
- 	if entity%10==8 then
+ 	if entity==48 then
  		for g=1,6 do
  			for h=179,182 do
  				spr(h,(i-1)*8,(j-1)*8)
@@ -1588,7 +1559,7 @@ function ai(i, j)
  			end
  		end
  	--if entity=49, spawn, reset entity to 40
- 	elseif	entity%10==9 then
+ 	elseif	entity==49 then
  		gb[i][j]=40
  		for l=i-1,i+1 do
  			for k=j-1,j+1 do
@@ -1633,8 +1604,6 @@ function ai(i, j)
  	 	animation(clowncarmove, standarddelay, i, j,east, death)
  	 end
 		end
-	else
-		z = 1/0
 	end
 end
 
@@ -1895,10 +1864,11 @@ function generateballoons()
 	rand=flr(rnd(120))
 	i=flr(rnd(3))+1
 		if i==1 and ((rand>0 and rand<32) or (rand>80 and rand<128)) then
-			temp={}
-			temp.x=rand
-			temp.y=127
-			temp.s=78
+			temp={
+				x=rand
+				y=127
+				s=78
+			}
 			add(balloons,temp)
 		end
 
@@ -1939,8 +1909,9 @@ function gamedraw()
 
 		print("you got the deed and\nreclaimed your castle!",25,40,7)
 		print("thanks for playing!",25,60,7)
-		print("created by:",25,70,7)
-		if btnp(4) then
+		print("created by:\nperry gordon\ntyler jones\nalex proctor\nharrison ratcliffe",25,70,7)
+		print("press x to return to main menu",8,120,7)
+		if btnp(5) then
 			win=false
 			titleinit()
 		end
@@ -2124,14 +2095,14 @@ __gfx__
 0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556006556656633b333b311111111
 00000000000005f0000000000000000000747000000000000000000007777770cccccccc6666566666666656444444446666666065666556333b333bcccccc1c
 0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556666666663333333311111111
-00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000333333330000000033331111
-000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00333333330000000033331111
-0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00333333330000000033331111
-0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00333333330000000033331111
-0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000333333330000000011113333
-0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000333333330000000011113333
-0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000333333330000000011113333
-00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000333333330000000011113333
+00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000333311110000000000000000
+000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00333311110000000000000000
+0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00333311110000000000000000
+0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00333311110000000000000000
+0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000111133330000000000000000
+0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000111133330000000000000000
+0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000111133330000000000000000
+00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000111133330000000000000000
 0000000000000000000000000000000000000a9a00000aaa00000a9a000000a00000000000000000000000000000000000000000000000000000000000000000
 000ee000000ee000000ee00000000000000ee989000eea89000ee98a000eeaaa0000000000000000000000000000000000000000000090000000000000000000
 00077000000770000007700000000000000770400007704000077040000779890000000000000000000000000000900000aa9900000990000000000000000000
@@ -2411,3 +2382,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
