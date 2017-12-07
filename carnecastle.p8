@@ -38,7 +38,24 @@ initialdirection=0.25
 skipanim=false
 
 
-
+truefloor={
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
+	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025"
+}
 --rooms
 
 --generic room
@@ -95,8 +112,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-  	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -124,8 +141,8 @@ gameboard={
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+		 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+		 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,nil,nil,nil,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,nil,210,210,210,210",
@@ -144,7 +161,7 @@ gameboard={
 	 	"210,nil,nil,nil,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
-		"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
+		 "210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,022,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
@@ -244,7 +261,7 @@ gameboard={
 		"210,nil,nil,nil,210,nil,nil,nil,210,nil,nil,nil,nil,210,nil,210",
 		"210,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,210,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,202,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
 		},
 		{--room2
@@ -265,25 +282,25 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,715,210,210,210,210,210,210,210"
 		},
-		{--room3
-		"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,021,nil,nil,nil,nil,210,nil,210,210,210,210,210,210,210",
-		"210,nil,021,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
-		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
-		"210,nil,021,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
-		},
-		{--room4
+	 	{--room3
+"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,021,nil,nil,nil,nil,210,nil,210,210,210,210,210,210,210",
+"210,nil,021,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
+"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+"210,nil,021,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
+},
+	  {--room4
 		"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
@@ -300,8 +317,8 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-		},
-		{--room5
+	  },
+	  {--room5
 		"210,210,210,210,210,210,210,210,712,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,031,nil,nil,nil,nil,nil,nil,210,210,210,210",
@@ -321,21 +338,21 @@ gameboard={
 		},
 		{--room 6
 			"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210",
-	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-	 "210,210,031,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 "210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-	 "210,210,031,nil,nil,nil,010,nil,010,nil,nil,nil,nil,nil,nil,210",
-	 "210,210,nil,nil,210,210,210,nil,210,nil,210,nil,210,nil,nil,210",
-	 "210,210,031,nil,nil,nil,nil,010,nil,nil,nil,010,nil,nil,nil,715",
-	 "210,210,nil,nil,210,nil,210,nil,210,nil,210,nil,210,nil,210,210",
-	 "210,210,210,020,nil,nil,210,501,210,nil,nil,nil,210,020,210,210",
-	 "210,210,210,nil,210,210,210,210,210,210,210,210,210,nil,210,210",
-	 "210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210",
-	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+ 	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	  "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+ 	 "210,210,031,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	 "210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+ 	 "210,210,031,nil,nil,nil,010,nil,010,nil,nil,nil,nil,nil,nil,210",
+ 	 "210,210,nil,nil,210,210,210,nil,210,nil,210,nil,210,nil,nil,210",
+ 	 "210,210,031,nil,nil,nil,nil,010,nil,nil,nil,010,nil,nil,nil,715",
+ 	 "210,210,nil,nil,210,nil,210,nil,210,nil,210,nil,210,nil,210,210",
+ 	 "210,210,210,020,nil,nil,210,501,210,nil,nil,nil,210,020,210,210",
+ 	 "210,210,210,nil,210,210,210,210,210,210,210,210,210,nil,210,210",
+ 	 "210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+ 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
 		{--room7
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -374,44 +391,24 @@ gameboard={
 		"210,210,210,210,210,210,210,210,712,210,210,210,210,210,210,210"
 		},
 		{--room9
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-		"210,210,210,210,040,nil,nil,210,210,210,210,210,210,210,210,210",
-		"210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210",
-		"210,nil,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
-		"210,nil,210,210,210,nil,nil,210,nil,nil,nil,210,210,210,210,210",
-		"210,nil,210,nil,nil,nil,nil,031,nil,210,nil,210,210,210,210,210",
-		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,210,210",
-		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,718",
-		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,210",
-		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,210,210,nil,nil,210,210,210,210,210,210,210,nil,210",
-		"210,nil,210,210,210,020,nil,210,210,210,210,210,210,210,nil,210",
-		"210,nil,nil,nil,nil,nil,501,210,210,210,210,210,210,210,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
-		}
-	},
-  {--floor four
-		{--boss room
-		"210,210,210,210,715,210,210,210,210,210,210,210,210,210,210,210",
-		"210,030,210,033,nil,033,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,nil,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,909,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210",
-		"210,nil,nil,nil,nil,030,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,030,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,210,030,032,nil,210,nil,nil,210,nil,nil,nil,210,nil,210",
-		"210,nil,nil,210,nil,nil,210,nil,nil,210,nil,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,210,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-    }
-  }
+"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+"210,210,210,210,040,nil,nil,210,210,210,210,210,210,210,210,210",
+"210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210",
+"210,nil,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
+"210,nil,210,210,210,nil,nil,210,nil,nil,nil,210,210,210,210,210",
+"210,nil,210,nil,nil,nil,nil,031,nil,210,nil,210,210,210,210,210",
+"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,210,210",
+"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,718",
+"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,210",
+"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+"210,nil,210,210,210,nil,nil,210,210,210,210,210,210,210,nil,210",
+"210,nil,210,210,210,020,nil,210,210,210,210,210,210,210,nil,210",
+"210,nil,nil,nil,nil,nil,501,210,210,210,210,210,210,210,nil,210",
+"210,210,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
+"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
+}
+	}
 }
 
 flags={
@@ -437,7 +434,7 @@ flags={
 			tutorial=0,
 		},
 		{--room6
-			key=1, 
+			key=1,
 			tutorial=0,
 		},
 		{--room7
@@ -455,7 +452,7 @@ flags={
 	},
 	{--floor2
 		{--room1
-			key=0, --has key
+			key=0,
 			tutorial=1,
 		},
 		{--room2
@@ -475,7 +472,7 @@ flags={
 			tutorial=0,
 		},
 		{--room6
-			key=0, --has key
+			key=0, --key here
 			tutorial=0,
 		},
 		{--room7
@@ -487,14 +484,14 @@ flags={
 			tutorial=0,
 		},
 		{--room9
-			key=1,
+			key=0, --key here
 			tutorial=0,
 		}
 	}
 }
 --dialogue
 dialoguetf=true --boolean variable for dialogue
-
+dialogue={
 	--27 characters (including spaces) currently fit on one line.
 	t_dialogue={ --tutorial level dialogue
 		"\"finally made it inside\nthe castle...!\"",
@@ -504,13 +501,14 @@ dialoguetf=true --boolean variable for dialogue
 		"hold x and press\n � or � to turn.",
 		"Ë turns you clockwise,\nand � turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
+		"stuck? press \"tab\" to reset\nthe current room.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
-		}
+		},
 	doors={ --dialogue for interacting with doors
 		"\"i don't need to go back\nthere...\"",
-		"\"i need a key to open\nthis door.\"",
+		"\"this door won't open\nwithout all the keys.\"",
 		"\"i shouldn't leave any\ncarnies alive.\"",
-	}
+	},
 	enemies={
 		--lesserclown intro
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
@@ -526,17 +524,19 @@ dialoguetf=true --boolean variable for dialogue
 		"in a straight line, turning\nright when they hit an\nobstacle.",
 		"a firestarters current\ndirection is shown by the\nwhite line on its body.",
 		"firestarters cannot be\nkilled, but do not stop\nyou from leaving rooms.",
+		"arrows won't hurt\nfirestarters, and are\nburned when shot at fire",
 		--clown car
 		"\"a clown car! i better\ndestory it before a bunch\nof clowns get out.\"",
 		"clown cars will run from\nyou if you get too close and\nspawn lesser clowns every 10 turns.",
 		"the clown cars color scheme will\nflash the turn before spawning\na set of lesser clowns."
-	}
+	},
 	misc={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
 		"press s�to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
 	}
+}
 
 --table for player containing direction and sprite
 --"0" corresponds to player in gb matrix
@@ -669,15 +669,17 @@ function playermovement()
 								else
 									--plays dialogue if player tries to go through a door
 									--without killing all enemies
-									load_dialogue(doors,3,3)
+									load_dialogue(dialogue.doors,3,3)
 									pturn=true
 									return
 								end
+							--interacting with key doors
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
 								if allkeyscollected() then
 									nextfloor=flr((gb[i+xmove][j+ymove]-800)/10)
-									floortransition(currentfloor,currentroom,nextfloor)
+									
 									if nextfloor==2 then
+										floortransition(currentfloor,currentroom,nextfloor)
 										player.x=15
 										player.y=15
 										player.direct=0
@@ -689,23 +691,25 @@ function playermovement()
 										player.direct=0.75
 										gb[player.x][player.y]=0
 									end
-									--saves player x and y for reboot
+									--saves player x,y,direction for reloading rooms
 									player.savedx=player.x
 									player.savedy=player.y
 									player.saveddirect=player.direct
 
 									return
 								else
-									load_dialogue(doors,2,2)
+									load_dialogue(dialogue.doors,2,2)
 									return
 								end
 							else
+								--picking up keys
 								if gb[i+xmove][j+ymove]==501 then --picking up keys
 								 sfx(62)
 									flags[currentfloor][currentroom].key-=1
+								--picking up arrows
 								elseif gb[i+xmove][j+ymove]==510 then --picking up arrows
 									if arrowdflag==nil then
-										load_dialogue(misc,1,3)
+										load_dialogue(dialogue.misc,1,3)
 										arrowdflag=true
 									end
 									player.arrows+=1
@@ -720,9 +724,6 @@ function playermovement()
 							end
 
 						end
-						--if(xmove==1) then
-							--rightfix+=1
-						--end
 						pturn=false
 
 						sworddirection()
@@ -742,17 +743,19 @@ end
 --fires arrow from player
 --can only shoot up,down,left,right
 function arrowshoot(i, j, direction)
+		--if in boss room
 		if currentfloor==4 then
-			load_dialogue(misc,4,4)
+			load_dialogue(dialogue.misc,4,4)
 			return
 		end
-		--set direction
+		
+		--set
 		if direction == 0 then
 			a = 0
 			b = -1
 			j=player.y-1
 			sp=4
-		elseif direction ==.5 or direction==-.5 then
+		elseif abs(direction)==.5 then
 			a = 0
 			b = 1
 			j=player.y+1
@@ -775,7 +778,7 @@ function arrowshoot(i, j, direction)
 
 		while(player.x*8 != i*8+a*k or player.y*8 != j*8+b*k) do
 			k +=2 --controls "speed" of arrow
-		--print("k = " .. k)
+
 			x = i*8+a*k-5
 			y = j*8+b*k-5
 
@@ -783,11 +786,11 @@ function arrowshoot(i, j, direction)
 				return
 			end
 			--floor
-
 			drawfloor(flr(x/8),flr(y/8),0,0)
-			--entityflr(x/8)
+			--entity to be killed
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
 
+			--if entity is an enemy, kill that enemy
 			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
@@ -800,7 +803,6 @@ function arrowshoot(i, j, direction)
 			if (x)%8>=0 and x%8<=7 and (y)%8>=0 and y%8<=7 then
 				--floor
 				drawfloor(flr((x-a*8)/8)+1,flr((y-b*8)/8)+1)
-				--entity
 				--player
 				spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 			end
@@ -816,16 +818,15 @@ end
 
 --animates player while turning
 function playeranimate(rotateaf,sign)
-	angle=0.03125*sign
+	angle=0.03125*sign --angle to rotate player by per iteration
 	while player.direct<rotateaf or player.direct>rotateaf do
 		player.direct+=angle
-
+		
 		--drawing everything to screen during rotation
 		for i=player.x-1,player.x+1 do
 			for j=player.y-1,player.y+1 do
 				--floor first
-				spr(floor[i][j], (i-1)*8, (j-1)*8)
-
+				drawfloor(i,j)
 				--enemy things
 			if(not(gb[i][j] == -1) and gb[i][j] > 0 and gb[i][j] < 100) then
 					if gb[i][j]<20 then
@@ -842,26 +843,26 @@ function playeranimate(rotateaf,sign)
 
 				--wall things
 				elseif gb[i][j]==210 then --200=wall
-					spr(10, i*8-8, j*8-8)
+					drawwall(i,j)
 				elseif gb[i][j]==211 then
 					spr(7, i*8-8, j*8-8)
 				elseif gb[i][j]==212 then
 					spr(8, i*8-8, j*8-8)
 
 				--door things
-			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
+				elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
-
+					
 				--locked door
     elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-
+				
 				--hazards/fire
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)
 					end
-
+				
 				--keys and arrows
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
@@ -914,23 +915,27 @@ function screentransition(prevfloor,prevroom,nextroom)
 	--dialogue trigger to introduce lesser clowns
 	if currentfloor==1 then
 		if currentroom==2 and checkforenemies() then
-			load_dialogue(enemies,1,2)
+			load_dialogue(dialogue.enemies,1,2)
 		elseif (currentroom==4 or currentroom==3) and checkforenemies() and metjuggler==nil then
 			load_dialogue(dialogue.enemies,3,5)
 			metjuggler=true
-		end
-    
+		end	
 	--dialogue trigger for firebreather intro
 	--fsmet= firestarter met
 	elseif currentfloor==2 then
-		if currentroom==1 then
-				load_dialogue(enemies,6,12)
-		elseif currentroom==8 or currentroom==9 then
-		 	load_dialogue(enemies,12,14)
+		if currentroom==1 and fsmet==nil then
+				fsmet=true
+				load_dialogue(dialogue.enemies,6,12)
+		--dialogue trigger for clown car intro.
+		--cmet=clown car met
+		elseif (currentroom==5 or currentroom==8 or currentroom==9) and cmet==nil then
+				cmet=true
+		 	load_dialogue(dialogue.enemies,13,14)
 		end
 	end
 end
 
+--checks current room for enemies
 function checkforenemies()
 	for i=1,#gb do
 		for j=1,#gb[i] do
@@ -942,6 +947,7 @@ function checkforenemies()
 	return false
 end
 
+--checks if all keys have been collected
 function allkeyscollected()
 	for i=1,#flags[currentfloor] do
 		if flags[currentfloor][i].key>0 then
@@ -950,7 +956,9 @@ function allkeyscollected()
 	end
 	return true
 end
---need to optimize
+
+--determines direction of sword based on sprite rotatin
+--sd=sword direction
 function sworddirection()
 	sd=player.direct*8
 
@@ -982,7 +990,7 @@ function sworddirection()
 		sword.x=player.x+1
 		sword.y=player.y-1
 	end
-	if sd==0 or player.direct>=1 or player.direct<=-1 then
+	if sd==0 or abs(sd)==8 then
 		player.direct = 0
 		sword.x=player.x
 		sword.y=player.y-1
@@ -1002,17 +1010,10 @@ function sworddirection()
 	end
 end
 
+--juggler throws ball at player
 function jugglershoot(i, j, direction)
-
-	--print("open fire!")
-	--wait(30)
 	delay =1
 
-	--[[
-	if skipanim then
-		--return
-	end
-	]]
 	a = 1
 	b = 1
 
@@ -1034,25 +1035,15 @@ function jugglershoot(i, j, direction)
 
 	k = 0
 
-	--print("player.x = "..player.x)
-	--print("i = "..i)
-	--print("player.y = "..player.y)
-	--print("j = "..j)
-	--wait(30)
 	while(player.x*8 != i*8+a*k or player.y*8 != j*8+b*k) do
-	k +=1
-	--print("k = " .. k)
+	k +=2
 	x = i*8+a*k-5
 	y = j*8+b*k-5
 
-	--floor
-	--print("floor = "..floor[x/8][y/8])
-	spr(floor[flr(x/8)][flr(y/8)], flr(x/8)*8, flr(y/8)*8)
+ --floor
+	drawfloor(flr(x/8),flr(y/8),0,0)
 	--entity
 	entity = gb[flr(x/8)+1][flr(y/8)+1]
-	--print("entity: "..entity)
-	--print("entity: ("..flr((x-4)/8)*8 ..",".. flr((y-4)/8)*8 ..")")
-	--print("proj: ("..x-8 .."," .. y-8 ..")")
 	if(flr(entity/10)==12) then
 		spr(48,flr(x/8)*8,flr(y/8)*8 )
 	elseif entity == 210 then
@@ -1063,9 +1054,9 @@ function jugglershoot(i, j, direction)
 	spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 
 	--cover your tracks
-	if (x)%8==0 or (x)%8==7 or (y)%8==0 or y%8==7 then
+	if (x)%8<=7 or y%8<=7 then
 		--floor
-		spr(floor[flr((x-a*8)/8)][flr((y-b*8)/8)], flr((x-a*8)/8)*8, flr((y-b*8)/8)*8)
+		drawfloor(flr((x-a*8)/8),flr((y-b*8)/8),0,0)
 		--entity
 		entity = gb[flr((x-a*8)/8)+1][flr((y-b*8)/8)+1]
 
@@ -1085,16 +1076,16 @@ function jugglershoot(i, j, direction)
 	wait(delay)
 	end
 
-	--print("and it's done")
 	wait(2)
 end
 
+--animates fire
 function update_fire()
 	for i = 1,#gb do
 		for j = 1,#gb[i] do
 			ent = gb[i][j]
 				if ent<415 and ent >409 then
-					spr(floor[i][j], i*8-8, j*8-8)
+					drawfloor(i,j,8,8)
 					if(gb[i][j] > 410) then
 						gb[i][j] -= 1
 						spr(41+gb[i][j]%10, i*8-8, j*8-8)
@@ -1106,6 +1097,7 @@ function update_fire()
 	end
 end
 
+--animation function for enemies
 function animation(a, delay, i, j, direction, enemydeath)
 
 	--a is a list of frames for animations
@@ -1134,16 +1126,15 @@ function animation(a, delay, i, j, direction, enemydeath)
 		q += 1
 		--checking for skip button
 		if btn(4) then
-			--print('btn 4')
 			skipanim = true
 			q = #a
 		end
 
 		--floor
-			spr(floor[i][j], i*8-8, j*8-8)
+		drawfloor(i,j)
 		if direction == north then
 			--floor
-			spr(floor[i][j-1], i*8-8, j*8-16)
+			drawfloor(i,j,8,16)
 			--entities
 			if(gb[i][j-1] < 420 and gb[i][j-1] >409) then
 				spr(41 + gb[i][j-1]-410, i*8-8, j*8-16)
@@ -1152,7 +1143,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 			spr(a[q], i*8-8, j*8-q-8)
 		elseif direction == east then
 			--floor
-			spr(floor[i+1][j], i*8, j*8-8)
+			drawfloor(i,j,0,8)
 			--entities
 			if(gb[i+1][j] < 420 and gb[i+1][j] >409) then
 				spr(41 + gb[i+1][j]-410, i*8, j*8-8)
@@ -1161,7 +1152,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 			spr(a[q], i*8+q-8, j*8-8)
 		elseif direction == south then
 			--floor
-			spr(floor[i][j+1], i*8-8, j*8)
+			drawfloor(i,j,8,0)
 			--entities
 			if(gb[i][j+1] < 420 and gb[i][j+1] >409) then
 				spr(41 + gb[i][j+1]-410, i*8-8, j*8)
@@ -1170,7 +1161,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 			spr(a[q], i*8-8, j*8+q-8)
 		elseif direction == west then
 			--floor
-			spr(floor[i-1][j], i*8-16, j*8-8)
+			drawfloor(i,j,16,8)
 			--entities
 			if(gb[i-1][j] < 420 and gb[i-1][j] >409) then
 				spr(41 + gb[i-1][j]-410, i*8-16, j*8-8)
@@ -1188,7 +1179,7 @@ function animation(a, delay, i, j, direction, enemydeath)
  	sfx(63)
 		if direction == north then
 			--floor
-			spr(floor[i][j-1], i*8-8, j*8-16)
+			drawfloor(i,j,8,16)
 			--entities
 			if(gb[i][j-1] < 420 and gb[i][j-1] >409) then
 				spr(41 + gb[i][j-1]-410, i*8-8, j*8-16)
@@ -1196,21 +1187,21 @@ function animation(a, delay, i, j, direction, enemydeath)
 
 		elseif direction == east then
 			--floor
-			spr(floor[i][j], i*8, j*8-8)
+			drawfloor(i,j,0,8)
 			--entities
 			if(gb[i+1][j] < 420 and gb[i+1][j] >409) then
 				spr(41 + gb[i+1][j]-410, i*8, j*8-8)
 			end
 		elseif direction == south then
 			--floor
-			spr(floor[i][j], i*8-8, j*8)
+			drawfloor(i,j,8,0)
 			--entities
 			if(gb[i][j+1] < 420 and gb[i][j+1] >409) then
 				spr(41 + gb[i][j+1]-410, i*8-8, j*8)
 			end
 		elseif direction == west then
 			--floor
-			spr(floor[i][j], i*8-16, j*8-8)
+			drawfloor(i,j,16,8)
 			--entities
 			if(gb[i-1][j] < 420 and gb[i-1][j] >409) then
 				spr(41 + gb[i-1][j]-410, i*8-16, j*8-8)
@@ -1238,7 +1229,6 @@ end
 
 function reloadroom()
  poke(0x5f40,0)
- spawncount=nil
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -1249,7 +1239,6 @@ end
 
 --returns whether it moves or not
 function lclownhorizontal(xoff, yoff, i, j)
-
  enemydeath = false
  a = xoff/abs(xoff)
 	spot = gb[i+a][j]
@@ -1317,22 +1306,8 @@ function lclownvertical(xoff, yoff, i, j)
 	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
 
-			--[[
-
-
-			ec1,wc1 = enemycount()
-
-			if(target == -1) then
-				print("taret is nil")
-			else
-				print("target = "..gb[i][j+b])
-			end
-
-			]]
 			gb[i][j+b] = entity+100
 			gb[i][j] = -1
-
-
 	 	--print("clown ("..i..","..j..") to ("..i..","..j+b..")")
  	end
 
@@ -1341,8 +1316,6 @@ function lclownvertical(xoff, yoff, i, j)
  		direction = north
   elseif b == 1 then
  		direction = south
- 	else
- 		print("problem: b="..b)
  	end
  	animation(lclownwalk,standarddelay,i,j,direction, enemydeath)
  	return true
@@ -1410,7 +1383,7 @@ function ai(i, j)
 
 	standarddelay = 1
 
-	if checkdeath(gb) then
+	if(checkdeath(gb) or entity == 0 or entity == -1 or entity > 200) then
 		return
 	end
 
@@ -1448,7 +1421,7 @@ function ai(i, j)
 			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
@@ -1478,7 +1451,7 @@ function ai(i, j)
 			elseif xoff!=0 then
 				c = xoff/abs(xoff)
 				spot = gb[i+c][j]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i+c and sword.y == j) or (gb[i+c][j] >399 and gb[i+c][j] < 500) then
@@ -1509,7 +1482,7 @@ function ai(i, j)
 			elseif(yoff!=0) then
 				c = yoff/abs(yoff)
 				spot = gb[i][j+c]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[i][j+c] < 500) then
@@ -1544,7 +1517,7 @@ function ai(i, j)
 				end
 				--print("c= "..c)
 				spot = gb[i][j+c]
-				if(spot == o or spot == -1) then
+				if(spot == o or spot == -1 or (spot>399 and spot<500)) then
 					gb[i][j] = -1
 
 					if (sword.x == i and sword.y == j+c) or (gb[i][j+c] >399 and gb[c][j+c] < 500) then
@@ -1571,16 +1544,15 @@ function ai(i, j)
  	a=xoff/abs(xoff)
  	b=yoff/abs(yoff)
 
- 	--if spawncount hasnt started, set it to 0
- 	if spawncount==nil then
- 		spawncount=1
- 	else
- 		spawncount+=1
- 	end
+ 	--40 to 49
+ 	--on 48,flash colors
+ 	--on 49, spawn new clowns
+ 	--reset to 40
+
 		--adds 1 to entity code
 		gb[i][j]=entity+1
 		--if entity=48, signal spawning
- 	if entity%10==8 then
+ 	if entity==48 then
  		for g=1,6 do
  			for h=179,182 do
  				spr(h,(i-1)*8,(j-1)*8)
@@ -1588,7 +1560,7 @@ function ai(i, j)
  			end
  		end
  	--if entity=49, spawn, reset entity to 40
- 	elseif	entity%10==9 then
+ 	elseif	entity==49 then
  		gb[i][j]=40
  		for l=i-1,i+1 do
  			for k=j-1,j+1 do
@@ -1603,7 +1575,7 @@ function ai(i, j)
 
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
- 	 	gb[i-a][j]=entity+100
+ 	 	gb[i-a][j]=entity+101
  	 	gb[i][j]=-1
 
  	 	if a==1 then
@@ -1612,8 +1584,8 @@ function ai(i, j)
  	 		direction=east
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
- 	 elseif gb[i][j-b]==-1 then
- 	 	gb[i][j-b]=entity+100
+ 	 elseif gb[i][j-b]==-1 and gb[i][j-b]!=sword.y then
+ 	 	gb[i][j-b]=entity+101
  	 	gb[i][j]=-1
 
  	 	if b==1 then
@@ -1622,6 +1594,15 @@ function ai(i, j)
  	 		direction=south
  	 	end
  	 	animation(clowncarmove, standarddelay, i, j,direction, death)
+
+ 	 elseif b==(0/0) and gb[i][j+1]==-1 then
+				gb[i][j+1]=entity+101
+ 	 	gb[i][j]=-1
+ 	 	animation(clowncarmove, standarddelay, i, j,south, death)
+ 	 elseif a==(0/0) and gb[i+1][j]==-1 then
+				gb[i+1][j]=entity+101
+ 	 	gb[i][j]=-1
+ 	 	animation(clowncarmove, standarddelay, i, j,east, death)
  	 end
 		end
 	end
@@ -1632,23 +1613,17 @@ function bossai(i, j)
 	ent = gb[i][j]
 	d = abs(player.x-i) + abs(player.y-j)--manhattan distance
 
-
 	if(ent < 910) then
 		code = gb[i][j]%10
-		die = sword.x == i and (sword.y == j or sword.y == j+1)
+		die = (sword.x == i and (sword.y == j or sword.y == j+1))
 		if(d < code) then
 			code -= 1
-			--load_dialogue({"code: "..code},1,1)
-			if code == 2 then
-				load_dialogue({"\"come, boy! show me what \nmanner of man your father \ndidn't raise."}, 1,1)
-			elseif code == 4 then
-				load_dialogue({"\"you must be jon claude.\nwe thought you died\nthat night.\""}, 1, 1)
-			elseif code == 6 then
-				load_dialogue({"carnie bandit lord: \"that\n sword... is it ...was it\n your father's?\""}, 1, 1)
+			load_dialogue({"code: "..code},1,1)
+			if (code <= #(dialogue.boss)) then
+				--load_dialogue(dialog.boss[code])
 			end
 			gb[i][j] -= 1
-
-			if die then
+		elseif die then
 			gb[i][j] = 910
 			spr(floor[i][j], i*8-8, j*8-8)
 			spr(floor[i+1][j], i*8, j*8-8)
@@ -1789,7 +1764,7 @@ function gameinit()
 	currentfloor=initialfloor
 	currentroom=initialroom
 	gb=convertstringstoarray(gameboard[currentfloor][currentroom])
---	floor = convertstringstoarray(truefloor)
+	floor = convertstringstoarray(truefloor)
 	player.x=initialx
 	player.y=initialy
 	gb[player.x][player.y]=0
@@ -1803,7 +1778,7 @@ function gameinit()
 		end
 	end
 	--load with tutorial level (floor 1, room1)
-	load_dialogue(t_dialogue)
+	load_dialogue(dialogue.t_dialogue)
 end
 
 function _update()
@@ -1829,6 +1804,13 @@ function gameupdate()
 	if dialoguetf then
 		update_dialogue()
 	else
+		--press tab to reset room
+		if btnp(4,1) then
+			rectfill(0,0,128,128,0)
+			wait(10)
+			reloadroom()
+		end
+
 		if pturn and not(checkdeath(gb)) then
 			playermovement()
 		elseif not checkdeath(gb) then
@@ -1838,22 +1820,6 @@ function gameupdate()
 			wait(2)
 		end
 	end
-end
-
---is this still needed?
-function enemycount()
-	count = 0
-	wallcount = 0
-	for i = 1,16 do
-		for j = 1,16 do
-			if gb[i][j] != -1 and gb[i][j] > 0 and gb[i][j] < 200 then
-				count += 1
-			elseif gb[i][j]/100 == 210 then
-				wallcount += 1
-			end
-		end
-	end
-	return count, wallcount
 end
 
 function _draw()
@@ -1882,7 +1848,7 @@ function titledraw()
 	circfill(82,130,20,3)
 	circfill(82,136,24,3)
 	--draws castle and title text
- sspr(40,32,64,64,40,54,128,128)
+ sspr(40,32,32,32,40,54,64,64)
 	sspr(0,34,32,38,0,0,128,128)
 
 	--cycles colors 7-16
@@ -1900,9 +1866,9 @@ function generateballoons()
 	i=flr(rnd(3))+1
 		if i==1 and ((rand>0 and rand<32) or (rand>80 and rand<128)) then
 			temp={
-			x=rand,
-			y=127,
-			s=78,
+				x=rand,
+				y=127,
+				s=78
 			}
 			add(balloons,temp)
 		end
@@ -1941,6 +1907,7 @@ function gamedraw()
 	if win then
 		cls()
 		pal()
+
 		print("you got the deed and\nreclaimed your castle!",25,40,7)
 		print("thanks for playing!",25,60,7)
 		print("created by:\nperry gordon\ntyler jones\nalex proctor\nharrison ratcliffe",25,70,7)
@@ -1956,8 +1923,7 @@ function gamedraw()
 		for i=1,16 do
 			for j=1,16 do
 				--floor first
-				spr(floor[i][j], (i-1)*8, (j-1)*8)
-
+				drawfloor(i,j)
 				--player things
 				if gb[i][j]==0 then
 					spra(player.direct,1,i*8-8,j*8-12,1,2)
@@ -1978,7 +1944,7 @@ function gamedraw()
 
 			--wall things
 			elseif gb[i][j]==210 then --200=wall
-				spr(10, i*8-8, j*8-8)
+				drawwall(i,j)
 			elseif gb[i][j]==211 then
 				spr(7, i*8-8, j*8-8)
 			elseif gb[i][j]==212 then
@@ -2021,25 +1987,17 @@ function gamedraw()
 		--bosses (just the one, really)
 				if gb[14][7] >899 and gb[14][7] < 1000 then
 					if gb[14][7] < 910 then
-						drawfloor(14,7)
-						
-						drawfloor(15,7)
-						
-						drawfloor(14,8)
-						
-						drawfloor(15,8)
-						
+						spr(floor[14][7], 14*8-8, 7*8-8)
+						spr(floor[15][7], 15*8-8, 7*8-8)
+						spr(floor[14][8], 14*8-8, 8*8-8)
+						spr(floor[15][8], 15*8-8, 8*8-8)
 						spr(105, 14*8-8,7*8-8, 2, 2)
 
 					elseif gb[14][7] == 910 then
-						
-						drawfloor(14,7)
-						
-						drawfloor(15,7)
-						
-						drawfloor(14,7)
-						
-						drawfloor(15,8)
+						spr(floor[14][7], 14*8-8, 7*8-8)
+						spr(floor[15][7], 15*8-8, 7*8-8)
+						spr(floor[14][8], 14*8-8, 8*8-8)
+						spr(floor[15][8], 15*8-8, 8*8-8)
 						spr(107, 14*8-8, 7*8-8, 2, 2)
 					end
 				end
@@ -2070,7 +2028,6 @@ function gamedraw()
 	end
 
 	end--end for win condition if-statement
-
 end
 
 function drawfloor(i,j,a,b)
@@ -2084,8 +2041,6 @@ function drawfloor(i,j,a,b)
 				spr(floor[i][j], i*8-a, j*8-b)
 			elseif currentfloor==2 then
 				spr(29, i*8-a, j*8-b)
-			elseif currentfloor==3 then
-				spr(31, i*8-a, j*8-b)
 			end
 end
 
@@ -2094,8 +2049,6 @@ function drawwall(i,j)
 					spr(10, i*8-8, j*8-8)
 				elseif currentfloor==2 then
 					spr(10, i*8-8, j*8-8)
-				elseif currentfloor==3 then
-					spr(15, i*8-8, j*8-8)
 				end
 end
 
@@ -2131,22 +2084,22 @@ function los(i, j, direction)
 
 end
 __gfx__
-00000000000005600000000000000000000500000000000000000000000d0000cccccccc666656666656666600444400600000006656666533333b33aa1aaaaa
-00000000000005600000000000500007005550000000000000000000000dd000cccccccc6666566655555555044444405600000065566666333333b311111111
-00700700000005600000000005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000656665563b3333b3bbbbbb1b
-00077000000005600000000055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000066666666b3333b3311111111
-0007700000000560000000000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600066556666333b333388188888
-0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556006556656633b333b311111111
-00000000000005f0000000000000000000747000000000000000000007777770cccccccc6666566666666656444444446666666065666556333b333bcccccc1c
-0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556666666663333333311111111
-00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000000000000000000033331111
-000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00000000000000000033331111
-000000000444444000000000700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00000000000000000033331111
-000000000444444000000000070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00000000000000000033331111
-0000000000444400000000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000000000000000000011113333
-0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000000000000000000011113333
-0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000000000000000000011113333
-00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000000000000000000011113333
+00000000000005600000000000000000000500000000000000000000000d0000cccccccc66665666665666660044440060000000aa1aaaaa33333b3322299222
+00000000000005600000000000500007005550000000000000000000000dd000cccccccc6666566655555555044444405600000011111111333333b322922222
+00700700000005600050070005000070050405000000000000000000000d0d00cccccccc55555555666666564444444466600000bbbbbb1b3b3333b362922226
+00077000000005600554400055444440000400000000000000000000766d6667ccccccac6656666655555555444444445556000011111111b3333b3355299255
+0007700000000560005007000500007000040000000000000000000076666667cccccccc6656666666566666444444a46666600088188888333b333366522666
+0070070000000560000000000050000700040000000000000000000077666677cccccccc555555555555555544444444555556001111111133b333b355522555
+00000000000005f0000000000000000000747000000000000000000007777770cccccccc66665666666666564444444466666660cccccc1c333b333b66666656
+0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556111111113333333355555555
+00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000333311110000000055555555
+000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00333311110000000059922995
+0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00333311110000000059922995
+0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00333311110000000052222225
+0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000111133330000000052222225
+0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000111133330000000059922995
+0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000111133330000000059922995
+00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000111133330000000055555555
 0000000000000000000000000000000000000a9a00000aaa00000a9a000000a00000000000000000000000000000000000000000000000000000000000000000
 000ee000000ee000000ee00000000000000ee989000eea89000ee98a000eeaaa0000000000000000000000000000000000000000000090000000000000000000
 00077000000770000007700000000000000770400007704000077040000779890000000000000000000000000000900000aa9900000990000000000000000000
@@ -2217,16 +2170,16 @@ c0888800008888000088880cc088880cc08888000088880cc088880cc088880c000c000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000070707070707070707070700
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000077077077777777707707700
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000077777077777777707777700
-000000ccbbbaa0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000707070707070707070707070
-00000c5c555a5a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000707070707070707070707070
-0000c55c555a55800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000777777777777777777777770
-000e55ccbbbaa5580000000000000000000000000000000000000000000000000000000000000000000000000000000000000000777777777707077777777770
-0eeeccccbbbaaa8800000000000cbb000008cc00000e8800000bee00000000000000000000000000000000000000000000000000770707777077707777070770
-eeeeccccbbbaaa880000000000c5bbe00085ccb000e588c000b5ee80000000000000000000000000000000000000000000000000707070770770770770707070
-eeee55ccbbba5588000000000855bbe00e55ccb00b5588c00c55ee80000000000000000000000000000000000000000000000000777777707700077077777770
-0ee5555cbbb555580000000088ccbbeeee88ccbbbbee88ccccbbee88000000000000000000000000000000000000000000000000770707777000007777070770
-000555500005555000000000855cb55ee558c55bb55e855cc55be558000000000000000000000000000000000000000000000000770707770000000777070770
-00005500000055000000000005500550055005500550055005500550000000000000000000000000000000000000000000000000770707770000000777070770
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000707070707070707070707070
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000707070707070707070707070
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000777777777777777777777770
+00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000777777777707077777777770
+000000000000000000000000000cbb000008cc00000e8800000bee00000000000000000000000000000000000000000000000000770707777077707777070770
+00000000000000000000000000c5bbe00085ccb000e588c000b5ee80000000000000000000000000000000000000000000000000707070770770770770707070
+0000000000000000000000000855bbe00e55ccb00b5588c00c55ee80000000000000000000000000000000000000000000000000777777707700077077777770
+00000000000000000000000088ccbbeeee88ccbbbbee88ccccbbee88000000000000000000000000000000000000000000000000770707777000007777070770
+000000000000000000000000855cb55ee558c55bb55e855cc55be558000000000000000000000000000000000000000000000000770707770000000777070770
+00000000000000000000000005500550055005500550055005500550000000000000000000000000000000000000000000000000770707770000000777070770
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -2259,135 +2212,6 @@ eeee55ccbbba5588000000000855bbe00e55ccb00b5588c00c55ee80000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-__label__
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888ff8ff8888228822888222822888888822888888228888
-8888888888888888888888888888888888888888888888888888888888888888888888888888888888ff888ff888222222888222822888882282888888222888
-8888888888888888888888888888888888888888888888888888888888888888888888888888888888ff888ff888282282888222888888228882888888288888
-8888888888888888888888888888888888888888888888888888888888888888888888888888888888ff888ff888222222888888222888228882888822288888
-8888888888888888888888888888888888888888888888888888888888888888888888888888888888ff888ff888822228888228222888882282888222288888
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888ff8ff8888828828888228222888888822888222888888
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-88885555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-88885555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-88885555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-88885555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-88885555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555551555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555517155555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555517715555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555517771555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555517777155555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555517711555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555551171555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-82888222822882228888822888828228888888888888888888888888888888888888888888888888888888888888888888888882228882822282288222822288
-82888828828282888888882888288828888888888888888888888888888888888888888888888888888888888888888888888882828828828288288282888288
-82888828828282288888882888288828888888888888888888888888888888888888888888888888888888888888888888888882828828822288288222822288
-82888828828282888888882888288828888888888888888888888888888888888888888888888888888888888888888888888882828828828288288882828888
-82228222828282228888822282888222888888888888888888888888888888888888888888888888888888888888888888888882228288822282228882822288
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
 
 __gff__
 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
