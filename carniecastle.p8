@@ -24,9 +24,9 @@ west=2
 pturn=true
 
 initialfloor=2
-initialroom=1
-initialx=9
-initialy=3
+initialroom=8
+initialx=7
+initialy=15
 initialdirection=0.25
 --directions:
 --left:0.25
@@ -492,7 +492,7 @@ flags={
 			tutorial=0,
 		},
 		{--room6
-			key=1,
+			key=0,
 			tutorial=0,
 		},
 		{--room7
@@ -504,7 +504,7 @@ flags={
 			tutorial=0,
 		},
 		{--room9
-			key=1,
+			key=0,
 			tutorial=0,
 		}
 	}
@@ -636,17 +636,15 @@ function playermovement()
 
 					--cardinal player movement
 					if (btnp(0) or btnp(1) or btnp(2) or btnp(3)) then
+						xmove=0
+						ymove=0
 						if btnp(0) then --left
 							xmove=-1
-							ymove=0
 						elseif btnp(1) then --right
 							xmove=1
-							ymove=0
 						elseif btnp(2) then --up
-							xmove=0
 							ymove=-1
 						elseif btnp(3) then --down
-							xmove=0
 							ymove=1
 						end
 						if flr(gb[i+xmove][j+ymove]/100)!=2 then
@@ -702,7 +700,6 @@ function playermovement()
 										player.direct=0
 										gb[player.x][player.y]=0
 									elseif nextfloor==3 then
-										win=true
 										player.x=2
 										player.y=15
 										player.direct=0.75
@@ -1444,7 +1441,6 @@ function ai(i, j)
 	if checkdeath(gb) then
 		return
 	end
-
 	--lesser clown
 	if(flr(entity/10) == 1) then
 
