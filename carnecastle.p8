@@ -12,7 +12,7 @@ stairs=800's
 bosses = 900's
 ]]
 
---temp boolean for win screen
+--boolean for win screen
 win=false
 --global directions
 north=0
@@ -112,8 +112,8 @@ gameboard={
 		"210,nil,nil,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,210",
 		"210,nil,210,nil,010,nil,210,nil,nil,nil,210,nil,nil,nil,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-  "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+    "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+    "210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,714,210,210,210,210,210,210,210"
@@ -141,8 +141,8 @@ gameboard={
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-		 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-		 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,nil,nil,nil,210,210,210,210",
 	 	"210,210,210,210,210,210,210,210,nil,210,210,nil,210,210,210,210",
@@ -161,7 +161,7 @@ gameboard={
 	 	"210,nil,nil,nil,nil,nil,nil,nil,010,nil,nil,nil,nil,nil,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
-		 "210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
+		"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,010,022,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
 	 	"210,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210,nil,210",
@@ -283,23 +283,23 @@ gameboard={
 		"210,210,210,210,210,210,210,210,715,210,210,210,210,210,210,210"
 		},
 	 	{--room3
-"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,021,nil,nil,nil,nil,210,nil,210,210,210,210,210,210,210",
-"210,nil,021,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
-"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
-"210,nil,021,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
-},
+		"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,021,nil,nil,nil,nil,210,nil,210,210,210,210,210,210,210",
+		"210,nil,021,nil,nil,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,712",
+		"210,nil,021,nil,nil,nil,210,210,nil,210,210,210,210,210,210,210",
+		"210,nil,021,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
+		},
 	  {--room4
 		"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
@@ -337,9 +337,9 @@ gameboard={
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
 		{--room 6
-			"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210",
  	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-	  "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
  	 "210,210,031,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	 "210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
  	 "210,210,031,nil,nil,nil,010,nil,010,nil,nil,nil,nil,nil,nil,210",
@@ -391,23 +391,23 @@ gameboard={
 		"210,210,210,210,210,210,210,210,712,210,210,210,210,210,210,210"
 		},
 		{--room9
-"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
-"210,210,210,210,040,nil,nil,210,210,210,210,210,210,210,210,210",
-"210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210",
-"210,nil,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
-"210,nil,210,210,210,nil,nil,210,nil,nil,nil,210,210,210,210,210",
-"210,nil,210,nil,nil,nil,nil,031,nil,210,nil,210,210,210,210,210",
-"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,210,210",
-"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,718",
-"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,210",
-"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-"210,nil,210,210,210,nil,nil,210,210,210,210,210,210,210,nil,210",
-"210,nil,210,210,210,020,nil,210,210,210,210,210,210,210,nil,210",
-"210,nil,nil,nil,nil,nil,501,210,210,210,210,210,210,210,nil,210",
-"210,210,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
-"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
-}
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,210,210,040,nil,nil,210,210,210,210,210,210,210,210,210",
+		"210,210,nil,nil,nil,nil,nil,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,210,210,nil,nil,210,210,210,210,210,210,210,210,210",
+		"210,nil,210,210,210,nil,nil,210,nil,nil,nil,210,210,210,210,210",
+		"210,nil,210,nil,nil,nil,nil,031,nil,210,nil,210,210,210,210,210",
+		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,210,210",
+		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,718",
+		"210,nil,210,nil,210,nil,nil,210,nil,210,nil,210,210,210,nil,210",
+		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,210,210,210,nil,nil,210,210,210,210,210,210,210,nil,210",
+		"210,nil,210,210,210,020,nil,210,210,210,210,210,210,210,nil,210",
+		"210,nil,nil,nil,nil,nil,501,210,210,210,210,210,210,210,nil,210",
+		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
+		}
 	},
 	{--floor 3
 		{--boss room
@@ -434,7 +434,7 @@ gameboard={
 flags={
 	{--floor1
 		{--room1
-			key=1,
+			key=1, --key here
 			tutorial=1
 		},
 		{--room2
@@ -454,7 +454,7 @@ flags={
 			tutorial=0
 		},
 		{--room6
-			key=1,
+			key=1, --key here
 			tutorial=0
 		},
 		{--room7
@@ -577,12 +577,13 @@ player={
 	savedarrows=0
 }
 
+--table for sword x and y
 sword = {
 	x = 8,
 	y = 14
 }
 
---animation
+--animation tables
 lclownwalk = {33, 32, 34, 32,33, 32, 34, 32}
 jugglerwalk = {49, 50, 51, 52, 53, 54, 55, 48}
 jugglerprojectile = 56
@@ -610,6 +611,7 @@ function spra(angle,n,x,y,w,h,flip_x,flip_y)
  end
 end
 
+--player movement and interactions
 function playermovement()
 		--move player
 		for i=1,16 do --iterate through gb to find player
@@ -625,14 +627,14 @@ function playermovement()
 						end
 
 					if btn(5) then
-						--sword turning
+						--sword turning left
 						if btn(0) then
 							playeranimate(player.direct+.125,1)
 							pturn=false
 							sworddirection()
 							break
 						end
-						--sword turning
+						--sword turning right
 						if btn(1) then
 							playeranimate(player.direct-.125,-1)
 							pturn=false
@@ -703,19 +705,19 @@ function playermovement()
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 800 and gb[i+xmove][j+ymove] < 900 then --door interaction
 								if allkeyscollected() then
 									nextfloor=flr((gb[i+xmove][j+ymove]-800)/10)
-									
+									--moving to floor 2
 									if nextfloor==2 then
 										floortransition(currentfloor,currentroom,nextfloor)
 										player.x=15
 										player.y=15
 										player.direct=0
 										gb[player.x][player.y]=0
+										--moving to floor 3/boss room
 									elseif nextfloor==3 then
 										floortransition(currentfloor,currentroom,nextfloor)
-										
 										player.x=2
-										player.y=15
-										player.direct=0.75
+										player.y=2
+										player.direct=0.5
 										gb[player.x][player.y]=0
 									end
 									--saves player x,y,direction for reloading rooms
@@ -725,6 +727,7 @@ function playermovement()
 
 									return
 								else
+									--load dialogue if player doesn't have all keys from current floor
 									load_dialogue(dialogue.doors,2,2)
 									return
 								end
@@ -757,7 +760,7 @@ function playermovement()
 						pturn=false
 
 						sworddirection()
-						--breaks loop if the player is found
+						--return if the player is found
 						return
 					end
 				end
@@ -774,11 +777,12 @@ end
 --can only shoot up,down,left,right
 function arrowshoot(i, j, direction)
 		--if in boss room
-		if currentfloor==4 then
+		--load diaglogue, dont shoot arrow
+		if currentfloor==3 then
 			load_dialogue(dialogue.misc,4,4)
 			return
 		end
-		
+
 		--set
 		if direction == 0 then
 			a = 0
@@ -851,13 +855,13 @@ function playeranimate(rotateaf,sign)
 	angle=0.03125*sign --angle to rotate player by per iteration
 	while player.direct<rotateaf or player.direct>rotateaf do
 		player.direct+=angle
-		
+
 		--drawing everything to screen during rotation
 		for i=player.x-1,player.x+1 do
 			for j=player.y-1,player.y+1 do
 				--floor first
 				drawfloor(i,j)
-				--enemy things
+				--draw enemies
 			if(not(gb[i][j] == -1) and gb[i][j] > 0 and gb[i][j] < 100) then
 					if gb[i][j]<20 then
 						spr(32,(i-1)*8,(j-1)*8)
@@ -882,17 +886,17 @@ function playeranimate(rotateaf,sign)
 				--door things
 				elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
-					
+
 				--locked door
-    elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
+    		elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-				
+
 				--hazards/fire
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)
 					end
-				
+
 				--keys and arrows
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
@@ -907,9 +911,7 @@ function playeranimate(rotateaf,sign)
 					elseif gb[i][j] == 910 then
 						spr(107, i*8-8, j*8-8, 2, 2)
 					end
-
 				end
-
 			end
 		end
 		--draw player
@@ -949,7 +951,7 @@ function screentransition(prevfloor,prevroom,nextroom)
 		elseif (currentroom==4 or currentroom==3) and checkforenemies() and metjuggler==nil then
 			load_dialogue(dialogue.enemies,3,5)
 			metjuggler=true
-		end	
+		end
 	--dialogue trigger for firebreather intro
 	--fsmet= firestarter met
 	elseif currentfloor==2 then
@@ -987,7 +989,7 @@ function allkeyscollected()
 	return true
 end
 
---determines direction of sword based on sprite rotatin
+--determines direction of sword based on sprite rotation
 --sd=sword direction
 function sworddirection()
 	sd=player.direct*8
@@ -1109,7 +1111,7 @@ function jugglershoot(i, j, direction)
 	wait(2)
 end
 
---animates fire
+--animates/updates fire
 function update_fire()
 	for i = 1,#gb do
 		for j = 1,#gb[i] do
@@ -1206,7 +1208,7 @@ function animation(a, delay, i, j, direction, enemydeath)
 	end
 
 	if enemydeath then
- 	sfx(63)
+ 	sfx(63) --enemy dying sound effect
 		if direction == north then
 			--floor
 			drawfloor(i,j,8,16)
@@ -1257,8 +1259,9 @@ function checkdeath(gb)
 	return true
 end
 
+--resets the current room player is in
 function reloadroom()
- poke(0x5f40,0)
+ 	poke(0x5f40,0) --resets the music
 	player.x=player.savedx
 	player.y=player.savedy
 	player.direct=player.saveddirect
@@ -1276,36 +1279,10 @@ function lclownhorizontal(xoff, yoff, i, j)
 		--mechanics of movement
 		if ((i+a)==sword.x and j==sword.y) or (gb[i+a][j]>399 and gb[i+a][j]<500) then
 			enemydeath = true
-			--print("walking to my death")
 			gb[i][j]=-1
-			--gb[i+a][j]=nil should be unnecessary
 		else
-
-			--ec1,wc1 = enemycount()
-
-			--[[
-
-			if(target == -1) then
-				print("taret is nil")
-			else
-				print("target = "..gb[i+a][j])
-			end
-
-			]]
 			gb[i+a][j] = entity+100
 			gb[i][j] = -1
-
-	 	--[[ec2,wc2 = enemycount()
-
-			if ec1!=ec2 then
-				print("a="..a)
-				print("i="..i)
-				print("j="..j)
-				wait(120)
-			end
-			]]
-
-			--print("clown ("..i..","..j..") to ("..i+a..","..j..")")
 	 end
 
 		--animation
@@ -1331,14 +1308,10 @@ function lclownvertical(xoff, yoff, i, j)
  if(spot== -1 or spot == 0or (spot < 500 and spot > 399)) then
  	if (i==sword.x and (j+b)==sword.y) or (gb[i][j+b]>399 and gb[i][j+b]<500) then
 	 	enemydeath = true
-	 	--print("walking to my death")
 	 	gb[i][j]=-1
-	 	--gb[i][j+b]=nil should be unnecsesary
 	 else
-
 			gb[i][j+b] = entity+100
 			gb[i][j] = -1
-	 	--print("clown ("..i..","..j..") to ("..i..","..j+b..")")
  	end
 
  	--animation
@@ -1353,9 +1326,8 @@ function lclownvertical(xoff, yoff, i, j)
  return false
 end
 
---sets fire on previoius spot when moving
+--sets fire on previous spot when moving
 --turns right when blocked
-
 function firestarter_action(i, j)
 	entity = gb[i][j]
 	direction = entity%10
@@ -1406,6 +1378,7 @@ function firestarter_action(i, j)
 
 end
 
+--overarching function containing enemy ai
 function ai(i, j)
 	entity = gb[i][j]
 	xoff = player.x - i
@@ -1571,38 +1544,40 @@ function ai(i, j)
 	--clown car
 	elseif flr(entity/10)==4 then
 		enemydeath = false
- 	a=xoff/abs(xoff)
- 	b=yoff/abs(yoff)
+ 		a=xoff/abs(xoff)
+ 		b=yoff/abs(yoff)
 
- 	--40 to 49
- 	--on 48,flash colors
- 	--on 49, spawn new clowns
- 	--reset to 40
+ 		--40 to 49
+ 		--on 48,flash colors
+ 		--on 49, spawn new clowns
+ 	  --reset to 40
 
 		--adds 1 to entity code
 		gb[i][j]=entity+1
 		--if entity=48, signal spawning
- 	if entity==48 then
- 		for g=1,6 do
- 			for h=179,182 do
- 				spr(h,(i-1)*8,(j-1)*8)
- 				wait(1)
+ 		if entity==48 then
+ 			for g=1,6 do
+ 				for h=179,182 do
+ 					spr(h,(i-1)*8,(j-1)*8)
+ 					wait(1)
+ 				end
  			end
- 		end
- 	--if entity=49, spawn, reset entity to 40
- 	elseif	entity==49 then
- 		gb[i][j]=40
- 		for l=i-1,i+1 do
- 			for k=j-1,j+1 do
- 				if gb[l][k]==-1 and (l!=sword.x or k!=sword.y) then
- 					--spawned lesser clowns designated 011
- 					--erases them on reload
- 					gb[l][k]=011+100
+ 		--if entity=49, spawn, reset entity to 40
+ 		elseif	entity==49 then
+ 			gb[i][j]=40
+ 			for l=i-1,i+1 do
+ 				for k=j-1,j+1 do
+ 					if gb[l][k]==-1 and (l!=sword.x or k!=sword.y) then
+ 						--spawned lesser clowns designated 011
+ 						--erases them on reload
+ 						gb[l][k]=011+100
+ 					end
  				end
  			end
  		end
- 	end
 
+		--clown car movement
+		--prioritizes horizontal movement
 		if abs(xoff)<=3 and abs(yoff)<=3 then
  	 if a!=(0/0) and gb[i-a][j]==-1 and i!=sword.x then
  	 	gb[i-a][j]=entity+101
@@ -1657,14 +1632,14 @@ function bossai(i, j)
 			gb[i][j] = 910
 			drawfloor(i,j)
 			drawfloor(i,j+1,8,0)
-			
+
 			spr(107, 14*8-8, 7*8-8, 2, 2)
 			spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 			wait(30)
 			gb[i][j] = 520
 			gb[i+1][j] = -1
 			gb[i][j+1] = -1
-			gb[i+1][j+1] = -1	
+			gb[i+1][j+1] = -1
 		end
 	end
 end
@@ -1694,7 +1669,7 @@ function enemymovement()
 	pturn = true
 end
 
---pauses game engine
+--pauses game engine momentarily
 --useful for playing animations
 function wait(i)
  for j = 1, i do
@@ -1781,11 +1756,13 @@ function _init()
 	titleinit()
 end
 
+--init for title state
 function titleinit()
 	music(0, 10, 2)
 	mode=0
 end
 
+--init for game state
 function gameinit()
 	mode=1
 	music(32, 200, 2)
@@ -1819,6 +1796,7 @@ function _update()
 	end
 end
 
+--updates title screen/lore screen
 function titleupdate()
 	if btnp(4) then
 		mode+=.5
@@ -1828,6 +1806,7 @@ function titleupdate()
 	end
 end
 
+--updates game state
 function gameupdate()
 
 	if dialoguetf then
@@ -1845,7 +1824,6 @@ function gameupdate()
 		elseif not checkdeath(gb) then
 			update_fire()
 			enemymovement()
-			--afterenemyenemycount, afterenemywallcount = enemycount()
 			wait(2)
 		end
 	end
@@ -1853,14 +1831,15 @@ end
 
 function _draw()
 	if mode==0 then
-		titledraw()
+		titledraw() --draw title screen
 	elseif mode==.5 then
-		lorescreen()
+		lorescreen() --draw lore screen
 	else
-			gamedraw()
+			gamedraw() --draw game
 	end
 end
 
+--draws contents of title screen
 function titledraw()
 	cls()
 	pal() --resets color palette
@@ -1921,7 +1900,7 @@ function lorescreen()
 	elseif ly<=0 then
 		ly=0
 	end
-
+	--super long lore string
 	lore="many years ago, you narrowly\nescaped your family's castle\nwith the help of your butler\nafter it was overrun by a\ndastardly carnival bandit\nlord and his carnie minions.\n\nnow, you must fufill the last\ndying wish of your butler;\ntake back the castle and\navenge your family.\n\narmed only with your trusty\nclaymore, minimal combat\nexperience, and knowledge\nof a secret entrance, you\nmust fight your way through\nthe castle and drive the\ncarnies from your home."
 
 	print(lore,10,ly,7)
@@ -1930,13 +1909,15 @@ function lorescreen()
 	ly-=10/30
 end
 
+--draws everything for the game, win screen, and death screen
 function gamedraw()
 	cls()
 	pal() --resets color palette for gameplay
-	if win then
+
+	if win then --show win screen
 		cls()
 		pal()
-
+		generateballoons()
 		print("you got the deed and\nreclaimed your castle!",25,40,7)
 		print("thanks for playing!",25,60,7)
 		print("created by:\nperry gordon\ntyler jones\nalex proctor\nharrison ratcliffe",25,70,7)
@@ -1995,7 +1976,8 @@ function gamedraw()
 				elseif gb[i][j] == 202 then
 					spr(12, i*8-8, j*8-8)
 
-   	elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
+			--locked door
+   		elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
 
 				--items
@@ -2047,10 +2029,10 @@ function gamedraw()
 	else
 		--prints this to screen if player is dead
 		cls()
-		poke(0x5f40,15)
+		poke(0x5f40,15) --load music
 		print("the carnies got you",26,64,7)
 		print("press z to try again",40,120)
-		if btn(4) then
+		if btn(4) then --reset room
 			cls()
 			reloadroom()
 		end
@@ -2059,6 +2041,7 @@ function gamedraw()
 	end--end for win condition if-statement
 end
 
+--draws floor sprites for each floor
 function drawfloor(i,j,a,b)
 	if a==nil then
 		a=8
@@ -2075,6 +2058,7 @@ function drawfloor(i,j,a,b)
 	end
 end
 
+--draws wall sprite for each floor
 function drawwall(i,j)
 	if currentfloor==1 then
 		spr(10, i*8-8, j*8-8)
@@ -2412,4 +2396,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
