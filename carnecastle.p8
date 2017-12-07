@@ -23,11 +23,11 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
-initialfloor=1
+initialfloor=3
 initialroom=1
-initialx=9
-initialy=3
-initialdirection=0.25
+initialx=5
+initialy=2
+initialdirection=0.625
 --directions:
 --left:0.25
 --rigth:0.75
@@ -524,8 +524,8 @@ dialogue={
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
 		"use the arrow keys to move.",
-		"hold x and press\n � or � to turn.",
-		"Ë turns you clockwise,\nand � turns you\ncounterclockwise.",
+		"hold x and press\n ï¿½ or ï¿½ to turn.",
+		"Ã turns you clockwise,\nand ï¿½ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"stuck? press \"tab\" to reset\nthe current room.",
 		"plan your movements, and\nyou shall succeed.\ngood luck!"
@@ -552,14 +552,14 @@ dialogue={
 		"firestarters cannot be\nkilled, but do not stop\nyou from leaving rooms.",
 		"arrows won't hurt\nfirestarters, and are\nburned when shot at fire",
 		--clown car
-		"\"a clown car! i better\ndestory it before a bunch\nof clowns get out.\"",
-		"clown cars will run from\nyou if you get too close and\nspawn lesser clowns every 10 turns.",
-		"the clown cars color scheme will\nflash the turn before spawning\na set of lesser clowns."
+	"\"a clown car! i better\ndestroy it before a bunch\nof clowns get out.\"",
+		"clown cars run from you if\nyou get too close, spawning\nclowns every 10 turns.",
+		"the clown car's colors will\ncycle before spawning a\nset of clowns."
 	},
 	misc={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
-		"press s�to fire an arrow\nin the direction you are\nfacing.",
+		"press s½to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
 	}
 }
@@ -573,7 +573,7 @@ player={
 	savedx=9,
 	savedy=3,
 	saveddirect=.25,
-	arrows=1,
+	arrows=0,
 	savedarrows=0
 }
 
@@ -718,7 +718,7 @@ function playermovement()
 										music(0, 10, 2)
 										player.x=5
 										player.y=2
-										player.direct=0.5
+										player.direct=0.625
 										gb[player.x][player.y]=0
 									end
 									--saves player x,y,direction for reloading rooms
@@ -744,7 +744,6 @@ function playermovement()
 										arrowdflag=true
 									end
 									player.arrows+=1
-									flags[currentfloor][currentroom].arrow-=1
 								--picking up deed to castle
 								elseif gb[i+xmove][j+ymove]==520 then
 									win=true
@@ -1623,21 +1622,26 @@ function bossai(i, j)
 	ent = gb[i][j]
 	d = abs(player.x-i) + abs(player.y-j)--manhattan distance
 
+
 	if(ent < 910) then
 		code = gb[i][j]%10
-		die = (sword.x == i and (sword.y == j or sword.y == j+1))
+		die = sword.x == i and (sword.y == j or sword.y == j+1)
 		if(d < code) then
 			code -= 1
-			load_dialogue({"code: "..code},1,1)
-	--[[	if (code <= #(dialogue.boss)) then
-				--load_dialogue(dialog.boss[code])
-			end]]
+			--load_dialogue({"code: "..code},1,1)
+			if code == 2 then
+				load_dialogue({"\"come, boy! show me what \nmanner of man your father \ndidn't raise."}, 1,1)
+			elseif code == 4 then
+				load_dialogue({"\"you must be jon claude.\nwe thought you died\nthat night.\""}, 1, 1)
+			elseif code == 6 then
+				load_dialogue({"carnie bandit lord: \"that\n sword... is it ...was it\n your father's?\""}, 1, 1)
+			end
 			gb[i][j] -= 1
-		elseif die then
+			
+			if die then
 			gb[i][j] = 910
 			drawfloor(i,j)
-			drawfloor(i,j+1,8,0)
-
+			drawfloor(i,j+1)
 			spr(107, 14*8-8, 7*8-8, 2, 2)
 			spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 			wait(30)
@@ -1645,7 +1649,24 @@ function bossai(i, j)
 			gb[i+1][j] = -1
 			gb[i][j+1] = -1
 			gb[i+1][j+1] = -1
-		end
+			end_dialogue = {
+			"jon claude: \"the deed to\nthe castle! i can\nreclaim my home!\"",
+			"freed servants: \"jon cluade\n- lord claude - has\nsaved us!\""
+			}
+			load_dialogue(end_dialogue, 1, 2)
+			
+			--restore room
+			for x = 1,16 do
+				for y = 1,16 do
+					if gb[x][y] > 0 and gb[x][y] <200 then
+						gb[x][y] = 213
+					elseif gb[x][y] > 399 and gb[x][y] <500 then
+						gb[x][y] = -1
+					end
+				end
+			end			
+			end		
+		end	
 	end
 end
 
@@ -1964,7 +1985,11 @@ function gamedraw()
 				spr(7, i*8-8, j*8-8)
 			elseif gb[i][j]==212 then
 				spr(8, i*8-8, j*8-8)
-
+			--freed servants are like walls, right?
+			elseif gb[i][j] == 213 then
+				spr(21, i*8-8, j*8-8)
+			
+			
 			--door things
 			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 				if flr((gb[i][j]-700)/10)==1 then
@@ -2115,13 +2140,13 @@ __gfx__
 00000000000005f0000000000000000000747000000000000000000007777770cccccccc66665666666666564444444466666660cccccc1c333b333b66666656
 0000000000000ff0000000000000000007000700000000000000000000000000c000000c66665666555555554444444455555556111111113333333355555555
 00000000004444400000000000000000070007000000000000000000000000000000000052115555000000000044440000000000333311110000000011111111
-000000000444444000000000000000000074700000000000000000000000000000000000121151110000000004aaaa4000aaaa00333311110000000011222211
-0000000004444440aaaaaa00700005000004000000000000000000000000000000000000111111110000000044a00a4400a00a00333311110000000012222221
-0000000004444440a0aa0a00070000500004000000000000000000000000000000000000511115550000000044aaaa4400aaaa00333311110000000012222221
-0000000000444400aaa000000444445500040000000000000000000000000000000000002211111100000000444aa444000aa000111133330000000012222221
-0000000000000000000000000700005005040500000000000000000000000000000000001222111100000000444a4444000a0000111133330000000012222221
-0000000000000000000000007000050000555000000000000000000000000000000000001111111100000000444aa444000aa000111133330000000011222211
-00000000000000000000000000000000000500000000000000000000000000000000000025111112000000004444444400000000111133330000000011111111
+000000000444444000000000000000000074700000066000000000000000000000000000121151110000000004aaaa4000aaaa00333311110000000011222211
+0000000004444440aaaaaa007000050000040000000ff000000000000000000000000000111111110000000044a00a4400a00a00333311110000000012222221
+0000000004444440a0aa0a00070000500004000000cccc00000000000000000000000000511115550000000044aaaa4400aaaa00333311110000000012222221
+0000000000444400aaa0000004444455000400000c0cc0c00000000000000000000000002211111100000000444aa444000aa000111133330000000012222221
+0000000000000000000000000700005005040500000990000000000000000000000000001222111100000000444a4444000a0000111133330000000012222221
+000000000000000000000000700005000055500000c00c000000000000000000000000001111111100000000444aa444000aa000111133330000000011222211
+000000000000000000000000000000000005000000c00c0000000000000000000000000025111112000000004444444400000000111133330000000011111111
 0000000000000000000000000000000000000a9a00000aaa00000a9a000000a00000000000000000000000000000000000000000000000000000000000000000
 000ee000000ee000000ee00000000000000ee989000eea89000ee98a000eeaaa0000000000000000000000000000000000000000000090000000000000000000
 00077000000770000007700000000000000770400007704000077040000779890000000000000000000000000000900000aa9900000990000000000000000000
@@ -2401,3 +2426,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
