@@ -23,7 +23,7 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
---Initial player location
+--initial player location
 initialfloor=1
 initialroom=1
 initialx=9
@@ -38,7 +38,7 @@ initialdirection=0.25
 --used to skip enemy animations
 skipanim=false
 
---Used to draw the floor
+--used to draw the floor
 truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -81,7 +81,7 @@ truefloor={
 }
 ]]
 
---All rooms
+--all rooms
 gameboard={
 	{--floor1
 		{--room1
@@ -433,7 +433,7 @@ gameboard={
 	}
 }
 
---Keeps track of which rooms have keys and tutorials
+--keeps track of which rooms have keys and tutorials
 flags={
 	{--floor1
 		{--room1
@@ -526,9 +526,9 @@ dialogue={
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
 		"\"i need to get out of the\ndungeon and make my way\nto the throne room!\"",
-		"use the arrow keys to move.",
-		"hold x and press\n Ã¯Â¿Â½ or Ã¯Â¿Â½ to turn.",
-		"ÃƒÂ‹ turns you clockwise,\nand Ã¯Â¿Â½ turns you\ncounterclockwise.",
+		"use the arrow keys to move\n(‹‘”ƒ).",
+		"hold x and press\n ‹ or ‘ to turn.",
+		"‘ turns you clockwise,\nand ‹ turns you\ncounterclockwise.",
 		"touching enemies with your\nsword will kill them.",
 		"enemy animations too\ntedious? hold z to\nskip enemy animations.",
 		"stuck? press \"tab\" to reset\nthe current room.",
@@ -772,7 +772,7 @@ function playermovement()
 		end
 end
 
---Moves the player to the specified floor
+--moves the player to the specified floor
 function floortransition(prevfloor,prevroom,nextfloor)
 	currentfloor=nextfloor
 	screentransition(prevfloor,prevroom,1)
@@ -926,7 +926,7 @@ function playeranimate(rotateaf,sign)
 	end
 end
 
---Moves the player from their room to the specified room
+--moves the player from their room to the specified room
 function screentransition(prevfloor,prevroom,nextroom)
 	currentroom=nextroom
 	--remove player from map
@@ -2434,3 +2434,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
