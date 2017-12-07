@@ -23,6 +23,7 @@ west=2
 --variable used to simulate turn based movement
 pturn=true
 
+--Initial player location
 initialfloor=1
 initialroom=1
 initialx=9
@@ -37,7 +38,7 @@ initialdirection=0.25
 --used to skip enemy animations
 skipanim=false
 
-
+--Used to draw the floor
 truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -80,6 +81,7 @@ truefloor={
 }
 ]]
 
+--All rooms
 gameboard={
 	{--floor1
 		{--room1
@@ -431,6 +433,7 @@ gameboard={
 	}
 }
 
+--Keeps track of which rooms have keys and tutorials
 flags={
 	{--floor1
 		{--room1
@@ -769,6 +772,7 @@ function playermovement()
 		end
 end
 
+--Moves the player to the specified floor
 function floortransition(prevfloor,prevroom,nextfloor)
 	currentfloor=nextfloor
 	screentransition(prevfloor,prevroom,1)
@@ -922,6 +926,7 @@ function playeranimate(rotateaf,sign)
 	end
 end
 
+--Moves the player from their room to the specified room
 function screentransition(prevfloor,prevroom,nextroom)
 	currentroom=nextroom
 	--remove player from map
@@ -935,7 +940,7 @@ function screentransition(prevfloor,prevroom,nextroom)
 		gb=previousrooms[currentfloor][currentroom]
 	end
 
-	--music transitions
+	--music transitions, changes music after a tutorial
 	if flags[prevfloor][prevroom].tutorial==1 then
 		flags[prevfloor][prevroom].tutorial=0
 		if flags[currentfloor][currentroom].tutorial!=1 then
@@ -984,7 +989,7 @@ function checkforenemies()
 	return false
 end
 
---checks if all keys have been collected
+--checks if all keys have been collected on the floor
 function allkeyscollected()
 	for i=1,#flags[currentfloor] do
 		if flags[currentfloor][i].key>0 then
@@ -1275,7 +1280,7 @@ function reloadroom()
 	gb[player.x][player.y]=0
 end
 
---returns whether it moves or not
+--returns whether a clown moves or not
 function lclownhorizontal(xoff, yoff, i, j)
  enemydeath = false
  a = xoff/abs(xoff)
@@ -1304,7 +1309,7 @@ function lclownhorizontal(xoff, yoff, i, j)
 	return false
 end
 
---returns whether it moves or not
+--returns whether the clown moves or not
 function lclownvertical(xoff, yoff, i, j)
 
  enemydeath = false
