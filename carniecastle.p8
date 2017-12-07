@@ -267,22 +267,22 @@ gameboard={
 		{--room2
 		"210,210,210,210,210,210,210,210,718,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,210,031,nil,nil,nil,nil,nil,nil,033,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"713,nil,nil,nil,nil,210,nil,nil,nil,nil,210,nil,nil,nil,nil,711",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,nil,nil,nil,nil,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,nil,210,210,210,210,210,210,nil,210,nil,nil,210",
-		"210,nil,nil,210,030,nil,nil,nil,nil,nil,nil,032,210,nil,nil,210",
-		"210,nil,nil,210,210,210,210,210,nil,210,210,210,210,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
+		"210,nil,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
+		"210,nil,210,nil,nil,nil,nil,nil,nil,nil,031,nil,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,030,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"713,nil,nil,nil,210,210,nil,nil,nil,nil,210,210,nil,nil,nil,711",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,033,210,nil,210",
+		"210,nil,210,nil,210,210,210,210,210,210,210,210,nil,210,nil,210",
+		"210,nil,210,nil,nil,032,nil,nil,nil,nil,nil,nil,nil,210,nil,210",
+		"210,nil,210,210,210,210,210,210,nil,210,210,210,210,210,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,715,210,210,210,210,210,210,210"
 		},
-	 	{--room3
+		{--room3
 		"210,210,210,210,210,210,210,210,719,210,210,210,210,210,210,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
@@ -299,26 +299,26 @@ gameboard={
 		"210,nil,nil,nil,210,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,210,nil,210,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,716,210,210,210,210,210,210,210"
-	  },
-	  {--room4
+		},
+		{--room4
 		"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"715,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,032,022,210,210,210,210,210,210",
+		"210,210,nil,nil,210,020,020,020,020,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"715,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,210,210,210,210,210,210,210,210,210,210,210,210",
+		"210,210,nil,nil,210,023,023,023,023,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,031,022,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
-	  },
-	  {--room5
+		},
+		{--room5
 		"210,210,210,210,210,210,210,210,712,210,210,210,210,210,210,210",
 		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
 		"210,210,210,210,210,031,nil,nil,nil,nil,nil,nil,210,210,210,210",
@@ -338,21 +338,21 @@ gameboard={
 		},
 		{--room 6
 			"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210",
- 	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
-	  "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
- 	 "210,210,031,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 	 "210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
- 	 "210,210,031,nil,nil,nil,010,nil,010,nil,nil,nil,nil,nil,nil,210",
- 	 "210,210,nil,nil,210,210,210,nil,210,nil,210,nil,210,nil,nil,210",
- 	 "210,210,031,nil,nil,nil,nil,010,nil,nil,nil,010,nil,nil,nil,715",
- 	 "210,210,nil,nil,210,nil,210,nil,210,nil,210,nil,210,nil,210,210",
- 	 "210,210,210,020,nil,nil,210,501,210,nil,nil,nil,210,020,210,210",
- 	 "210,210,210,nil,210,210,210,210,210,210,210,210,210,nil,210,210",
- 	 "210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210",
- 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
- 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
- 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
- 	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+	 "210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+		"210,210,210,210,210,210,210,210,nil,210,210,210,210,210,210,210",
+	 "210,210,031,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 "210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+	 "210,210,031,nil,nil,nil,010,nil,010,nil,nil,nil,nil,nil,nil,210",
+	 "210,210,nil,nil,210,210,210,nil,210,nil,210,nil,210,nil,nil,210",
+	 "210,210,031,nil,nil,nil,nil,010,nil,nil,nil,010,nil,nil,nil,715",
+	 "210,210,nil,nil,210,nil,210,nil,210,nil,210,nil,210,nil,210,210",
+	 "210,210,210,020,nil,nil,210,501,210,nil,nil,nil,210,020,210,210",
+	 "210,210,210,nil,210,210,210,210,210,210,210,210,210,nil,210,210",
+	 "210,210,210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210,210",
+	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
+	 "210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
 		},
 		{--room7
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -370,17 +370,25 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,711,210,210,210,210,210,210,210"
+		},
+		{--room8
+		"210,210,210,210,210,210,210,210,831,210,210,210,210,210,210,210",
+		"210,nil,nil,nil,nil,nil,nil,031,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"716,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,714",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,033,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"719,nil,nil,nil,nil,nil,nil,040,nil,nil,nil,nil,nil,nil,nil,717",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,030,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
-		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
+		"210,nil,nil,nil,032,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
+		"210,210,210,210,210,210,210,210,712,210,210,210,210,210,210,210"
 		},
 		{--room9
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210",
@@ -401,7 +409,7 @@ gameboard={
 		"210,210,210,210,210,210,210,210,713,210,210,210,210,210,210,210"
 		}
 	},
-  	{--floor four
+  {--floor four
 		{--boss room
 		"210,210,210,210,715,210,210,210,210,210,210,210,210,210,210,210",
 		"210,030,210,033,nil,033,210,nil,nil,nil,nil,nil,nil,nil,nil,210",
@@ -420,7 +428,7 @@ gameboard={
 		"210,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,210",
 		"210,210,210,210,210,210,210,210,210,210,210,210,210,210,210,210"
     }
-    }
+  }
 }
 
 flags={
@@ -755,7 +763,7 @@ function arrowshoot(i, j, direction)
 			load_dialogue(dialogue.misc,4,4)
 			return
 		end
-		
+
 		--set direction
 		if direction == 0 then
 			a = 0
@@ -829,7 +837,7 @@ function playeranimate(rotateaf,sign)
 	angle=0.03125*sign --angle to rotate player by per iteration
 	while player.direct<rotateaf or player.direct>rotateaf do
 		player.direct+=angle
-		
+
 		--drawing everything to screen during rotation
 		for i=player.x-1,player.x+1 do
 			for j=player.y-1,player.y+1 do
@@ -861,17 +869,17 @@ function playeranimate(rotateaf,sign)
 				--door things
 			elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
-          
+
 				--locked door
     elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
-				
+
 				--hazards/fire
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)
 					end
-				
+
 				--keys and arrows
 				elseif gb[i][j] == 501 then
 					spr(28, i*8-8, j*8-8)
@@ -928,7 +936,7 @@ function screentransition(prevfloor,prevroom,nextroom)
 		elseif (currentroom==4 or currentroom==3) and checkforenemies() and metjuggler==nil then
 			load_dialogue(dialogue.enemies,3,5)
 			metjuggler=true
-		end	
+		end
 	--dialogue trigger for firebreather intro
 	--fsmet= firestarter met
 	elseif currentfloor==2 then
@@ -1398,7 +1406,7 @@ function firestarter_action(i, j)
 	end
 
 	move = gb[i+a][j+b] < 1 or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
-	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399) 
+	--fdeath = (i+a==sword.x and j+b == sword.y) or (gb[i+a][j+b] <500 and gb[i+a][j+b] > 399)
 	fdeath = false
 	if(move) then
 		--set fire
@@ -1432,7 +1440,7 @@ function ai(i, j)
 	yoff = player.y - j
 
 	standarddelay = 1
-	
+
 	if checkdeath(gb) then
 		return
 	end
@@ -1670,7 +1678,7 @@ function bossai(i, j)
 				load_dialogue({"carnie bandit lord: \"that\n sword... is it ...was it\n your father's?\""}, 1, 1)
 			end
 			gb[i][j] -= 1
-			
+
 			if die then
 			gb[i][j] = 910
 			spr(floor[i][j], i*8-8, j*8-8)
@@ -2058,7 +2066,7 @@ function gamedraw()
 						spr(107, 14*8-8, 7*8-8, 2, 2)
 					end
 				end
-       
+
 		--puts arrow counter on screen
 		if arrowdflag!=nil then
 			rectfill(0,0,20,4,9)
@@ -2437,4 +2445,3 @@ __music__
 00 41424344
 00 41424344
 00 41424344
-
