@@ -544,7 +544,7 @@ dialogue={
 		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
 		"each jugglers line of sight\nis shown by the white\narrow on their body.",
 		--firestarters intro
-		"\"those people setting fires\nlook familiar...oh no!\nthey're my families\"",
+		"\"those people setting fires\nlook familiar...oh no!\nthey're my family's\"",
 		"\"servants! they must be\nunder the carnies control.\ni better not hurt them.\"",
 		"firestarters leave a trail\nof fire behind them as\nthey move across a room",
 		"in a straight line, turning\nright when they hit an\nobstacle.",
@@ -559,7 +559,7 @@ dialogue={
 	misc={
 		--arrow explanation
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
-		"press s½to fire an arrow\nin the direction you are\nfacing.",
+		"press s to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
 	}
 }
@@ -709,7 +709,7 @@ function playermovement()
 									if nextfloor==2 then
 										floortransition(currentfloor,currentroom,nextfloor)
 										player.x=15
-										player.y=15
+										player.y=14
 										player.direct=0
 										gb[player.x][player.y]=0
 										--moving to floor 3/boss room
@@ -966,7 +966,7 @@ function screentransition(prevfloor,prevroom,nextroom)
 		--cmet=clown car met
 		elseif (currentroom==5 or currentroom==8 or currentroom==9) and cmet==nil then
 				cmet=true
-		 	load_dialogue(dialogue.enemies,13,14)
+		 	load_dialogue(dialogue.enemies,13,15)
 		end
 	end
 end
@@ -2426,3 +2426,4 @@ __music__
 00 41424344
 00 41424344
 00 41424344
+
