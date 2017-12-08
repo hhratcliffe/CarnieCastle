@@ -1,18 +1,28 @@
 pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
+
 win=false
+
 north=0
 east=1
 south=3
 west=2
+
+
 pturn=true
+
+
 initialfloor=1
 initialroom=1
 initialx=9
 initialy=3
 initialdirection=0.25
+
+
+
 skipanim=false
+
 truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
@@ -31,6 +41,7 @@ truefloor={
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025",
 	"025,025,025,025,025,025,025,025,025,025,025,025,025,025,025,025"
 }
+
 gameboard={
 	{--floor1
 		{--room1
@@ -466,8 +477,11 @@ flags={
 		}
 	}
 }
+
+
 dialoguetf=true 
 dialogue={
+
 	t_dialogue={ 
 		"\"finally made it inside\nthe castle...!\"",
 		"\"third stall from the left;\njust as i remembered.\"",
@@ -486,11 +500,14 @@ dialogue={
 		"\"i shouldn't leave any\ncarnies alive.\"",
 	},
 	enemies={
+
 		"\"it seems like these lesser\nclowns will walk into my\nsword...\"",
 		"\"maybe i can use that\nto my advantage.\"",
+
 		"\"uh-oh, a juggler. i better\nstay out of his line\nof sight.\"",
 		"jugglers will kill you with\na ball if you enter their\ndirect line of sight.",
 		"each jugglers line of sight\nis shown by the white\narrow on their body.",
+
 		"\"those people setting fires\nlook familiar...oh no!\nthey're my family's\"",
 		"\"servants! they must be\nunder the carnies control.\ni better not hurt them.\"",
 		"firestarters leave a trail\nof fire behind them as\nthey move across a room",
@@ -504,6 +521,7 @@ dialogue={
 		"the clown car's colors will\ncycle before spawning a\nset of clowns."
 	},
 	misc={
+
 		"\"an arrow! this will come\nin handy with killing\nenemies!\"",
 		"press s to fire an arrow\nin the direction you are\nfacing.",
 		"your number of arrows are\ndisplayed in the top left\ncorner of the screen.",
@@ -521,15 +539,20 @@ player={
 	arrows=0,
 	savedarrows=0
 }
+
+
 sword = {
 	x = 8,
 	y = 14
 }
+
+
 lclownwalk = {33, 32, 34, 32,33, 32, 34, 32}
 jugglerwalk = {49, 50, 51, 52, 53, 54, 55, 48}
 jugglerprojectile = 56
 fwalk = {37, 38, 39, 36, 37, 38, 39, 36}
 clowncarmove={179,179,179,179,179,179,179,179}
+
 function spra(angle,n,x,y,w,h,flip_x,flip_y)
  w=w*8
  h=h*8
@@ -548,10 +571,14 @@ function spra(angle,n,x,y,w,h,flip_x,flip_y)
   end
  end
 end
+
+
 function playermovement()
+
 		for i=1,16 do 
 			for j=1,16 do
 				if gb[i][j]==0 then
+
 						if btn(0,1) and player.arrows>0 then
 							arrowshoot(player.x,player.y,player.direct)
 							pturn=false
@@ -559,13 +586,16 @@ function playermovement()
 						elseif btn(3,1) then
 							break
 						end
+
 					if btn(5) then
+
 						if btn(0) then
 							playeranimate(player.direct+.125,1)
 							pturn=false
 							sworddirection()
 							break
 						end
+
 						if btn(1) then
 							playeranimate(player.direct-.125,-1)
 							pturn=false
@@ -573,6 +603,7 @@ function playermovement()
 							break
 						end
 					end
+
 					if (btnp(0) or btnp(1) or btnp(2) or btnp(3)) then
 						if btnp(0) then --left
 							xmove=-1
@@ -596,7 +627,7 @@ function playermovement()
 										load_dialogue(deed_d,1,1)
 										return
 									elseif currentfloor==3 then
-										boss_d={"\"i need to kill the\ncarnie bandit lord.\""}
+										boss_d={"\"i need to kill the\nbandit carnie lord.\""}
 										load_dialogue(boss_d,1,1)
 										return
 									end
@@ -624,12 +655,15 @@ function playermovement()
 										player.direct=.5
 										gb[player.x][player.y]=0
 									end
+										--saves player x and y for reboot
 										player.savedx=player.x
 										player.savedy=player.y
 										player.saveddirect=player.direct
 										player.savedarrows=player.arrows
+
 										return
 								else
+
 									load_dialogue(dialogue.doors,3,3)
 									pturn=true
 									return
@@ -654,6 +688,7 @@ function playermovement()
 									player.savedx=player.x
 									player.savedy=player.y
 									player.saveddirect=player.direct
+
 									return
 								else
 									load_dialogue(dialogue.doors,2,2)
@@ -679,8 +714,10 @@ function playermovement()
 								sword.x+=xmove
 								sword.y+=ymove
 							end
+
 						end
 						pturn=false
+
 						sworddirection()
 						return
 					end
@@ -688,15 +725,19 @@ function playermovement()
 			end
 		end
 end
+
+
 function floortransition(prevfloor,prevroom,nextfloor)
 	currentfloor=nextfloor
 	screentransition(prevfloor,prevroom,1)
 end
+
 function arrowshoot(i, j, direction)
 		if currentfloor==3 then
 			load_dialogue(dialogue.misc,4,4)
 			return
 		end
+
 		if direction == 0 then
 			a = 0
 			b = -1
@@ -722,25 +763,38 @@ function arrowshoot(i, j, direction)
 		end
 		k = 0
 	 player.arrows-=1
+
 		while(player.x*8 != i*8+a*k or player.y*8 != j*8+b*k) do
 			k +=2 --controls "speed" of arrow
 
 			x = i*8+a*k-5
 			y = j*8+b*k-5
+
 			if gb[flr(x/8)+1][flr(y/8)+1]>=200 then
 				return
 			end
+			--floor
 			drawfloor(flr(x/8),flr(y/8),0,0)
+			--entity to be killed
 			entity = gb[flr(x/8)+1][flr(y/8)+1]
+
+			--if entity is an enemy, kill that enemy
 			if flr(entity)>=10 and flr(entity)<100 and not (flr(entity)>=30 and flr(entity)<40) then
 				gb[flr(x/8)+1][flr(y/8)+1]=-1
 				return
 			end
+
+			--drawing player
 			spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
+
+			--cover your tracks
 			if (x)%8>=0 and x%8<=7 and (y)%8>=0 and y%8<=7 then
+				--floor
 				drawfloor(flr((x-a*8)/8)+1,flr((y-b*8)/8)+1)
+				--player
 				spra(player.direct,1,player.x*8-8,player.y*8-12,1,2)
 			end
+			--projectile
 			if gb[flr(x/8)+1][flr(y/8)+1]>=200 then
 				return
 			else
@@ -749,6 +803,7 @@ function arrowshoot(i, j, direction)
 			wait(1)
 		end
 end
+
 function playeranimate(rotateaf,sign)
 	angle=0.03125*sign --angle to rotate player by per iteration
 	while player.direct<rotateaf or player.direct>rotateaf do
@@ -769,16 +824,24 @@ function playeranimate(rotateaf,sign)
 					elseif gb[i][j] < 50 then
 						spr(179,(i-1)*8,(j-1)*8)
 					end
+
+				--wall things
 				elseif gb[i][j]==210 then --200=wall
 					drawwall(i,j)
 				elseif gb[i][j]==211 then
 					spr(7, i*8-8, j*8-8)
 				elseif gb[i][j]==212 then
 					spr(8, i*8-8, j*8-8)
+
+				--door things
 				elseif gb[i][j]!=-1 and gb[i][j] > 700 and gb[i][j] < 800 then
 					spr(11, i*8-8, j*8-8)
+
+				--locked door
     		elseif gb[i][j]!=-1 and gb[i][j] > 800 and gb[i][j] < 900 then
 					spr(27, i*8-8, j*8-8)
+
+				--hazards/fire
 				elseif gb[i][j] > 399 and gb[i][j] <500 then
 					if(flr((gb[i][j]-400)/10) == 1) then
 						spr(41+gb[i][j]%10,i*8-8, j*8-8)

@@ -680,7 +680,7 @@ function playermovement()
 										load_dialogue(deed_d,1,1)
 										return
 									elseif currentfloor==3 then
-										boss_d={"\"i need to kill the\ncarnie bandit lord.\""}
+										boss_d={"\"i need to kill the\nbandit carnie lord.\""}
 										load_dialogue(boss_d,1,1)
 										return
 									end
