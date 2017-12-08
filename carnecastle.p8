@@ -2,6 +2,13 @@ pico-8 cartridge // http://www.pico-8.com
 version 8
 __lua__
 --[[
+carnecastle
+created by:perry gordon, tyler jones, alex proctor, and harrison ratcliffe
+cosc438
+alan jamieson
+]]
+
+--[[
 player=0
 enemies=0's and 100's
 walls=200's
