@@ -518,6 +518,7 @@ flags={
 		}
 	}
 }
+
 --dialogue
 dialoguetf=true --boolean variable for dialogue
 dialogue={
@@ -667,6 +668,15 @@ function playermovement()
 							if gb[i+xmove][j+ymove]!=-1 and ((gb[i+xmove][j+ymove]>=10 and gb[i+xmove][j+ymove]<100) or (gb[i+xmove][j+ymove]>=400 and gb[i+xmove][j+ymove]<500)) then
 									gb[i][j]=-1
 							elseif gb[i+xmove][j+ymove]!=-1 and gb[i+xmove][j+ymove] > 700 and gb[i+xmove][j+ymove] < 800 then --door interaction
+								if currentfloor==3 and die then
+										deed_d={"\"i should get the deed.\""}
+										load_dialogue(deed_d,1,1)
+										return
+									elseif currentfloor==3 then
+										boss_d={"\"i need to kill the\nbandit carnie lord.\""}
+										load_dialogue(boss_d,1,1)
+										return
+									end
 								if not checkforenemies() then
 									if flr((gb[i+xmove][j+ymove]-700)/10)==1 then
 										nextroom=gb[i+xmove][j+ymove]%10
